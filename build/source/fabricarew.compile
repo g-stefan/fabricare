@@ -1,0 +1,6 @@
+--exe fabricarew
+--project-base=fabricare
+--use-project=qse-magnet.static
+--def=BUILD_WINDOWS_GUI
+--for-platform=win*
+--output-bin-path-is-output
