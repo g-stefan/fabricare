@@ -69,7 +69,7 @@ namespace Main {
 			"    --execution-time       show execution time\n"
 			"    --execution-time-cmd   --execution-time + --cmd\n"
 			"\n"
-			"by default will load fabricare.json if exists and execute fabricare.js\n"
+			"by default will execute fabricare.js\n"
 		);
 		printf("\n");
 	};

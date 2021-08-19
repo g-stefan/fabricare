@@ -39,12 +39,12 @@ Script.requireExtension("URL");
 Script.requireExtension("Version");
 Script.requireExtension("XML");
 
-// --- Load configuration
+// ---
 
-var Config={};
+Config = {};
+Fabricare = {};
 
-(function(){
-
+Fabricare.loadConfig = function() {
 	var cwd = Shell.getcwd();
 	if(!Script.isNil(cwd)){
 		cwd+="/";
@@ -52,12 +52,23 @@ var Config={};
 
 	var json=Shell.fileGetContents(cwd+"fabricare.json");
 	if(!Script.isNil(json)) {
-		global.Config = JSON.decode(json);
-		if(Script.isNil(global.Configuration)){
-			global.Config = {};
+		Config = JSON.decode(json);
+		if(!Script.isNil(global.Configuration)){
+			return true;
 		};
 	};
 
-})();
+	global.Config = {};
+	return false;
+};
+
+Fabricare.saveConfig = function() {
+	var cwd = Shell.getcwd();
+	if(!Script.isNil(cwd)){
+		cwd+="/";
+	};
+
+	return Shell.filePutContents(cwd+"fabricare.json",JSON.encodeWithIndentation(Config));
+};
 
 // ---
