@@ -83,7 +83,7 @@ namespace Main {
 	int Application::main(int cmdN, char *cmdS[]) {
 		int i;
 		char *opt;
-		char *fileIn;
+		const char *fileIn;
 		bool executionTime = false;
 		uint64_t beginTimestampInMilliseconds;
 		uint64_t endTimestampInMilliseconds;
