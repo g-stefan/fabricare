@@ -8,7 +8,7 @@ if [ "$ACTION" = "" ]; then
 	ACTION=make
 fi
 
-echo "-> $ACTION fabricare"
+echo "- $BUILD_PROJECT > $ACTION"
 
 cmdX(){
 	if ! "$@" ; then
@@ -17,4 +17,5 @@ cmdX(){
 	fi
 }
 
+cmdX file-to-cs --touch=source/fabricare.cpp --file-in=source/fabricare.js --file-out=source/fabricare.src --is-string --name=fabricareSource
 cmdX xyo-cc --mode=$ACTION @build/source/fabricare.compile
