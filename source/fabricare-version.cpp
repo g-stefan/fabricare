@@ -12,10 +12,10 @@
 namespace Fabricare {
 	namespace Version {
 
-		static const char *version_ = "1.1.0";
+		static const char *version_ = "1.2.0";
 		static const char *build_ = "6";
-		static const char *versionWithBuild_ = "1.1.0.6";
-		static const char *datetime_ = "2021-12-02 01:42:24";
+		static const char *versionWithBuild_ = "1.2.0.6";
+		static const char *datetime_ = "2022-01-01 21:19:10";
 
 		const char *version() {
 			return version_;
