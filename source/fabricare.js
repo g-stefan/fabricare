@@ -41,8 +41,13 @@ Script.requireExtension("XML");
 
 // ---
 
+Script.resetIncludePath();
+Script.setIncludePath(Application.getPathExecutable()+"/fabricare");
+Script.setIncludePath(Shell.getcwd());
+
+// ---
+
 Config = {};
-Fabricare = {};
 
 Fabricare.loadConfig = function() {
 	var cwd = Shell.getcwd();

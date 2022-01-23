@@ -10,10 +10,10 @@
 #ifndef FABRICARE_VERSION_HPP
 #define FABRICARE_VERSION_HPP
 
-#define FABRICARE_VERSION_ABCD                1,2,0,6
-#define FABRICARE_VERSION_STR                 "1.2.0"
-#define FABRICARE_VERSION_STR_BUILD           "6"
-#define FABRICARE_VERSION_STR_DATETIME        "2022-01-01 21:19:10"
+#define FABRICARE_VERSION_ABCD                1,3,0,14
+#define FABRICARE_VERSION_STR                 "1.3.0"
+#define FABRICARE_VERSION_STR_BUILD           "14"
+#define FABRICARE_VERSION_STR_DATETIME        "2022-01-23 21:43:01"
 
 #ifndef XYO_RC
 

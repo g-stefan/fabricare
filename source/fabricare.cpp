@@ -20,44 +20,217 @@
 #include "quantum-script-extension-openssl.hpp"
 #include "quantum-script-extension-magnet.hpp"
 
+#include "xyo-cc.hpp"
+#include "file-to-cs.hpp"
+#include "file-to-js.hpp"
+#include "file-to-rc.hpp"
+#include "html-to-rc.hpp"
+#include "time-cmd.hpp"
+#include "xyo-version-application.hpp"
+#include "file-crypt.hpp"
+#include "png-to-icon.hpp"
+#include "exec-cgi.hpp"
+
+#include "fabricare.hpp"
 #include "fabricare-license.hpp"
 #include "fabricare-copyright.hpp"
+#ifndef FABRICARE_NO_VERSION
 #include "fabricare-version.hpp"
-
+#endif
 
 #include "fabricare.src"
 
-namespace Main {
+namespace Fabricare {
 
 	using namespace XYO;
 	using namespace Quantum::Script;
 
-	class Application :
-		public virtual IMain {
-			XYO_DISALLOW_COPY_ASSIGN_MOVE(Application);
-		protected:
 
-			static void initExecutive(Executive *);
+	template<typename TApplication>
+	TPointer<Variable> internalCall(const char *cmd0, VariableArray *arguments) {
+		int k,cmdN;
+		char **cmdS;
+		TDynamicArray<String> cmdV;
+		TPointer<Variable> retV;
+		
+		retV=VariableNumber::newVariable(0);
+		cmdN=arguments->value->length()+1;
+		cmdS=new char*[cmdN];
+		cmdV[0]=cmd0;
+		for(k=1;k<cmdN;++k) {
+			cmdV[k]=(arguments->index(k-1))->toString();
+		};
+		for(k=0;k<cmdN;++k) {
+			cmdS[k]=const_cast<char *>(cmdV[k].value());
+		};
+		try{
+			TApplication application;
+			((VariableNumber *) retV.value())->value=(Number)(application.main(cmdN,cmdS));
+		}catch(...) {
+			((VariableNumber *) retV.value())->value=-1;
+			delete cmdS;
+			throw;
+		};
+		delete cmdS;
+		return retV;
+	};
 
-			void showUsage();
-			void showLicense();
+	TPointer<Variable> Application::internalXYOCC(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-xyo-cc\n");
+#endif
+		return internalCall<XYOCC::Application>("xyo-cc", arguments);
+	};
 
-		public:
+	TPointer<Variable> Application::internalFileToCS(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-file-to-cs\n");
+#endif
+		return internalCall<FileToCS::Application>("file-to-cs", arguments);
+	};
 
-			inline Application() {};
+	TPointer<Variable> Application::internalFileToJS(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-file-to-js\n");
+#endif
+		return internalCall<FileToJS::Application>("file-to-js", arguments);
+	};
 
-			int main(int cmdN, char *cmdS[]);
+	TPointer<Variable> Application::internalFileToRC(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-file-to-rc\n");
+#endif
+		return internalCall<FileToRC::Application>("file-to-rc", arguments);
+	};
+
+	TPointer<Variable> Application::internalHTMLToRC(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-html-to-rc\n");
+#endif
+		return internalCall<HTMLToRC::Application>("html-to-rc", arguments);
+	};
+
+	TPointer<Variable> Application::internalTimeCmd(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-time-cmd\n");
+#endif
+		return internalCall<TimeCmd::Application>("time-cmd", arguments);
+	};
+
+	TPointer<Variable> Application::internalXYOVersion(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-xyo-version\n");
+#endif
+		return internalCall<XYOVersion::Application>("xyo-version", arguments);
+	};
+
+	TPointer<Variable> Application::internalFileCrypt(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-file-crypt\n");
+#endif                              
+		return internalCall<FileCrypt::Application>("file-crypt", arguments);
+	};
+
+	TPointer<Variable> Application::internalPNGToIcon(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-png-to-icon\n");
+#endif
+		return internalCall<PNGToIcon::Application>("png-to-icon", arguments);
+	};
+
+	TPointer<Variable> Application::internalExecCGI(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
+		printf("- internal-exec-cgi\n");
+#endif
+		return internalCall<ExecCGI::Application>("exec-cgi", arguments);
+	};
+
+	TPointer<Variable> Application::isXYOConfigDefined(VariableFunction *function, Variable *this_, VariableArray *arguments){
+		String isDefined((arguments->index(0))->toString());
+// -- Operating System
+#ifdef XYO_OS_WINDOWS
+		if(isDefined=="XYO_OS_WINDOWS"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_OS_UNIX
+		if(isDefined=="XYO_OS_UNIX"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_OS_MINGW
+		if(isDefined=="XYO_OS_MINGW"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+
+// -- Compiler
+#ifdef XYO_COMPILER_MSVC
+		if(isDefined=="XYO_COMPILER_MSVC"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_COMPILER_GCC
+		if(isDefined=="XYO_COMPILER_GCC"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+
+// -- Application
+#ifdef XYO_APPLICATION_64BIT
+		if(isDefined=="XYO_APPLICATION_64BIT"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_APPLICATION_32BIT
+		if(isDefined=="XYO_APPLICATION_32BIT"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+
+// -- Thread support
+#ifdef XYO_SINGLE_THREAD
+		if(isDefined=="XYO_SINGLE_THREAD"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_MULTI_THREAD
+		if(isDefined=="XYO_MULTI_THREAD"){
+			return VariableBoolean::newVariable(true);
+		};
+#endif		
+		return VariableBoolean::newVariable(false);
+	};
+
+	TPointer<Variable> Application::getXYOPlatform(VariableFunction *function, Variable *this_, VariableArray *arguments){
+		return VariableString::newVariable(XYO_PLATFORM);
 	};
 
 	void Application::initExecutive(Executive *executive) {
 		Extension::Magnet::registerInternalExtension(executive);
 		executive->compileString("Script.requireInternalExtension(\"Magnet\");");
+		// 
+		executive->compileStringX("var Internal={};");
+		executive->setFunction2("Internal.xyoCC", internalXYOCC);
+		executive->setFunction2("Internal.fileToCS", internalFileToCS);
+		executive->setFunction2("Internal.fileToJS", internalFileToJS);
+		executive->setFunction2("Internal.fileToRC", internalFileToRC);
+		executive->setFunction2("Internal.htmlToRC", internalHTMLToRC);
+		executive->setFunction2("Internal.timeCmd", internalTimeCmd);
+		executive->setFunction2("Internal.xyoVersion", internalXYOVersion);
+		executive->setFunction2("Internal.fileCrypt", internalFileCrypt);
+		executive->setFunction2("Internal.pngToIcon", internalPNGToIcon);
+		executive->setFunction2("Internal.execCGI", internalExecCGI);
+		//
+		executive->compileStringX("var Fabricare={};");
+		executive->setFunction2("Fabricare.isXYOConfigDefined(def);", isXYOConfigDefined);
+		executive->setFunction2("Fabricare.getXYOPlatform", getXYOPlatform);
 		executive->compileStringX(fabricareSource);
 	};
 
 	void Application::showUsage() {
 		printf("Fabricare\n");
-		printf("version %s build %s [%s]\n", Fabricare::Version::version(), Fabricare::Version::build(), Fabricare::Version::datetime());
+		Application::showVersion();
 		printf("%s\n\n", Fabricare::Copyright::fullCopyright());
 
 		printf("%s",
@@ -78,6 +251,12 @@ namespace Main {
 		printf("%s", Fabricare::License::content());
 		printf("%s", Extension::OpenSSL::License::content());
 		printf("%s", XYO::Pixel32::License::content());
+	};
+
+	void Application::showVersion() {
+#ifndef FABRICARE_NO_VERSION
+		printf("version %s build %s [%s]\n", Fabricare::Version::version(), Fabricare::Version::build(), Fabricare::Version::datetime());
+#endif
 	};
 
 	int Application::main(int cmdN, char *cmdS[]) {
@@ -207,9 +386,11 @@ namespace Main {
 
 };
 
+#ifndef FABRICARE_LIBRARY
 #ifdef BUILD_WINDOWS_GUI
-XYO_APPLICATION_WINMAIN_STD(Main::Application);
+XYO_APPLICATION_WINMAIN_STD(Fabricare::Application);
 #else
-XYO_APPLICATION_MAIN_STD(Main::Application);
+XYO_APPLICATION_MAIN_STD(Fabricare::Application);
+#endif
 #endif
 
