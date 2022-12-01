@@ -1,57 +1,31 @@
 @echo off
-rem Public domain
-rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
+rem Public domain (Unlicense) <http://unlicense.org>
+rem SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+rem SPDX-License-Identifier: Unlicense
 
-if "%XYO_PLATFORM%" == "" goto :eof
-if "%XYO_PATH_REPOSITORY%" == "" goto :eof
-if "%XYO_PATH_RELEASE%" == "" goto :eof
+setlocal 
+
+if not exist .\output\ goto :buildStep
+pushd .\output
+set PATH=%CD%;%PATH%	
+popd
+:buildStep
 
 if exist .\build\msvc.config.cmd call .\build\msvc.config.cmd
 
-set ACTION=%1
-if "%ACTION%" == "" set ACTION=make
-set ACTION_CMD=build\msvc.%ACTION%.cmd
-if exist build\msvc.%ACTION%.cmd goto BuildActionOk
-set ACTION_CMD=build\platform\msvc.%ACTION%.cmd
-if exist build\platform\msvc.%ACTION%.cmd goto BuildActionOk
-set ACTION=make
-set ACTION_CMD=build\msvc.%ACTION%.cmd
-if exist build\msvc.%ACTION%.cmd goto BuildActionOk
-set ACTION_CMD=build\platform\msvc.%ACTION%.cmd
-:BuildActionOk
+set action=%1
+if "%1" == "" set action=default
 
-set RESTORE_PATH=%PATH%
-set RESTORE_INCLUDE=%INCLUDE%
-set RESTORE_LIB=%LIB%
+if exist ".\build\msvc.%action%.cmd" (
+	call ".\build\msvc.%action%.cmd"
+	goto :eof
+)
 
-set PATH=%XYO_PATH_REPOSITORY%\bin;%PATH%
-set INCLUDE=%XYO_PATH_REPOSITORY%\include;%INCLUDE%
-set LIB=%XYO_PATH_REPOSITORY%\lib;%LIB%
+if exist ".\build\platform\msvc.%action%.cmd" (
+	call ".\build\platform\msvc.%action%.cmd"
+	goto :eof
+)
 
-if not exist output\ goto BuildSetPathOutputSkip
-pushd output
-set PATH=%CD%;%PATH%
-popd
-:BuildSetPathOutputSkip
-
-if not exist output\bin\ goto BuildSetPathOutputBinSkip
-pushd output\bin
-set PATH=%CD%;%PATH%
-popd
-:BuildSetPathOutputBinSkip
-
-call %ACTION_CMD% %1
-if errorlevel 1 goto BuildStepError
-goto BuildStepDone
-
-:BuildStepError
-set PATH=%RESTORE_PATH%
-set INCLUDE=%RESTORE_INCLUDE%
-set LIB=%RESTORE_LIB%
-exit 1
-:BuildStepDone
-set PATH=%RESTORE_PATH%
-set INCLUDE=%RESTORE_INCLUDE%
-set LIB=%RESTORE_LIB%
-
+for /F %%a in ('echo prompt $E ^| cmd') do set ESC=%%a
+echo %ESC%[31m* Error:%ESC%[0m Action %ESC%[33m%action%%ESC%[0m not found!

@@ -1,0 +1,42 @@
+{
+	"project": "fabricare-prepare",
+	"type": "exe",
+	"defines": [
+		"_CRT_SECURE_NO_WARNINGS",
+		"XYO_MANAGEDMEMORY_NO_VERSION",
+		"XYO_DATASTRUCTURES_NO_VERSION",
+		"XYO_MULTITHREADING_NO_VERSION",
+		"XYO_ENCODING_NO_VERSION",
+		"XYO_SYSTEM_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_EXTENSION_CONSOLE_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_EXTENSION_SHELL_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_EXTENSION_SHELLFIND_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_EXTENSION_BUFFER_NO_VERSION"
+	],
+	"includePath": [
+		"vendor/quantum-script/source",
+		"vendor/quantum-script--shell/source",
+		"vendor/quantum-script--shellfind/source",
+		"vendor/quantum-script--buffer/source",
+		"vendor/xyo-managed-memory/source",
+		"vendor/xyo-data-structures/source",
+		"vendor/xyo-multithreading/source",
+		"vendor/xyo-encoding/source",
+		"vendor/xyo-system/source"
+	],
+	"cppSource": [
+		"source/XYO/Fabricare.Prepare.cpp",
+		"vendor/quantum-script/source/XYO/QuantumScript.Amalgam.cpp",
+		"vendor/quantum-script/source/XYO/QuantumScript.Extension/Console.Amalgam.cpp",
+		"vendor/quantum-script--shell/source/XYO/QuantumScript.Extension/Shell.Amalgam.cpp",
+		"vendor/quantum-script--shellfind/source/XYO/QuantumScript.Extension/ShellFind.Amalgam.cpp",
+		"vendor/quantum-script--buffer/source/XYO/QuantumScript.Extension/Buffer.Amalgam.cpp",
+		"vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp",
+		"vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp",
+		"vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp",
+		"vendor/xyo-encoding/source/XYO/Encoding.Amalgam.cpp",
+		"vendor/xyo-system/source/XYO/System.Amalgam.cpp"		
+	],
+	"crt": "static"
+}

@@ -1,0 +1,31 @@
+{
+	"project": "file-to-cs",
+	"type": "exe",
+	"defines": [
+		"_CRT_SECURE_NO_WARNINGS",
+		"XYO_MANAGEDMEMORY_NO_VERSION",
+		"XYO_DATASTRUCTURES_NO_VERSION",
+		"XYO_MULTITHREADING_NO_VERSION",
+		"XYO_ENCODING_NO_VERSION",
+		"XYO_SYSTEM_NO_VERSION",
+		"XYO_FILETOCS_NO_VERSION",
+		"XYO_FILETOCS_APPLICATION_NO_VERSION"
+	],
+	"includePath": [
+		"vendor/file-to-cs/source",
+		"vendor/xyo-managed-memory/source",
+		"vendor/xyo-data-structures/source",
+		"vendor/xyo-multithreading/source",
+		"vendor/xyo-encoding/source",
+		"vendor/xyo-system/source"
+	],
+	"cppSource": [
+		"vendor/file-to-cs/source/XYO/FileToCS.Application.Amalgam.cpp",
+		"vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp",
+		"vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp",
+		"vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp",
+		"vendor/xyo-encoding/source/XYO/Encoding.Amalgam.cpp",
+		"vendor/xyo-system/source/XYO/System.Amalgam.cpp"		
+	],
+	"crt": "static"
+}

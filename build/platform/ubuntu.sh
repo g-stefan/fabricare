@@ -1,17 +1,16 @@
 #!/bin/sh
-# Public domain
-# http://unlicense.org/
 # Created by Grigore Stefan <g_stefan@yahoo.com>
+# Public domain (Unlicense) <http://unlicense.org>
+# SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+# SPDX-License-Identifier: Unlicense
 
-if [ -f ./build/ubuntu.config.sh ]; then
-	. ./build/ubuntu.config.sh
-fi
+. ./build/ubuntu.config.sh
 
 RESTORE_PATH=$PATH
 RESTORE_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
-PATH=$XYO_PATH_REPOSITORY/bin:$PATH
-LD_LIBRARY_PATH=$XYO_PATH_REPOSITORY/bin:$LD_LIBRARY_PATH
+PATH=$pathRepository/bin:$PATH
+LD_LIBRARY_PATH=$pathRepository/bin:$LD_LIBRARY_PATH
 
 if [ -d "output" ]; then
 	POPD=$PWD
@@ -21,45 +20,35 @@ if [ -d "output" ]; then
 	cd $POPD
 fi
 
-if [ -d "output/bin" ]; then
-	POPD=$PWD
-	cd output/bin
-	PATH=$PWD:$PATH
-	LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
-	cd $POPD
+action=$1
+if [ "$action" = "" ]; then
+	action=default
 fi
 
-export LD_LIBRARY_PATH
-export XYO_PATH_REPOSITORY
-export XYO_PATH_RELEASE
-
-RETV=0
-
-if [ "$1" = "" ]; then
-	if [ -f "./build/ubuntu.make.sh" ]; then
-		. ./build/ubuntu.make.sh make
-	else
-		. ./build/platform/ubuntu.make.sh make
+if [ -f "./build/ubuntu.$action.sh" ]; then
+	. ./build/ubuntu.$action.sh
+	retV=$?
+	PATH=$RESTORE_PATH
+	LD_LIBRARY_PATH=$RESTORE_LD_LIBRARY_PATH
+	export PATH
+	export LD_LIBRARY_PATH
+	if [ "$retV" = "1" ]; then
+		exit 1
 	fi
-else
-	if [ -f "./build/ubuntu.$1.sh" ]; then
-		. ./build/ubuntu.$1.sh $1
-	elif [ -f "./build/platform/ubuntu.$1.sh" ]; then
-		. ./build/platform/ubuntu.$1.sh $1
-	elif [ -f "./build/ubuntu.make.sh" ]; then
-		. ./build/ubuntu.make.sh $1
-	else
-		. ./build/platform/ubuntu.make.sh $1
+	exit 0
+fi
+
+if [ -f "./build/platform/ubuntu.$action.sh" ]; then
+	. ./build/platform/ubuntu.$action.sh
+	retV=$?
+	PATH=$RESTORE_PATH
+	LD_LIBRARY_PATH=$RESTORE_LD_LIBRARY_PATH
+	export PATH
+	export LD_LIBRARY_PATH
+	if [ "$retV" = "1" ]; then
+		exit 1
 	fi
+	exit 0
 fi
-
-RETV=$?
-
-PATH=$RESTORE_PATH
-LD_LIBRARY_PATH=$RESTORE_LD_LIBRARY_PATH
-export LD_LIBRARY_PATH
-
-if [ "$RETV" = "1" ]; then
-	exit 1
-fi
-exit 0
+	
+echo  "* Error: Action $action not found!"

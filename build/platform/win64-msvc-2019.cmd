@@ -1,21 +1,21 @@
 @echo off
-rem Public domain
-rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
+rem Public domain (Unlicense) <http://unlicense.org>
+rem SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+rem SPDX-License-Identifier: Unlicense
 
-set MSVC_PLATFORM_MACHINE=win64
-set MSVC_PLATFORM_VERSION=2019
-set MSVC_PLATFORM_PATH=C:\Program Files (x86)\Microsoft Visual Studio\%MSVC_PLATFORM_VERSION%\Community\VC\Auxiliary\Build\
+set platformMachine=win64
+set platformVersion=2019
+set platformPath=C:\Program Files (x86)\Microsoft Visual Studio\%platformVersion%\Community\VC\Auxiliary\Build\
 
-if "%MSVC_PLATFORM_ACTIVE%" == "%MSVC_PLATFORM_MACHINE%-%MSVC_PLATFORM_VERSION%" goto PlatformAlreadyActive
-pushd "%MSVC_PLATFORM_PATH%"
+if not "%XYO_PLATFORM%" == "" set platformActive=%XYO_PLATFORM%
+
+if "%platformActive%" == "%platformMachine%-msvc-%platformVersion%" goto :process
+pushd "%platformPath%"
 call vcvarsall.bat x64
 popd
-set MSVC_PLATFORM_ACTIVE=%MSVC_PLATFORM_MACHINE%-%MSVC_PLATFORM_VERSION%
-:PlatformAlreadyActive
+set platformActive=%platformMachine%-msvc-%platformVersion%
+set platform=%platformActive%
 
-set XYO_PLATFORM=%MSVC_PLATFORM_MACHINE%-msvc-%MSVC_PLATFORM_VERSION%
-set XYO_PATH_REPOSITORY=%HOMEDRIVE%%HOMEPATH%\SDK\%XYO_PLATFORM%
-set XYO_PATH_RELEASE=%HOMEDRIVE%%HOMEPATH%\SDK\%XYO_PLATFORM%\release
-
-cmd.exe /C "build\platform\msvc.cmd %1"
+:process
+call .\build\platform\msvc.cmd %1

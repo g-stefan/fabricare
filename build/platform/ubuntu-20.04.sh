@@ -1,11 +1,10 @@
 #!/bin/sh
-# Public domain
-# http://unlicense.org/
 # Created by Grigore Stefan <g_stefan@yahoo.com>
+# Public domain (Unlicense) <http://unlicense.org>
+# SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+# SPDX-License-Identifier: Unlicense
 
-export XYO_PLATFORM="ubuntu-20.04"
-export XYO_PATH_REPOSITORY=$HOME/SDK
-export XYO_PATH_RELEASE=$HOME/SDK/release
+export platform="ubuntu-20.04"
 
 /bin/sh -- ./build/platform/ubuntu.sh $1
 RETV=$?

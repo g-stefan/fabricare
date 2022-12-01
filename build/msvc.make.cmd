@@ -1,23 +1,45 @@
 @echo off
-rem Public domain
-rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
+rem Public domain (Unlicense) <http://unlicense.org>
+rem SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+rem SPDX-License-Identifier: Unlicense
 
-set ACTION=%1
-if "%1" == "" set ACTION=make
+for /F %%a in ('echo prompt $E ^| cmd') do set ESC=%%a
+echo - %ESC%[32m%project%%ESC%[0m: make
 
-echo - %BUILD_PROJECT% ^> %ACTION%
+rem ---
 
 goto cmdXDefined
 :cmdX
-cmd.exe /C "%*"
+echo %*
+%*
 if errorlevel 1 goto cmdXError
 goto :eof
 :cmdXError
-echo "Error: %ACTION%"
+echo %ESC%[31m* Error:%ESC%[0m make
 exit 1
 :cmdXDefined
 
-call :cmdX file-to-cs --touch=source/fabricare.cpp --file-in=source/fabricare.js --file-out=source/fabricare.src --is-string --name=fabricareSource
-call :cmdX xyo-cc --mode=%ACTION% @build/source/fabricare.compile --use-lib=crypt32
-call :cmdX xyo-cc --mode=%ACTION% @build/source/fabricarew.compile --use-lib=crypt32
+rem ---
+
+if not exist output\ mkdir output
+if not exist temp\ mkdir temp
+
+if "%CXX%" == "" set CXX=cl
+
+rem ---
+set PATH=%CD%\temp;%PATH%
+
+if not exist temp\xyo-managed-memory.config.exe call :cmdX cmd.exe /C ".\build\msvc.make.xyo-managed-memory.cmd"
+if not exist temp\xyo-system.config.exe         call :cmdX cmd.exe /C ".\build\msvc.make.xyo-system.cmd"
+if not exist temp\xyo-cc.exe                    call :cmdX cmd.exe /C ".\build\msvc.make.xyo-cc.cmd"
+if not exist temp\file-to-cs.exe                call :cmdX xyo-cc.exe --output-path=temp @build/file-to-cs.compile.json
+if not exist temp\fabricare-prepare.exe         call :cmdX xyo-cc.exe --output-path=temp @build/fabricare-prepare.compile.json
+
+call :cmdX fabricare-prepare.exe
+
+pushd "source\XYO\Fabricare"
+call :cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource
+popd
+
+call :cmdX xyo-cc.exe --output-path=output @build/fabricare.compile.json
