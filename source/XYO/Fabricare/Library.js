@@ -142,7 +142,9 @@ if (!Script.isNil(Config.solution)) {
 
 if (!Script.isNil(Solution.type)) {
 	Fabricare.configOk = true;
-	Fabricare.include(Solution.type);
+	if(!Fabricare.include(Solution.type+".solution")){
+		Console.writeLn("* Error: Solution type "+Solution.type+" not found!");
+	};
 };
 
 // ---
@@ -155,7 +157,9 @@ if (!Script.isNil(Config.project)) {
 
 if (!Script.isNil(Project.type)) {
 	Fabricare.configOk = true;
-	Fabricare.include(Project.type);
+	if(!Fabricare.include(Project.type+".project")){
+		Console.writeLn("* Error: Project type "+Solution.type+" not found!");
+	};
 };
 
 // ---

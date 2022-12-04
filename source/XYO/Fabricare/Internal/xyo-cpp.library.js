@@ -28,3 +28,18 @@ global.exit = function(retV) {
 	messageError();
 	Script.exit(retV);
 };
+
+global.runInPath = function(path, fn) {
+	var savePath = Shell.realPath(Shell.getcwd());
+	if (Script.isNil(savePath)) {
+		exit(1);
+	};
+	Shell.chdir(path);
+	try {
+		fn();
+	} catch (e) {
+		throw e;
+	} finally {
+		Shell.chdir(savePath);
+	};
+};

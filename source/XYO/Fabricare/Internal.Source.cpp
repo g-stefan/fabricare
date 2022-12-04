@@ -1,35 +1,40 @@
-#include <XYO/Fabricare/Internal/mingw32.cpp>
-#include <XYO/Fabricare/Internal/mingw64.cpp>
-#include <XYO/Fabricare/Internal/msvc.clean.cpp>
-#include <XYO/Fabricare/Internal/msvc.default.cpp>
-#include <XYO/Fabricare/Internal/msvc.install.cpp>
-#include <XYO/Fabricare/Internal/msvc.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.dll.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.exe.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.exe.static.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.lib-and-dll.cpp>
-#include <XYO/Fabricare/Internal/msvc.make.lib.cpp>
-#include <XYO/Fabricare/Internal/msvc.test.cpp>
-#include <XYO/Fabricare/Internal/msvc.version.cpp>
-#include <XYO/Fabricare/Internal/platform.detect.cpp>
-#include <XYO/Fabricare/Internal/platform.mingw.subroutine.cpp>
-#include <XYO/Fabricare/Internal/platform.msvc.subroutine.cpp>
-#include <XYO/Fabricare/Internal/ubuntu.clean.cpp>
-#include <XYO/Fabricare/Internal/ubuntu.default.cpp>
-#include <XYO/Fabricare/Internal/ubuntu.install.cpp>
-#include <XYO/Fabricare/Internal/ubuntu.cpp>
-#include <XYO/Fabricare/Internal/win32-msvc-2017.cpp>
-#include <XYO/Fabricare/Internal/win32-msvc-2019.cpp>
-#include <XYO/Fabricare/Internal/win32-msvc-2022.cpp>
-#include <XYO/Fabricare/Internal/win64-msvc-2017.cpp>
-#include <XYO/Fabricare/Internal/win64-msvc-2019.cpp>
-#include <XYO/Fabricare/Internal/win64-msvc-2022.cpp>
-#include <XYO/Fabricare/Internal/xyo-cpp-project.cpp>
-#include <XYO/Fabricare/Internal/xyo-cpp-project.subroutine.cpp>
-#include <XYO/Fabricare/Internal/xyo-cpp-solution.cpp>
-#include <XYO/Fabricare/Internal/xyo-cpp-solution.subroutine.cpp>
-#include <XYO/Fabricare/Internal/xyo-cpp.library.cpp>
+#include <XYO/Fabricare/Internal.Source/mingw32.cpp>
+#include <XYO/Fabricare/Internal.Source/mingw64.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.clean.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.default.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.install.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.dll.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.exe.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.exe.static.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.lib-and-dll.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.lib.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.test.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.version.cpp>
+#include <XYO/Fabricare/Internal.Source/platform.detect.cpp>
+#include <XYO/Fabricare/Internal.Source/platform.mingw.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/platform.msvc.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/ubuntu.clean.cpp>
+#include <XYO/Fabricare/Internal.Source/ubuntu.default.cpp>
+#include <XYO/Fabricare/Internal.Source/ubuntu.install.cpp>
+#include <XYO/Fabricare/Internal.Source/ubuntu.cpp>
+#include <XYO/Fabricare/Internal.Source/vendor.clean.cpp>
+#include <XYO/Fabricare/Internal.Source/vendor.default.cpp>
+#include <XYO/Fabricare/Internal.Source/vendor.install.cpp>
+#include <XYO/Fabricare/Internal.Source/win32-msvc-2017.cpp>
+#include <XYO/Fabricare/Internal.Source/win32-msvc-2019.cpp>
+#include <XYO/Fabricare/Internal.Source/win32-msvc-2022.cpp>
+#include <XYO/Fabricare/Internal.Source/win64-msvc-2017.cpp>
+#include <XYO/Fabricare/Internal.Source/win64-msvc-2019.cpp>
+#include <XYO/Fabricare/Internal.Source/win64-msvc-2022.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-cpp.library.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-cpp.project.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-cpp.project.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-cpp.solution.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-cpp.solution.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-vendor.project.cpp>
+#include <XYO/Fabricare/Internal.Source/xyo-vendor.project.subroutine.cpp>
 
 static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://mingw32.js", source_mingw32);
@@ -53,16 +58,21 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://ubuntu.default.js", source_ubuntu_default);
 	executive->setIncludeSource("fabricare://ubuntu.install.js", source_ubuntu_install);
 	executive->setIncludeSource("fabricare://ubuntu.js", source_ubuntu);
+	executive->setIncludeSource("fabricare://vendor.clean.js", source_vendor_clean);
+	executive->setIncludeSource("fabricare://vendor.default.js", source_vendor_default);
+	executive->setIncludeSource("fabricare://vendor.install.js", source_vendor_install);
 	executive->setIncludeSource("fabricare://win32-msvc-2017.js", source_win32_msvc_2017);
 	executive->setIncludeSource("fabricare://win32-msvc-2019.js", source_win32_msvc_2019);
 	executive->setIncludeSource("fabricare://win32-msvc-2022.js", source_win32_msvc_2022);
 	executive->setIncludeSource("fabricare://win64-msvc-2017.js", source_win64_msvc_2017);
 	executive->setIncludeSource("fabricare://win64-msvc-2019.js", source_win64_msvc_2019);
 	executive->setIncludeSource("fabricare://win64-msvc-2022.js", source_win64_msvc_2022);
-	executive->setIncludeSource("fabricare://xyo-cpp-project.js", source_xyo_cpp_project);
-	executive->setIncludeSource("fabricare://xyo-cpp-project.subroutine.js", source_xyo_cpp_project_subroutine);
-	executive->setIncludeSource("fabricare://xyo-cpp-solution.js", source_xyo_cpp_solution);
-	executive->setIncludeSource("fabricare://xyo-cpp-solution.subroutine.js", source_xyo_cpp_solution_subroutine);
 	executive->setIncludeSource("fabricare://xyo-cpp.library.js", source_xyo_cpp_library);
+	executive->setIncludeSource("fabricare://xyo-cpp.project.js", source_xyo_cpp_project);
+	executive->setIncludeSource("fabricare://xyo-cpp.project.subroutine.js", source_xyo_cpp_project_subroutine);
+	executive->setIncludeSource("fabricare://xyo-cpp.solution.js", source_xyo_cpp_solution);
+	executive->setIncludeSource("fabricare://xyo-cpp.solution.subroutine.js", source_xyo_cpp_solution_subroutine);
+	executive->setIncludeSource("fabricare://xyo-vendor.project.js", source_xyo_vendor_project);
+	executive->setIncludeSource("fabricare://xyo-vendor.project.subroutine.js", source_xyo_vendor_project_subroutine);
 };
 

@@ -50,8 +50,9 @@ compileDll({
 // ---
 
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp", "output/include");
-copyFileIfExists("source/" + Project.sourcePath + ".hpp", "output/include/" + Shell.getFilePath(Project.sourcePath));
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rh", "output/include");
+var sourcePath = [].concat(Project.sourcePath);
+copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.getFilePath(Project.sourcePath[0]));
 
 // ---
 

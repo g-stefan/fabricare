@@ -7,28 +7,42 @@ Script.requireExtension("Console");
 Script.requireExtension("ShellFind");
 Script.requireExtension("Shell");
 
+function pad2(x){
+	if(x<10){
+		return "0"+x;
+	};
+	return x;
+};
+
 var sourceInternal="";
 var sourceInternalFunction="";
-var list=Shell.getFileList("source/fabricare/*.js");
+var list=Shell.getFileList("source/XYO/Fabricare/Internal/*.js");
+var index=0;
+var infoMap=["|","/","-","\\"];
 for(var file of list){
 	var filename=Shell.getFileName(file);	
 	var filenameCPP=filename.replace(".js",".cpp");
 	var filenameSource="source_"+filename.replace(".js","").replace("-","_").replace(".","_");
 
-	var cmd="file-to-cs --touch=Library.cpp";
+	var cmd="file-to-cs --touch=source/XYO/Fabricare/Library.cpp";
 	cmd+=" --file-in="+file;
-	cmd+=" --file-out=source/XYO/Fabricare/Internal/"+filenameCPP;
+	cmd+=" --file-out=source/XYO/Fabricare/Internal.Source/"+filenameCPP;
 	cmd+=" --is-string";
 	cmd+=" --name="+filenameSource;
 
-	Console.writeLn(cmd);
+	//Console.writeLn(cmd);
 	if(Shell.system(cmd)!=0){
 		throw("command");
 	};
 
-	sourceInternal+="#include <XYO/Fabricare/Internal/"+filenameCPP+">\r\n";
+	sourceInternal+="#include <XYO/Fabricare/Internal.Source/"+filenameCPP+">\r\n";
 	sourceInternalFunction+="\texecutive->setIncludeSource(\"fabricare://"+filename+"\", "+filenameSource+");\r\n";
+
+	//---
+	++index;
+	Console.write(infoMap[index%infoMap.length]+" ["+pad2(index)+"/"+list.length+"]\r");
 };
+Console.writeLn("- ["+pad2(index)+"/"+list.length+"]");
 
 var source=sourceInternal;
 source+="\r\n";

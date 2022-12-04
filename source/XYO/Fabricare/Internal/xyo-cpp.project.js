@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.subroutine = "xyo-cpp-project.subroutine";
+Fabricare.subroutine = "xyo-cpp.project.subroutine";
 
 // ---
 

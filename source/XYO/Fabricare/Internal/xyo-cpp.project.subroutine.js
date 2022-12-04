@@ -242,21 +242,6 @@ global.compileAndRunTemp = function(compileProject) {
 	exitIf(Shell.system(".\\temp\\" + compileProject.project));
 };
 
-global.runInPath = function(path, fn) {
-	var savePath = Shell.realPath(Shell.getcwd());
-	if (Script.isNil(savePath)) {
-		exit(1);
-	};
-	Shell.chdir(path);
-	try {
-		fn();
-	} catch (e) {
-		throw e;
-	} finally {
-		Shell.chdir(savePath);
-	};
-};
-
 global.compileAndRunTest = function(compileProject) {
 	compileProjectDependency(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));

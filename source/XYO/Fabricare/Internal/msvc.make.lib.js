@@ -32,37 +32,22 @@ var version = getVersion();
 
 // ---
 
-compileLibAndDll({
+compileLib({
 	project : Project.name,
 	defines : Project.defines,
 	includePath : Project.includePath.concat("source"),
 	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp"),
-	library : Project.library,
-	resources : {
-		"includePath" : [
-			"source"
-		],
-		"rcSource" : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rc")
-	}
+	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp")
 });
 
 // ---
 
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp", "output/include");
-copyFileIfExists("source/" + Project.sourcePath + ".hpp", "output/include/" + Shell.getFilePath(Project.sourcePath));
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rh", "output/include");
+var sourcePath = [].concat(Project.sourcePath);
+copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.getFilePath(Project.sourcePath[0]));
 
 // ---
-
-var dependency = {};
-dependency[Project.name] = {
-	version : version[Project.name],
-	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	library : Project.dependency
-};
-
-exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));
 
 var library = [];
 for (var lib of Project.dependency) {
