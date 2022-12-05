@@ -21,10 +21,8 @@ Script.requireExtension("File");
 Script.requireExtension("Base16");
 Script.requireExtension("Base32");
 Script.requireExtension("Base64");
-Script.requireExtension("CSV");
 Script.requireExtension("SHA256");
 Script.requireExtension("SHA512");
-Script.requireExtension("XML");
 Script.requireExtension("Random");
 
 // ---

@@ -23,11 +23,8 @@
 #include <XYO/QuantumScript.Extension/Base16.hpp>
 #include <XYO/QuantumScript.Extension/Base32.hpp>
 #include <XYO/QuantumScript.Extension/Base64.hpp>
-#include <XYO/QuantumScript.Extension/CSV.hpp>
-#include <XYO/QuantumScript.Extension/MD5.hpp>
 #include <XYO/QuantumScript.Extension/SHA256.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
-#include <XYO/QuantumScript.Extension/XML.hpp>
 #include <XYO/QuantumScript.Extension/Random.hpp>
 #include <XYO/FileToCS.Application.hpp>
 #include <XYO/FileToRC.Application.hpp>
@@ -208,10 +205,8 @@ namespace XYO::Fabricare {
 		Extension::Base16::registerInternalExtension(executive);
 		Extension::Base32::registerInternalExtension(executive);
 		Extension::Base64::registerInternalExtension(executive);
-		Extension::CSV::registerInternalExtension(executive);
 		Extension::SHA256::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
-		Extension::XML::registerInternalExtension(executive);
 		Extension::Random::registerInternalExtension(executive);
 
 		executive->compileString("Script.requireExtension=Script.requireInternalExtension;");
