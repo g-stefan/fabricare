@@ -28,6 +28,7 @@
 #include <XYO/QuantumScript.Extension/SHA256.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
 #include <XYO/QuantumScript.Extension/XML.hpp>
+#include <XYO/QuantumScript.Extension/Random.hpp>
 #include <XYO/FileToCS.Application.hpp>
 #include <XYO/FileToRC.Application.hpp>
 #include <XYO/HTMLToRC.Application.hpp>
@@ -211,6 +212,7 @@ namespace XYO::Fabricare {
 		Extension::SHA256::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
 		Extension::XML::registerInternalExtension(executive);
+		Extension::Random::registerInternalExtension(executive);
 
 		executive->compileString("Script.requireExtension=Script.requireInternalExtension;");
 

@@ -31,6 +31,7 @@
 			"quantum-script--sha256",
 			"quantum-script--sha512",
 			"quantum-script--xml",
+			"quantum-script--random",
 			"file-json",
 			"file-xml",
 			"file-to-cs.application",

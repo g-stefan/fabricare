@@ -51,6 +51,7 @@ call :cmdVendor quantum-script--md5
 call :cmdVendor quantum-script--sha256
 call :cmdVendor quantum-script--sha512
 call :cmdVendor quantum-script--xml
+call :cmdVendor quantum-script--random
 call :cmdVendor file-json
 call :cmdVendor file-xml
 call :cmdVendor file-to-cs

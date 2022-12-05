@@ -25,6 +25,7 @@ Script.requireExtension("CSV");
 Script.requireExtension("SHA256");
 Script.requireExtension("SHA512");
 Script.requireExtension("XML");
+Script.requireExtension("Random");
 
 // ---
 
