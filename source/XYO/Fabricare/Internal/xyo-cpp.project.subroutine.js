@@ -235,6 +235,16 @@ global.compileLibAndDll = function(compileProject) {
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--dll", "--output-bin-path=output/bin", "--output-lib-path=output/lib")));
 };
 
+global.compileDllStatic = function(compileProject) {
+	compileProjectDependency(compileProject);
+	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
+	var outputPath = "output/bin";
+	if (!Script.isNil(Project.outputPath)) {
+		outputPath = Project.outputPath;
+	};
+	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--dll-x-static", "--output-bin-path=" + outputPath, "--crt-static")));
+};
+
 global.compileAndRunTemp = function(compileProject) {
 	compileProjectDependency(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));

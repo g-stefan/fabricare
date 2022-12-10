@@ -17,7 +17,7 @@ namespace XYO::Fabricare {
 	void Application::showUsage() {
 		printf("Fabricare - Build system\n");
 		showVersion();
-		printf("%s\n\n", Fabricare::Copyright::fullCopyright());
+		printf("%s\n\n", Fabricare::Copyright::copyright());
 
 		printf("%s",
 		       "options:\n"
@@ -30,7 +30,7 @@ namespace XYO::Fabricare {
 	};
 
 	void Application::showLicense() {
-		printf("%s%s", Fabricare::License::licenseHeader(), Fabricare::License::licenseBody());
+		printf("%s", Fabricare::License::license());
 	};
 
 	void Application::showVersion() {

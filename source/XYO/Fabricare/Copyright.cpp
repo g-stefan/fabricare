@@ -13,7 +13,6 @@ namespace XYO::Fabricare::Copyright {
 	static const char *publisher_ = XYO_FABRICARE_PUBLISHER;
 	static const char *company_ = XYO_FABRICARE_COMPANY;
 	static const char *contact_ = XYO_FABRICARE_CONTACT;
-	static const char *fullCopyright_ = XYO_FABRICARE_FULL_COPYRIGHT;
 
 	const char *copyright() {
 		return copyright_;
@@ -29,10 +28,6 @@ namespace XYO::Fabricare::Copyright {
 
 	const char *contact() {
 		return contact_;
-	};
-
-	const char *fullCopyright() {
-		return fullCopyright_;
 	};
 
 };

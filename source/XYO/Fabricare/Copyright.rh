@@ -7,10 +7,9 @@
 #ifndef XYO_FABRICARE_COPYRIGHT_RH
 #define XYO_FABRICARE_COPYRIGHT_RH
 
-#define XYO_FABRICARE_COPYRIGHT "Copyright (c) 2022 Grigore Stefan"
+#define XYO_FABRICARE_COPYRIGHT "Copyright (c) 2022 Grigore Stefan <g_stefan@yahoo.com>"
 #define XYO_FABRICARE_PUBLISHER "Grigore Stefan"
 #define XYO_FABRICARE_COMPANY XYO_FABRICARE_PUBLISHER
 #define XYO_FABRICARE_CONTACT "g_stefan@yahoo.com"
-#define XYO_FABRICARE_FULL_COPYRIGHT XYO_FABRICARE_COPYRIGHT " <" XYO_FABRICARE_CONTACT ">"
 
 #endif

@@ -5,6 +5,7 @@
 #include <XYO/Fabricare/Internal.Source/msvc.install.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.make.dll.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.make.dll.static.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.make.exe.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.make.exe.static.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.make.cpp>
@@ -44,6 +45,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://msvc.install.js", source_msvc_install);
 	executive->setIncludeSource("fabricare://msvc.js", source_msvc);
 	executive->setIncludeSource("fabricare://msvc.make.dll.js", source_msvc_make_dll);
+	executive->setIncludeSource("fabricare://msvc.make.dll.static.js", source_msvc_make_dll_static);
 	executive->setIncludeSource("fabricare://msvc.make.exe.js", source_msvc_make_exe);
 	executive->setIncludeSource("fabricare://msvc.make.exe.static.js", source_msvc_make_exe_static);
 	executive->setIncludeSource("fabricare://msvc.make.js", source_msvc_make);
