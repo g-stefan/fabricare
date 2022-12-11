@@ -34,6 +34,10 @@ global.runInPath = function(path, fn) {
 	if (Script.isNil(savePath)) {
 		exit(1);
 	};
+	if(!Shell.directoryExists(path)){
+		global.messageError("path not found \""+path+"\"");
+		exit(1);
+	};
 	Shell.chdir(path);
 	try {
 		fn();

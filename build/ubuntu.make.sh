@@ -45,4 +45,4 @@ cd "source/XYO/Fabricare"
 cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource
 cd ../../..
 
-cmdX xyo-cc --output-path=output @build/fabricare.compile.json
+cmdX xyo-cc --output-path=output/bin @build/fabricare.compile.json

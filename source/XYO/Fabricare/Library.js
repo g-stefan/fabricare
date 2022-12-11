@@ -163,6 +163,16 @@ if (!Script.isNil(Project.type)) {
 
 // ---
 
+if(Shell.fileExists("fabricare/fabricare.js")){
+	Fabricare.configOk = true;
+};
+
+if(Application.getFlagValue("run-script")){
+	Fabricare.configOk = true;
+};
+
+// ---
+
 if (!Fabricare.configOk) {
 	Console.writeLn("fabricare [--platform=...] [action]");
 };

@@ -27,4 +27,4 @@ set pathRepository=%pathHome%\SDK\%platform%
 
 if not exist %pathRepository%\bin\ mkdir %pathRepository%\bin
 
-call :cmdX copy /Y /B output\fabricare.exe %pathRepository%\bin\fabricare.exe
+call :cmdX copy /Y /B output\bin\fabricare.exe %pathRepository%\bin\fabricare.exe

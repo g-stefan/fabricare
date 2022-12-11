@@ -42,4 +42,4 @@ pushd "source\XYO\Fabricare"
 call :cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource
 popd
 
-call :cmdX xyo-cc.exe --output-path=output @build/fabricare.compile.json
+call :cmdX xyo-cc.exe --output-path=output/bin @build/fabricare.compile.json
