@@ -10,9 +10,10 @@ SOURCE_HOST=https://github.com/g-stefan
 
 cmdVendor() {
 	if ! [ -d "./$1" ]; then
-	if ! "git clone --depth 1 $SOURCE_HOST/$1" ; then
-		echo "* Error: vendor"
-		exit 1
+		if ! "git clone --depth 1 $SOURCE_HOST/$1" ; then
+			echo "* Error: vendor"
+			exit 1
+		fi
 	fi
 }
 
