@@ -163,6 +163,11 @@ global.getDependency = function() {
 			dependencyProcess(dependency, projectList, projectDependency);
 		};
 	};
+	if (!Script.isNil(Project.library)) {
+		for (var library of Project.library) {
+			dependencyProcess(library, projectList, projectDependency);
+		};
+	};
 	var retV = [];
 	for (var library of projectDependency) {
 		retV[retV.length] = library;

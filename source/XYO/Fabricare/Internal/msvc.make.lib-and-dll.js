@@ -24,8 +24,6 @@ if (Script.isNil(Project.includePath)) {
 	Project.includePath = [];
 };
 
-Project.library = Project.library.concat(Project.dependency);
-
 // ---
 
 var version = getVersion();
@@ -38,7 +36,6 @@ compileLibAndDll({
 	includePath : Project.includePath.concat("source"),
 	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp"),
 	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp"),
-	library : Project.library,
 	resources : {
 		"includePath" : [
 			"source"
@@ -60,15 +57,22 @@ var dependency = {};
 dependency[Project.name] = {
 	version : version[Project.name],
 	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	library : Project.dependency
+	library : Project.dependency.concat(Project.library)
 };
 
 exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));
+
+// ---
 
 var library = [];
 for (var lib of Project.dependency) {
 	library[library.length] = lib + ".static";
 };
+for (var lib of Project.library) {
+	library[library.length] = lib;
+};
+
+// ---
 
 var dependency = {};
 dependency[Project.name + ".static"] = {

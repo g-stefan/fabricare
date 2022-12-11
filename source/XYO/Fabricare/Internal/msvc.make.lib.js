@@ -24,8 +24,6 @@ if (Script.isNil(Project.includePath)) {
 	Project.includePath = [];
 };
 
-Project.library = Project.library.concat(Project.dependency);
-
 // ---
 
 var version = getVersion();
@@ -53,6 +51,11 @@ var library = [];
 for (var lib of Project.dependency) {
 	library[library.length] = lib + ".static";
 };
+for (var lib of Project.library) {
+	library[library.length] = lib;
+};
+
+// ---
 
 var dependency = {};
 dependency[Project.name + ".static"] = {

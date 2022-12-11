@@ -83,7 +83,11 @@
 		"vendor/xyo-cryptography/source"
 	],
 	"cppSource": [
-		"source/XYO/Fabricare.Amalgam.cpp",
+		"source/XYO/Fabricare/Copyright.cpp",
+		"source/XYO/Fabricare/License.cpp",
+		"source/XYO/Fabricare/Version.cpp",
+		"source/XYO/Fabricare/Library.cpp",
+		"source/XYO/Fabricare/Application.cpp",
 		"vendor/quantum-script/source/XYO/QuantumScript.Extension/Console.Amalgam.cpp",
 		"vendor/quantum-script--buffer/source/XYO/QuantumScript.Extension/Buffer.Amalgam.cpp",
 		"vendor/quantum-script--datetime/source/XYO/QuantumScript.Extension/DateTime.Amalgam.cpp",

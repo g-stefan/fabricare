@@ -36,7 +36,6 @@ compileExe({
 	includePath : Project.includePath.concat("source"),
 	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp"),
 	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp"),
-	library : Project.library,
 	resources : {
 		"includePath" : [
 			"source"
