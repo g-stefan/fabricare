@@ -170,7 +170,7 @@ global.getDependency = function() {
 	};
 	var retV = [];
 	for (var library of projectDependency) {
-		retV[retV.length] = library;
+		retV[retV.length] = ":"+library;
 	};
 	return retV;
 };
