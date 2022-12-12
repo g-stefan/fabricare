@@ -24,11 +24,12 @@ for(var file of list){
 	var filenameCPP=filename.replace(".js",".cpp");
 	var filenameSource="source_"+filename.replace(".js","").replace("-","_").replace(".","_");
 
-	var cmd="file-to-cs --touch=source/XYO/Fabricare/Library.cpp";
-	cmd+=" --file-in="+file;
-	cmd+=" --file-out=source/XYO/Fabricare/Internal.Source/"+filenameCPP;
-	cmd+=" --is-string";
-	cmd+=" --name="+filenameSource;
+	var cmd="file-to-cs";
+	cmd+=" \"--touch=source/XYO/Fabricare/Library.cpp\"";
+	cmd+=" \"--file-in="+file+"\"";
+	cmd+=" \"--file-out=source/XYO/Fabricare/Internal.Source/"+filenameCPP+"\"";
+	cmd+=" \"--is-string\"";
+	cmd+=" \"--name="+filenameSource+"\"";
 
 	//Console.writeLn(cmd);
 	if(Shell.system(cmd)!=0){

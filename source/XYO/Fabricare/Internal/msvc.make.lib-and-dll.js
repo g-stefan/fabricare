@@ -68,11 +68,15 @@ if (OS.isLinux()) {
 	property = "osLinux";
 };
 if (!Script.isNil(Project[property])) {
-	for (var lib of Project[property].dependency) {
-		library[library.length] = lib;
+	if (!Script.isNil(Project[property].dependency)) {
+		for (var lib of Project[property].dependency) {
+			library[library.length] = lib;
+		};
 	};
-	for (var lib of Project[property].library) {
-		library[library.length] = lib;
+	if (!Script.isNil(Project[property].library)) {
+		for (var lib of Project[property].library) {
+			library[library.length] = lib;
+		};
 	};
 };
 
@@ -104,11 +108,15 @@ if (OS.isLinux()) {
 	property = "osLinux";
 };
 if (!Script.isNil(Project[property])) {
-	for (var lib of Project[property].dependency) {
-		library[library.length] = lib + ".static";
+	if (!Script.isNil(Project[property].dependency)) {
+		for (var lib of Project[property].dependency) {
+			library[library.length] = lib + ".static";
+		};
 	};
-	for (var lib of Project[property].library) {
-		library[library.length] = lib;
+	if (!Script.isNil(Project[property].library)) {
+		for (var lib of Project[property].library) {
+			library[library.length] = lib;
+		};
 	};
 };
 
