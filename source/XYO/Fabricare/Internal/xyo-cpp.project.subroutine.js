@@ -138,15 +138,16 @@ global.getDependencyOfProject = function(projectName) {
 
 global.dependencyProcess = function(projectName, projectList, projectDependency) {
 	if (projectList[projectName]) {
+		++projectDependency[projectName];
 		return;
 	};
 
 	projectList[projectName] = true;
-	projectDependency[projectName] = projectName;
+	projectDependency[projectName] = 1;
 
 	var dependency = getDependencyOfProject(projectName);
 	if (dependency[projectName].library) {
-		for (var library of dependency[projectName].library) {			
+		for (var library of dependency[projectName].library) {
 			dependencyProcess(library, projectList, projectDependency);
 		};
 	};
@@ -154,7 +155,7 @@ global.dependencyProcess = function(projectName, projectList, projectDependency)
 
 global.getDependency = function() {
 	var projectList = {};
-	var projectDependency = new AssociativeArray();
+	var projectDependency = {};
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
 			dependencyProcess(dependency, projectList, projectDependency);
@@ -184,9 +185,21 @@ global.getDependency = function() {
 			};
 		};
 	};
+
+	var listProject = [];
+	var listIndex = [];	
+	for (var library in projectDependency) {
+		listProject[listProject.length]=library;
+	};
+	var powIndex=Math.pow(Math.floor(Math.log10(listProject.length)),10);
+	for (var index in listProject) {
+		listIndex[index]=projectDependency[listProject[index]]*powIndex+index;
+	};
+	var sortedIndex=listIndex.sort();
 	var retV = [];
-	for (var library of projectDependency) {
-		retV[retV.length] = ":" + library;
+	for (var sIndex of sortedIndex) {
+		var index = sIndex%powIndex;
+		retV[retV.length] = ":" + listProject[index];
 	};
 	return retV;
 };
