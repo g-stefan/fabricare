@@ -53,11 +53,36 @@ copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.g
 
 // ---
 
+var library = [];
+for (var lib of Project.dependency) {
+	library[library.length] = lib;
+};
+for (var lib of Project.library) {
+	library[library.length] = lib;
+};
+var property = "osUnknown";
+if (OS.isWindows()) {
+	property = "osWindows";
+};
+if (OS.isLinux()) {
+	property = "osLinux";
+};
+if (!Script.isNil(Project[property])) {
+	for (var lib of Project[property].dependency) {
+		library[library.length] = lib;
+	};
+	for (var lib of Project[property].library) {
+		library[library.length] = lib;
+	};
+};
+
+// ---
+
 var dependency = {};
 dependency[Project.name] = {
 	version : version[Project.name],
 	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	library : Project.dependency.concat(Project.library)
+	library : library
 };
 
 exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));

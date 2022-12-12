@@ -54,6 +54,21 @@ for (var lib of Project.dependency) {
 for (var lib of Project.library) {
 	library[library.length] = lib;
 };
+var property = "osUnknown";
+if (OS.isWindows()) {
+	property = "osWindows";
+};
+if (OS.isLinux()) {
+	property = "osLinux";
+};
+if (!Script.isNil(Project[property])) {
+	for (var lib of Project[property].dependency) {
+		library[library.length] = lib + ".static";
+	};
+	for (var lib of Project[property].library) {
+		library[library.length] = lib;
+	};
+};
 
 // ---
 

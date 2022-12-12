@@ -17,14 +17,14 @@ global.messageError = function(info) {
 	Console.writeLn("- \x1B[31m* Error\x1B[0m: " + info);
 };
 
-global.exitIf = function(retV,message) {
+global.exitIf = function(retV, message) {
 	if (retV) {
 		messageError(message);
 		Script.exit(retV);
 	};
 };
 
-global.exit = function(retV,message) {
+global.exit = function(retV, message) {
 	messageError(message);
 	Script.exit(retV);
 };
@@ -34,8 +34,8 @@ global.runInPath = function(path, fn) {
 	if (Script.isNil(savePath)) {
 		exit(1);
 	};
-	if(!Shell.directoryExists(path)){
-		global.messageError("path not found \""+path+"\"");
+	if (!Shell.directoryExists(path)) {
+		global.messageError("path not found \"" + path + "\"");
 		exit(1);
 	};
 	Shell.chdir(path);

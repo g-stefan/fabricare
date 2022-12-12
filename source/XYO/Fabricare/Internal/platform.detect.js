@@ -43,13 +43,13 @@ if (OS.isWindows()) {
 };
 
 if (OS.isLinux()) {
-	var info=Fabricare.runInteractive("uname -s").trim();
-	if(info.indexOf("Linux")>=0) {		
-		Platform.name = "ubuntu";		
-		if(Shell.fileExists("/etc/lsb-release")) {			
-			var release=Fabricare.runInteractive("/bin/sh -c \"cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d \\\"=\\\" -f 2\"").trim();
-			Platform.name += "-"+release;
+	var info = Fabricare.runInteractive("uname -s").trim();
+	if (info.indexOf("Linux") >= 0) {
+		Platform.name = "ubuntu";
+		if (Shell.fileExists("/etc/lsb-release")) {
+			var release = Fabricare.runInteractive("/bin/sh -c \"cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d \\\"=\\\" -f 2\"").trim();
+			Platform.name += "-" + release;
 		};
 		return;
-	};	
+	};
 };

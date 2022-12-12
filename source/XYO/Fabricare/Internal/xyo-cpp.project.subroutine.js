@@ -168,9 +168,28 @@ global.getDependency = function() {
 			dependencyProcess(library, projectList, projectDependency);
 		};
 	};
+	var property = "osUnknown";
+	if (OS.isWindows()) {
+		property = "osWindows";
+	};
+	if (OS.isLinux()) {
+		property = "osLinux";
+	};
+	if (!Script.isNil(Project[property])) {
+		if (!Script.isNil(Project[property].dependency)) {
+			for (var dependency of Project[property].dependency) {
+				dependencyProcess(dependency, projectList, projectDependency);
+			};
+		};
+		if (!Script.isNil(Project[property].library)) {
+			for (var library of Project[property].library) {
+				dependencyProcess(library, projectList, projectDependency);
+			};
+		};
+	};
 	var retV = [];
 	for (var library of projectDependency) {
-		retV[retV.length] = ":"+library;
+		retV[retV.length] = ":" + library;
 	};
 	return retV;
 };
