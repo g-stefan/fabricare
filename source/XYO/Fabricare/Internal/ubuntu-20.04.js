@@ -7,5 +7,6 @@ Platform.name = "ubuntu-20.04";
 Platform.osName = "ubuntu";
 Platform.osType = "linux";
 Platform.version = "20.04";
+Platform.machine = "x64";
 
 Fabricare.include("platform.ubuntu.subroutine");
