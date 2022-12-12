@@ -127,6 +127,30 @@ xyoVersion = Internal.xyoVersion;
 
 // ---
 
+Fabricare.runInteractive = function(cmd) {	
+	var line;
+	var retV="";
+	var process=new ProcessInteractive();	
+	process.execute(cmd);	
+	while(process.isRunning()) {		
+		if(process.waitToRead(10)) {			
+			line=process.readLn();
+			if(line){
+				retV+=line;
+			};
+		};		
+	};	
+	// data in buffer after end
+	line=process.read();
+	if(line){
+		retV+=line;
+	};	
+	process.close();
+	return retV;
+};
+
+// ---
+
 Fabricare.loadConfig();
 
 Fabricare.configOk = false;

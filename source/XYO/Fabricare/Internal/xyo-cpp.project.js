@@ -12,4 +12,7 @@ if (!Platform.name) {
 	Fabricare.include("platform.detect");
 };
 
-Fabricare.include(Platform.name);
+if(!Fabricare.include(Platform.name)) {
+	Console.writeLn("Error: Platform "+ Platform.name + " not found!");
+	Script.exit(1);
+};

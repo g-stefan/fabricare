@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Unlicense
 
 global.pathHome = Shell.getenv("HOME");
-global.pathRepository = pathHome + "/SDK/" + Platform.name;
+global.pathRepository = pathHome + "/SDK";
 global.pathRelease = pathRepository + "/release";
 
 Shell.setenv("PATH", pathRepository + "\\bin;" + Shell.getenv("PATH"));

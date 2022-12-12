@@ -17,15 +17,15 @@ global.messageError = function(info) {
 	Console.writeLn("- \x1B[31m* Error\x1B[0m: " + info);
 };
 
-global.exitIf = function(retV) {
+global.exitIf = function(retV,message) {
 	if (retV) {
-		messageError();
+		messageError(message);
 		Script.exit(retV);
 	};
 };
 
-global.exit = function(retV) {
-	messageError();
+global.exit = function(retV,message) {
+	messageError(message);
 	Script.exit(retV);
 };
 

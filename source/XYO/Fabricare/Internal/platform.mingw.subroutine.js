@@ -55,13 +55,13 @@ if (!Fabricare.isPlatformSubroutine) {
 
 		var cmdSh = "";
 		cmdSh += "#!/bin/sh\n";
-		cmdScript += "export PATH=$PATH:/c/msys64/" + Platform.name + "/bin/../libexec;\n";
-		cmdScript += "fabricare \"@" + tempFileArguments + "\"\n";
-		cmdScript += "RETV=$?\n";
-		cmdScript += "if [ \"$RETV\" = \"1\" ]; then\n";
-		cmdScript += "	exit 1\n";
-		cmdScript += "fi\n";
-		cmdScript += "exit 0\n";
+		cmdSh += "export PATH=$PATH:/c/msys64/" + Platform.name + "/bin/../libexec;\n";
+		cmdSh += "fabricare \"@" + tempFileArguments + "\"\n";
+		cmdSh += "RETV=$?\n";
+		cmdSh += "if [ \"$RETV\" = \"1\" ]; then\n";
+		cmdSh += "	exit 1\n";
+		cmdSh += "fi\n";
+		cmdSh += "exit 0\n";
 		Shell.filePutContents(tempFileSh, cmdSh);
 
 		var cmd = "cmd.exe /C \"" + tempFileCmd + "\"";

@@ -254,7 +254,7 @@ global.compileAndRunTemp = function(compileProject) {
 	compileProjectDependency(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=temp")));
-	exitIf(Shell.system(".\\temp\\" + compileProject.project));
+	exitIf(Shell.system("./temp/" + compileProject.project));
 };
 
 global.compileAndRunTest = function(compileProject) {
