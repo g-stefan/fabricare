@@ -132,9 +132,7 @@ global.getDependencyOfProject = function(projectName) {
 	};
 
 	retV = {};
-	retV[projectName] = {
-		"library" : []
-	};
+	retV[projectName] = {};
 	return retV;
 };
 
@@ -148,8 +146,7 @@ global.dependencyProcess = function(projectName, projectList, projectDependency)
 
 	var dependency = getDependencyOfProject(projectName);
 	if (dependency[projectName].library) {
-		for (var library of dependency[projectName].library) {
-			projectDependency[library] = library;
+		for (var library of dependency[projectName].library) {			
 			dependencyProcess(library, projectList, projectDependency);
 		};
 	};
