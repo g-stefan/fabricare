@@ -50,5 +50,6 @@ if (OS.isLinux()) {
 			var release=Fabricare.runInteractive("/bin/sh -c \"cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d \\\"=\\\" -f 2\"").trim();
 			Platform.name += "-"+release;
 		};
+		return;
 	};	
 };
