@@ -153,7 +153,7 @@ global.dependencyProcess = function(projectName, projectList, projectDependency)
 };
 
 global.getDependency = function() {
-	var projectList = new AssociativeArray();
+	var projectList = {};
 	var projectDependency = new AssociativeArray();
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
