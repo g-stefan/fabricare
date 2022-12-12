@@ -2,6 +2,7 @@
 #include <XYO/Fabricare/Internal.Source/mingw64.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.clean.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.default.cpp>
+#include <XYO/Fabricare/Internal.Source/msvc.install-bin.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.install.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.cpp>
 #include <XYO/Fabricare/Internal.Source/msvc.make.dll.cpp>
@@ -18,6 +19,7 @@
 #include <XYO/Fabricare/Internal.Source/platform.msvc.subroutine.cpp>
 #include <XYO/Fabricare/Internal.Source/ubuntu.clean.cpp>
 #include <XYO/Fabricare/Internal.Source/ubuntu.default.cpp>
+#include <XYO/Fabricare/Internal.Source/ubuntu.install-bin.cpp>
 #include <XYO/Fabricare/Internal.Source/ubuntu.install.cpp>
 #include <XYO/Fabricare/Internal.Source/ubuntu.cpp>
 #include <XYO/Fabricare/Internal.Source/vendor.clean.cpp>
@@ -42,6 +44,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://mingw64.js", source_mingw64);
 	executive->setIncludeSource("fabricare://msvc.clean.js", source_msvc_clean);
 	executive->setIncludeSource("fabricare://msvc.default.js", source_msvc_default);
+	executive->setIncludeSource("fabricare://msvc.install-bin.js", source_msvc_install_bin);
 	executive->setIncludeSource("fabricare://msvc.install.js", source_msvc_install);
 	executive->setIncludeSource("fabricare://msvc.js", source_msvc);
 	executive->setIncludeSource("fabricare://msvc.make.dll.js", source_msvc_make_dll);
@@ -58,6 +61,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://platform.msvc.subroutine.js", source_platform_msvc_subroutine);
 	executive->setIncludeSource("fabricare://ubuntu.clean.js", source_ubuntu_clean);
 	executive->setIncludeSource("fabricare://ubuntu.default.js", source_ubuntu_default);
+	executive->setIncludeSource("fabricare://ubuntu.install-bin.js", source_ubuntu_install_bin);
 	executive->setIncludeSource("fabricare://ubuntu.install.js", source_ubuntu_install);
 	executive->setIncludeSource("fabricare://ubuntu.js", source_ubuntu);
 	executive->setIncludeSource("fabricare://vendor.clean.js", source_vendor_clean);
