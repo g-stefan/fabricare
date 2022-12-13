@@ -1,76 +1,76 @@
-#include <XYO/Fabricare/Internal.Source/platform/mingw64.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/mingw32.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/ubuntu.subroutine.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2019.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/ubuntu-18.04.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2022.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2017.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/msvc.subroutine.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2017.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/ubuntu-22.04.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/mingw.subroutine.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/ubuntu.cpp>
 #include <XYO/Fabricare/Internal.Source/platform/detect.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/ubuntu-20.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/mingw.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/mingw32.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/mingw64.cpp>
 #include <XYO/Fabricare/Internal.Source/platform/msvc.cpp>
-#include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2022.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/msvc.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/ubuntu-18.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/ubuntu-20.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/ubuntu-22.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/ubuntu.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/ubuntu.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2017.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2019.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/win32-msvc-2022.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2017.cpp>
 #include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2019.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2022.cpp>
 #include <XYO/Fabricare/Internal.Source/solution/xyo-cpp.cpp>
 #include <XYO/Fabricare/Internal.Source/solution/xyo-cpp.subroutine.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.library.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.subroutine.cpp>
-#include <XYO/Fabricare/Internal.Source/make.exe.cpp>
-#include <XYO/Fabricare/Internal.Source/make.dll.static.cpp>
-#include <XYO/Fabricare/Internal.Source/version.cpp>
-#include <XYO/Fabricare/Internal.Source/make.lib.cpp>
-#include <XYO/Fabricare/Internal.Source/make.dll.cpp>
-#include <XYO/Fabricare/Internal.Source/make.lib-and-dll.cpp>
-#include <XYO/Fabricare/Internal.Source/make.cpp>
-#include <XYO/Fabricare/Internal.Source/install-bin.cpp>
-#include <XYO/Fabricare/Internal.Source/install.cpp>
-#include <XYO/Fabricare/Internal.Source/make.exe.static.cpp>
 #include <XYO/Fabricare/Internal.Source/clean.cpp>
 #include <XYO/Fabricare/Internal.Source/default.cpp>
+#include <XYO/Fabricare/Internal.Source/install-bin.cpp>
+#include <XYO/Fabricare/Internal.Source/install.cpp>
+#include <XYO/Fabricare/Internal.Source/make.dll.cpp>
+#include <XYO/Fabricare/Internal.Source/make.dll.static.cpp>
+#include <XYO/Fabricare/Internal.Source/make.exe.cpp>
+#include <XYO/Fabricare/Internal.Source/make.exe.static.cpp>
+#include <XYO/Fabricare/Internal.Source/make.cpp>
+#include <XYO/Fabricare/Internal.Source/make.lib-and-dll.cpp>
+#include <XYO/Fabricare/Internal.Source/make.lib.cpp>
 #include <XYO/Fabricare/Internal.Source/project.cpp>
 #include <XYO/Fabricare/Internal.Source/test.cpp>
+#include <XYO/Fabricare/Internal.Source/version.cpp>
 
 static void internalInitExecutive(Executive *executive){
-	executive->setIncludeSource("fabricare://platform/mingw64.js", source_platform__mingw64);
-	executive->setIncludeSource("fabricare://platform/mingw32.js", source_platform__mingw32);
-	executive->setIncludeSource("fabricare://platform/ubuntu.subroutine.js", source_platform__ubuntu_subroutine);
-	executive->setIncludeSource("fabricare://platform/win32-msvc-2019.js", source_platform__win32_msvc_2019);
-	executive->setIncludeSource("fabricare://platform/ubuntu-18.04.js", source_platform__ubuntu_18_04);
-	executive->setIncludeSource("fabricare://platform/win32-msvc-2022.js", source_platform__win32_msvc_2022);
-	executive->setIncludeSource("fabricare://platform/win32-msvc-2017.js", source_platform__win32_msvc_2017);
-	executive->setIncludeSource("fabricare://platform/msvc.subroutine.js", source_platform__msvc_subroutine);
-	executive->setIncludeSource("fabricare://platform/win64-msvc-2017.js", source_platform__win64_msvc_2017);
-	executive->setIncludeSource("fabricare://platform/ubuntu-22.04.js", source_platform__ubuntu_22_04);
-	executive->setIncludeSource("fabricare://platform/mingw.subroutine.js", source_platform__mingw_subroutine);
-	executive->setIncludeSource("fabricare://platform/ubuntu.js", source_platform__ubuntu);
 	executive->setIncludeSource("fabricare://platform/detect.js", source_platform__detect);
-	executive->setIncludeSource("fabricare://platform/ubuntu-20.04.js", source_platform__ubuntu_20_04);
+	executive->setIncludeSource("fabricare://platform/mingw.subroutine.js", source_platform__mingw_subroutine);
+	executive->setIncludeSource("fabricare://platform/mingw32.js", source_platform__mingw32);
+	executive->setIncludeSource("fabricare://platform/mingw64.js", source_platform__mingw64);
 	executive->setIncludeSource("fabricare://platform/msvc.js", source_platform__msvc);
-	executive->setIncludeSource("fabricare://platform/win64-msvc-2022.js", source_platform__win64_msvc_2022);
+	executive->setIncludeSource("fabricare://platform/msvc.subroutine.js", source_platform__msvc_subroutine);
+	executive->setIncludeSource("fabricare://platform/ubuntu-18.04.js", source_platform__ubuntu_18_04);
+	executive->setIncludeSource("fabricare://platform/ubuntu-20.04.js", source_platform__ubuntu_20_04);
+	executive->setIncludeSource("fabricare://platform/ubuntu-22.04.js", source_platform__ubuntu_22_04);
+	executive->setIncludeSource("fabricare://platform/ubuntu.js", source_platform__ubuntu);
+	executive->setIncludeSource("fabricare://platform/ubuntu.subroutine.js", source_platform__ubuntu_subroutine);
+	executive->setIncludeSource("fabricare://platform/win32-msvc-2017.js", source_platform__win32_msvc_2017);
+	executive->setIncludeSource("fabricare://platform/win32-msvc-2019.js", source_platform__win32_msvc_2019);
+	executive->setIncludeSource("fabricare://platform/win32-msvc-2022.js", source_platform__win32_msvc_2022);
+	executive->setIncludeSource("fabricare://platform/win64-msvc-2017.js", source_platform__win64_msvc_2017);
 	executive->setIncludeSource("fabricare://platform/win64-msvc-2019.js", source_platform__win64_msvc_2019);
+	executive->setIncludeSource("fabricare://platform/win64-msvc-2022.js", source_platform__win64_msvc_2022);
 	executive->setIncludeSource("fabricare://solution/xyo-cpp.js", source_solution__xyo_cpp);
 	executive->setIncludeSource("fabricare://solution/xyo-cpp.subroutine.js", source_solution__xyo_cpp_subroutine);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.js", source_project__xyo_cpp);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.library.js", source_project__xyo_cpp_library);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.subroutine.js", source_project__xyo_cpp_subroutine);
-	executive->setIncludeSource("fabricare://make.exe.js", source_make_exe);
-	executive->setIncludeSource("fabricare://make.dll.static.js", source_make_dll_static);
-	executive->setIncludeSource("fabricare://version.js", source_version);
-	executive->setIncludeSource("fabricare://make.lib.js", source_make_lib);
-	executive->setIncludeSource("fabricare://make.dll.js", source_make_dll);
-	executive->setIncludeSource("fabricare://make.lib-and-dll.js", source_make_lib_and_dll);
-	executive->setIncludeSource("fabricare://make.js", source_make);
-	executive->setIncludeSource("fabricare://install-bin.js", source_install_bin);
-	executive->setIncludeSource("fabricare://install.js", source_install);
-	executive->setIncludeSource("fabricare://make.exe.static.js", source_make_exe_static);
 	executive->setIncludeSource("fabricare://clean.js", source_clean);
 	executive->setIncludeSource("fabricare://default.js", source_default);
+	executive->setIncludeSource("fabricare://install-bin.js", source_install_bin);
+	executive->setIncludeSource("fabricare://install.js", source_install);
+	executive->setIncludeSource("fabricare://make.dll.js", source_make_dll);
+	executive->setIncludeSource("fabricare://make.dll.static.js", source_make_dll_static);
+	executive->setIncludeSource("fabricare://make.exe.js", source_make_exe);
+	executive->setIncludeSource("fabricare://make.exe.static.js", source_make_exe_static);
+	executive->setIncludeSource("fabricare://make.js", source_make);
+	executive->setIncludeSource("fabricare://make.lib-and-dll.js", source_make_lib_and_dll);
+	executive->setIncludeSource("fabricare://make.lib.js", source_make_lib);
 	executive->setIncludeSource("fabricare://project.js", source_project);
 	executive->setIncludeSource("fabricare://test.js", source_test);
+	executive->setIncludeSource("fabricare://version.js", source_version);
 };
 
