@@ -21,7 +21,7 @@ void initExecutive(Executive *executive) {
 
 void process(int cmdN, char *cmdS[]) {
 
-	const char *codeFile = "fabricare/msvc.prepare.js";
+	const char *codeFile = "fabricare/prepare.js";
 
 	if (ExecutiveX::initExecutive(cmdN, cmdS, initExecutive)) {
 		ExecutiveX::includePath(Shell::getFilePath(codeFile));
