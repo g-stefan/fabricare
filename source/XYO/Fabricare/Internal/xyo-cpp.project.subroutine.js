@@ -187,28 +187,21 @@ global.getDependency = function() {
 			};
 		};
 	};
-
+	
 	var listProject = [];
-	var listIndex = [];	
+	var listIndex = [];
 	for (var library in projectDependency) {		
 		listProject[listProject.length]=""+library;
-	};
-	Console.writeLn(JSON.encode(projectDependency));
-	Console.writeLn(JSON.encode(listProject));
-	Console.writeLn("listProject.length: "+listProject.length);
+	};		
 	var powIndex=Math.pow(10,1+Math.floor(Math.log10(listProject.length)));
-	Console.writeLn("Log10: "+Math.log10(listProject.length));
-	Console.writeLn("PowIndex: "+powIndex);
 	for (var index in listProject) {
 		listIndex[index]=projectDependency[listProject[index]]*powIndex+index;
-	};
-	Console.writeLn(JSON.encode(listIndex));
+	};	
 	var sortedIndex=listIndex.sort();
-	Console.writeLn(JSON.encode(sortedIndex));
+
 	var retV = [];
 	for (var sIndex of sortedIndex) {
-		var index = sIndex%powIndex;
-		Console.writeLn("index: "+index);
+		var index = sIndex%powIndex;	
 		retV[retV.length] = ":" + listProject[index];
 	};
 	return retV;
