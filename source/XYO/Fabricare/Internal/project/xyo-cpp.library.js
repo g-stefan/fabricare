@@ -51,7 +51,7 @@ global.runInPath = function(path, fn) {
 global.forceRemoveDirRecursively = function(path) {
 	if (!Shell.removeDirRecursively(Project.vendor)) {
 		if (OS.isWindows()) {
-			Shell.system("del /F /S /Q \"" + path + "\" 1>NUL");
+			Shell.system("rmdir /Q /S \"" + path + "\" 1>NUL");
 		} else {
 			Shell.system("rm -f \"" + path + "\"");
 		};
