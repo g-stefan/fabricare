@@ -4,4 +4,4 @@
 // SPDX-License-Identifier: Unlicense
 
 Fabricare.action = "make";
-Fabricare.include("project.make");
+Fabricare.include("make");

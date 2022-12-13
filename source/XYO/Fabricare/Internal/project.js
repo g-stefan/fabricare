@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-if (Fabricare.include("project." + Fabricare.action)) {
+if (Fabricare.include(Fabricare.action)) {
 	return;
 };
 
-messageError("Action project." + Fabricare.action + " not found!");
+messageError("Action " + Fabricare.action + " not found!");
