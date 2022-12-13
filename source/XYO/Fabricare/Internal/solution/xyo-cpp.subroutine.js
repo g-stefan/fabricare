@@ -48,8 +48,8 @@ for (var project of Solution.projects) {
 	cmdArguments += "--platform=" + Platform.name + " ";
 	cmdArguments += "\"--config=" + tempFileProject + "\" ";
 	cmdArguments += Fabricare.action;
-	
+		
 	var retV = Shell.system("fabricare " + cmdArguments);
-	Shell.remove(tempFileProject);
+	Shell.remove(tempFileProject);	
 	exitIf(retV);
 };

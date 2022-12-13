@@ -140,21 +140,21 @@ namespace XYO::Fabricare {
 				ExecutiveX::includePath(Shell::getFilePath(applicationFile));
 				if (ExecutiveX::executeFile(applicationFile)) {
 					exitCode = ExecutiveX::getExitCode();
-					ExecutiveX::endProcessing();
+					ExecutiveX::endProcessing();					
 					return exitCode;
 				};
 
 			} else {
 
 				exitCode = ExecutiveX::getExitCode();
-				ExecutiveX::endProcessing();
+				ExecutiveX::endProcessing();				
 				return exitCode;
 			};
 		};
 
 		printf("%s\n", (ExecutiveX::getError()).value());
 		printf("%s", (ExecutiveX::getStackTrace()).value());
-		ExecutiveX::endProcessing();
+		ExecutiveX::endProcessing();		
 		return 1;
 	};
 };
