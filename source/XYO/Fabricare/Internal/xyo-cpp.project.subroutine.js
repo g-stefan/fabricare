@@ -136,34 +136,36 @@ global.getDependencyOfProject = function(projectName) {
 	return retV;
 };
 
-global.dependencyProcess = function(projectName, projectList, projectDependency) {
-	if (projectList[projectName]) {
-		++projectDependency[projectName];
+global.dependencyProcess = function(projectName, projectDependency, level) {
+	if (Script.isNil(projectDependency[projectName])) {
+		projectDependency[projectName] = 0;		
+	};
+	
+	projectDependency[projectName]+=level;
+
+	// Circular reference protection or very deep dependency tree
+	if(projectDependency[projectName]>=65536){
 		return;
 	};
-
-	projectList[projectName] = true;
-	projectDependency[projectName] = 1;
 
 	var dependency = getDependencyOfProject(projectName);
 	if (dependency[projectName].library) {
 		for (var library of dependency[projectName].library) {
-			dependencyProcess(library, projectList, projectDependency);
+			dependencyProcess(library, projectDependency,level+1);
 		};
 	};
 };
 
-global.getDependency = function() {
-	var projectList = {};
+global.getDependency = function() {	
 	var projectDependency = {};
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
-			dependencyProcess(dependency, projectList, projectDependency);
+			dependencyProcess(dependency, projectDependency,1);
 		};
 	};
 	if (!Script.isNil(Project.library)) {
 		for (var library of Project.library) {
-			dependencyProcess(library, projectList, projectDependency);
+			dependencyProcess(library, projectDependency,1);
 		};
 	};
 	var property = "osUnknown";
@@ -176,29 +178,37 @@ global.getDependency = function() {
 	if (!Script.isNil(Project[property])) {
 		if (!Script.isNil(Project[property].dependency)) {
 			for (var dependency of Project[property].dependency) {
-				dependencyProcess(dependency, projectList, projectDependency);
+				dependencyProcess(dependency, projectDependency,1);
 			};
 		};
 		if (!Script.isNil(Project[property].library)) {
 			for (var library of Project[property].library) {
-				dependencyProcess(library, projectList, projectDependency);
+				dependencyProcess(library, projectDependency,1);
 			};
 		};
 	};
 
 	var listProject = [];
 	var listIndex = [];	
-	for (var library in projectDependency) {
-		listProject[listProject.length]=library;
+	for (var library in projectDependency) {		
+		listProject[listProject.length]=""+library;
 	};
-	var powIndex=Math.pow(Math.floor(Math.log10(listProject.length)),10);
+	Console.writeLn(JSON.encode(projectDependency));
+	Console.writeLn(JSON.encode(listProject));
+	Console.writeLn("listProject.length: "+listProject.length);
+	var powIndex=Math.pow(10,1+Math.floor(Math.log10(listProject.length)));
+	Console.writeLn("Log10: "+Math.log10(listProject.length));
+	Console.writeLn("PowIndex: "+powIndex);
 	for (var index in listProject) {
 		listIndex[index]=projectDependency[listProject[index]]*powIndex+index;
 	};
+	Console.writeLn(JSON.encode(listIndex));
 	var sortedIndex=listIndex.sort();
+	Console.writeLn(JSON.encode(sortedIndex));
 	var retV = [];
 	for (var sIndex of sortedIndex) {
 		var index = sIndex%powIndex;
+		Console.writeLn("index: "+index);
 		retV[retV.length] = ":" + listProject[index];
 	};
 	return retV;
