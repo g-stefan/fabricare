@@ -12,17 +12,16 @@ if (Solution.projects.length == 0) {
 	Script.exit(1);
 };
 
-var tempPath="./temp";
-if(OS.isWindows()){
-	tempPath=Shell.getenv("TEMP");
+var tempPath = "./temp";
+if (OS.isWindows()) {
+	tempPath = Shell.getenv("TEMP");
 };
-if(OS.isLinux()){
-	tempPath="/tmp";
+if (OS.isLinux()) {
+	tempPath = "/tmp";
 };
-
 
 for (var project of Solution.projects) {
-	Shell.mkdirRecursivelyIfNotExists(tempPath);	
+	Shell.mkdirRecursivelyIfNotExists(tempPath);
 	var tempFileBase = tempPath + "/fabricare." + (new DateTime()).toUnixTime() + ".";
 	var tempIndex = 0;
 	var tempFileProject;
@@ -48,8 +47,8 @@ for (var project of Solution.projects) {
 	cmdArguments += "--platform=" + Platform.name + " ";
 	cmdArguments += "\"--config=" + tempFileProject + "\" ";
 	cmdArguments += Fabricare.action;
-		
+
 	var retV = Shell.system("fabricare " + cmdArguments);
-	Shell.remove(tempFileProject);	
+	Shell.remove(tempFileProject);
 	exitIf(retV);
 };

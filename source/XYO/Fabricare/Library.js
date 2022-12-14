@@ -157,6 +157,10 @@ Fabricare.configOk = false;
 
 // ---
 
+Fabricare.action = Application.getArgument(0, "default");
+
+// ---
+
 if (!Script.isNil(Config.solution)) {
 	for (var property in Config.solution) {
 		Solution[property] = Config.solution[property];

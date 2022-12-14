@@ -7,20 +7,32 @@ Fabricare.subroutine = "project/xyo-cpp.subroutine";
 
 // ---
 
-if (!Script.isNil(Project.noInstall)) {
-	if(Project.noInstall){
+if (Fabricare.action == "install") {
+	if (!Script.isNil(Project.noInstall)) {
+		if (Project.noInstall) {
+			return;
+		};
+	};
+};
+
+if (Fabricare.action == "version") {
+	if (!Script.isNil(Project.noVersion)) {
+		if (Project.noVersion) {
+			return;
+		};
+	};
+
+	if (!Script.isNil(Project.linkVersion)) {
 		return;
 	};
 };
 
-if (!Script.isNil(Project.noVersion)) {
-	if(Project.noVersion){
-		return;
+if (Fabricare.action == "release") {
+	if (!Script.isNil(Project.noRelease)) {
+		if (Project.noRelease) {
+			return;
+		};
 	};
-};
-
-if (!Script.isNil(Project.linkVersion)) {
-	return;
 };
 
 // ---
@@ -30,7 +42,7 @@ if (!Platform.name) {
 	Fabricare.include("platform/detect");
 };
 
-if (!Fabricare.include("platform/"+Platform.name)) {
+if (!Fabricare.include("platform/" + Platform.name)) {
 	Console.writeLn("Error: Platform " + Platform.name + " not found!");
 	Script.exit(1);
 };

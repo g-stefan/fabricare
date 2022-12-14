@@ -144,34 +144,34 @@ global.getDependencyOfProject = function(projectName) {
 
 global.dependencyProcess = function(projectName, projectDependency, level) {
 	if (Script.isNil(projectDependency[projectName])) {
-		projectDependency[projectName] = 0;		
+		projectDependency[projectName] = 0;
 	};
-	
-	projectDependency[projectName]+=level;
+
+	projectDependency[projectName] += level;
 
 	// Circular reference protection or very deep dependency tree
-	if(projectDependency[projectName]>=65536){
+	if (projectDependency[projectName] >= 65536) {
 		return;
 	};
 
 	var dependency = getDependencyOfProject(projectName);
 	if (dependency[projectName].library) {
 		for (var library of dependency[projectName].library) {
-			dependencyProcess(library, projectDependency,level+1);
+			dependencyProcess(library, projectDependency, level + 1);
 		};
 	};
 };
 
-global.getDependency = function() {	
+global.getDependency = function() {
 	var projectDependency = {};
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
-			dependencyProcess(dependency, projectDependency,1);
+			dependencyProcess(dependency, projectDependency, 1);
 		};
 	};
 	if (!Script.isNil(Project.library)) {
 		for (var library of Project.library) {
-			dependencyProcess(library, projectDependency,1);
+			dependencyProcess(library, projectDependency, 1);
 		};
 	};
 	var property = "osUnknown";
@@ -184,30 +184,30 @@ global.getDependency = function() {
 	if (!Script.isNil(Project[property])) {
 		if (!Script.isNil(Project[property].dependency)) {
 			for (var dependency of Project[property].dependency) {
-				dependencyProcess(dependency, projectDependency,1);
+				dependencyProcess(dependency, projectDependency, 1);
 			};
 		};
 		if (!Script.isNil(Project[property].library)) {
 			for (var library of Project[property].library) {
-				dependencyProcess(library, projectDependency,1);
+				dependencyProcess(library, projectDependency, 1);
 			};
 		};
 	};
-	
+
 	var listProject = [];
 	var listIndex = [];
-	for (var library in projectDependency) {		
-		listProject[listProject.length]=""+library;
-	};		
-	var powIndex=Math.pow(10,1+Math.floor(Math.log10(listProject.length)));
+	for (var library in projectDependency) {
+		listProject[listProject.length] = "" + library;
+	};
+	var powIndex = Math.pow(10, 1 + Math.floor(Math.log10(listProject.length)));
 	for (var index in listProject) {
-		listIndex[index]=projectDependency[listProject[index]]*powIndex+index;
-	};	
-	var sortedIndex=listIndex.sort();
+		listIndex[index] = projectDependency[listProject[index]] * powIndex + index;
+	};
+	var sortedIndex = listIndex.sort();
 
 	var retV = [];
 	for (var sIndex of sortedIndex) {
-		var index = sIndex%powIndex;	
+		var index = sIndex % powIndex;
 		retV[retV.length] = ":" + listProject[index];
 	};
 	return retV;
@@ -285,7 +285,7 @@ global.compileAndRunTemp = function(compileProject) {
 	compileProjectDependency(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=temp")));
-	if(OS.isWindows()) {
+	if (OS.isWindows()) {
 		exitIf(Shell.system("temp\\" + compileProject.project));
 	} else {
 		exitIf(Shell.system("./temp/" + compileProject.project));
