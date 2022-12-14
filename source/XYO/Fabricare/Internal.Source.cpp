@@ -20,6 +20,7 @@
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.library.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.subroutine.cpp>
+#include <XYO/Fabricare/Internal.Source/analyze.cpp>
 #include <XYO/Fabricare/Internal.Source/clean.cpp>
 #include <XYO/Fabricare/Internal.Source/default.cpp>
 #include <XYO/Fabricare/Internal.Source/install-bin.cpp>
@@ -59,6 +60,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://project/xyo-cpp.js", source_project__xyo_cpp);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.library.js", source_project__xyo_cpp_library);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.subroutine.js", source_project__xyo_cpp_subroutine);
+	executive->setIncludeSource("fabricare://analyze.js", source_analyze);
 	executive->setIncludeSource("fabricare://clean.js", source_clean);
 	executive->setIncludeSource("fabricare://default.js", source_default);
 	executive->setIncludeSource("fabricare://install-bin.js", source_install_bin);
