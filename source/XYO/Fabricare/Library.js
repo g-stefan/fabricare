@@ -31,9 +31,14 @@ Script.resetIncludePath();
 
 // ---
 
-Config = {};
 Fabricare = {};
 Fabricare.configFile = "";
+Fabricare.userConfigFile = "";
+Fabricare.action = Application.getArgument(0, "default");
+
+// ---
+
+Config = {};
 
 Fabricare.loadConfig = function() {
 	var cwd = Shell.getcwd();
@@ -64,6 +69,60 @@ Fabricare.saveConfig = function() {
 	Fabricare.configFile = Application.getFlagValue("config", cwd + "fabricare.json");
 
 	return Shell.filePutContents(Fabricare.configFile, JSON.encodeWithIndentation(Config));
+};
+
+// ---
+
+UserConfig = {};
+
+Fabricare.loadUserConfig = function() {
+	var pathHome = null;
+	if(OS.isWindows()) {
+		pathHome=Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+	};
+	if(OS.isLinux()) {
+		pathHome=Shell.getenv("HOME");
+	};	
+	if (Script.isNil(pathHome)) {
+		Console.writeLn("* Error: Unable to determine user home path!");
+		Script.exit(1);
+	};
+	
+	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
+
+	if(!Shell.fileExists(Fabricare.userConfigFile)){
+		global.UserConfig = {};
+		return false;
+	};
+
+	var json = Shell.fileGetContents(Fabricare.userConfigFile);
+	if (!Script.isNil(json)) {
+		UserConfig = JSON.decode(json);
+		if (!Script.isNil(global.UserConfig)) {
+			return true;
+		};
+	};
+
+	global.UserConfig = {};
+	return false;
+};
+
+Fabricare.saveUserConfig = function() {
+	var pathHome = null;
+	if(OS.isWindows()) {
+		pathHome=Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+	};
+	if(OS.isLinux()) {
+		pathHome=Shell.getenv("HOME");
+	};	
+	if (Script.isNil(pathHome)) {
+		Console.writeLn("* Error: Unable to determine user home path!");
+		Script.exit(1);
+	};
+	
+	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
+
+	return Shell.filePutContents(Fabricare.userConfigFile, JSON.encodeWithIndentation(UserConfig));
 };
 
 // ---
@@ -151,13 +210,9 @@ Fabricare.runInteractive = function(cmd) {
 
 // ---
 
+Fabricare.loadUserConfig();
 Fabricare.loadConfig();
-
 Fabricare.configOk = false;
-
-// ---
-
-Fabricare.action = Application.getArgument(0, "default");
 
 // ---
 

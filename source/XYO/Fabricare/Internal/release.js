@@ -46,7 +46,7 @@ if(releaseBin) {
 				json={};
 			};
 		};
-		json[releaseName+".7z"]=SHA512.hash("....2");
+		json[releaseName+".7z"]=SHA512.fileHash("release"+pathSeparator+releaseName+".7z");
 		Shell.filePutContents(jsonFilename,JSON.encodeWithIndentation(json));
 	};
 };
@@ -70,7 +70,7 @@ if(releaseDev) {
 				json={};
 			};
 		};
-		json[releaseName+"-dev.7z"]=SHA512.hash("....1");
+		json[releaseName+"-dev.7z"]=SHA512.fileHash("release"+pathSeparator+releaseName+"-dev.7z");
 		Shell.filePutContents(jsonFilename,JSON.encodeWithIndentation(json));
 	};
 };
