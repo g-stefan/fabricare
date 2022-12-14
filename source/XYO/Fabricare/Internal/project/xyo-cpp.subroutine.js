@@ -100,6 +100,12 @@ global.getVersion = function(file) {
 				return retV;
 			};
 		};
+		if (!Script.isNil(Project.versionName)) {
+			if (!Script.isNil(retV[Project.versionName])) {
+				retV[Project.name] = retV[Project.versionName];
+				return retV;
+			};
+		};
 		if (!Script.isNil(retV[Project.name])) {
 			return retV;
 		};
