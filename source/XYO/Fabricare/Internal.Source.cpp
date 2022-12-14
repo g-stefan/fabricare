@@ -23,6 +23,7 @@
 #include <XYO/Fabricare/Internal.Source/analyze.cpp>
 #include <XYO/Fabricare/Internal.Source/clean.cpp>
 #include <XYO/Fabricare/Internal.Source/default.cpp>
+#include <XYO/Fabricare/Internal.Source/github-update.cpp>
 #include <XYO/Fabricare/Internal.Source/install-bin.cpp>
 #include <XYO/Fabricare/Internal.Source/install.cpp>
 #include <XYO/Fabricare/Internal.Source/make.dll.cpp>
@@ -63,6 +64,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://analyze.js", source_analyze);
 	executive->setIncludeSource("fabricare://clean.js", source_clean);
 	executive->setIncludeSource("fabricare://default.js", source_default);
+	executive->setIncludeSource("fabricare://github-update.js", source_github_update);
 	executive->setIncludeSource("fabricare://install-bin.js", source_install_bin);
 	executive->setIncludeSource("fabricare://install.js", source_install);
 	executive->setIncludeSource("fabricare://make.dll.js", source_make_dll);
