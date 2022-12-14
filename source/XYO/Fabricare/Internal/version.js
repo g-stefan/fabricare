@@ -5,10 +5,6 @@
 
 messageAction("version");
 
-if (!Script.isNil(Project.linkVersion)) {
-	return;
-};
-
 var project = Project.name;
 
 if (!Script.isNil(Project.versionName)) {

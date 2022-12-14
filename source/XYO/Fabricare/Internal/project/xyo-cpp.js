@@ -7,6 +7,24 @@ Fabricare.subroutine = "project/xyo-cpp.subroutine";
 
 // ---
 
+if (!Script.isNil(Project.noInstall)) {
+	if(Project.noInstall){
+		return;
+	};
+};
+
+if (!Script.isNil(Project.noVersion)) {
+	if(Project.noVersion){
+		return;
+	};
+};
+
+if (!Script.isNil(Project.linkVersion)) {
+	return;
+};
+
+// ---
+
 Platform.name = Application.getFlagValue("platform");
 if (!Platform.name) {
 	Fabricare.include("platform/detect");

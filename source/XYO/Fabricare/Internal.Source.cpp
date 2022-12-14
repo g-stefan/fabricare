@@ -32,6 +32,7 @@
 #include <XYO/Fabricare/Internal.Source/make.lib-and-dll.cpp>
 #include <XYO/Fabricare/Internal.Source/make.lib.cpp>
 #include <XYO/Fabricare/Internal.Source/project.cpp>
+#include <XYO/Fabricare/Internal.Source/release.cpp>
 #include <XYO/Fabricare/Internal.Source/test.cpp>
 #include <XYO/Fabricare/Internal.Source/version.cpp>
 
@@ -70,6 +71,7 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://make.lib-and-dll.js", source_make_lib_and_dll);
 	executive->setIncludeSource("fabricare://make.lib.js", source_make_lib);
 	executive->setIncludeSource("fabricare://project.js", source_project);
+	executive->setIncludeSource("fabricare://release.js", source_release);
 	executive->setIncludeSource("fabricare://test.js", source_test);
 	executive->setIncludeSource("fabricare://version.js", source_version);
 };
