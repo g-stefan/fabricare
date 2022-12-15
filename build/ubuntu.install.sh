@@ -6,6 +6,14 @@
 
 echo "- $project: install"
 
+export plaformPath=
+if [ "$platform" = "mingw32" ]; then
+	export plaformPath=\$MINGW_MOUNT_POINT
+fi
+if [ "$platform" = "mingw64" ]; then
+	export plaformPath=\$MINGW_MOUNT_POINT
+fi
+
 mkdir -p "$HOME/SDK$platformPath/bin"
 mkdir -p "$HOME/SDK$platformPath/include"
 mkdir -p "$HOME/SDK$platformPath/lib"

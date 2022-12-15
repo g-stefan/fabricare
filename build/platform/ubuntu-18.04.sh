@@ -7,7 +7,6 @@
 export platform="ubuntu-18.04"
 export pathRepository=$HOME/SDK
 export pathRelease=$HOME/SDK/release
-export plaformPath=
 
 /bin/sh -- ./build/platform/ubuntu.sh $1
 RETV=$?

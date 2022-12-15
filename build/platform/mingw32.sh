@@ -8,7 +8,6 @@ export platform=mingw32
 export pathRepository=$HOME/SDK/mingw32
 export pathRelease=$HOME/SDK/mingw32/release
 export PATH=$PATH:/c/msys64/mingw32/bin/../libexec;
-export plaformPath=/mingw32
 
 . ./build/ubuntu.config.sh
 
