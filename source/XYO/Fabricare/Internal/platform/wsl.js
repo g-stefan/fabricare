@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+Fabricare.include("project/xyo-cpp.library");
+
 var folderName = "unknown";
 if(Fabricare.isSolution) {
 	folderName = Solution.name;
