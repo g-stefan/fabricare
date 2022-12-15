@@ -28,13 +28,12 @@ if (Fabricare.action == "default") {
 
 var retV = 1;
 
-runInPath(buildPath, function() {
+runInPath(buildPath, function() {		
 	Shell.system("chmod -R -x+X source");
-	if(Shell.directoryExist("vendor")) {
+	if(Shell.directoryExists("vendor")) {
 		Shell.system("chmod -R -x+X vendor");
-	};
-
-	retV = Shell.system("fabricare "+ Fabricare.action);
+	};	
+	retV = Shell.system("fabricare "+ Fabricare.action);	
 });
 
 if (Fabricare.action == "release") {
