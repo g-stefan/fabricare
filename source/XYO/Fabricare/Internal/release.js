@@ -15,10 +15,11 @@ function commandFix(cmd){
 var p7zipCompress = "7z a -mx9 -mmt4 -r- -w. -y -t7z";
 var pathSeparator = "/";
 if(OS.isWindows()) {
-	p7zipCompress += " -sse";
-	pathSeparator = "\\";
 	if(Platform.name.indexOf("mingw")>=0) {
 		pathSeparator = "/";
+	} else {
+		p7zipCompress += " -sse";
+		pathSeparator = "\\";
 	};
 };
 
