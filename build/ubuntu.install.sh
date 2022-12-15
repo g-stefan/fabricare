@@ -9,12 +9,12 @@ echo "- $project: install"
 export platformPath=
 export platformPathStr=
 if [ "$platform" = "mingw32" ]; then
-	export platformPath=$MINGW_MOUNT_POINT
-	export platformPathStr=\$MINGW_MOUNT_POINT
+	export platformPath=$MINGW_PREFIX
+	export platformPathStr=\$MINGW_PREFIX
 fi
 if [ "$platform" = "mingw64" ]; then
-	export platformPath=$MINGW_MOUNT_POINT
-	export platformPathStr=\$MINGW_MOUNT_POINT
+	export platformPath=$MINGW_PREFIX
+	export platformPathStr=\$MINGW_PREFIX
 fi
 
 mkdir -p "$HOME/SDK$platformPath/bin"
