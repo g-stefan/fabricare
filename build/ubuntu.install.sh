@@ -6,16 +6,16 @@
 
 echo "- $project: install"
 
-mkdir -p "$HOME/SDK/bin"
-mkdir -p "$HOME/SDK/include"
-mkdir -p "$HOME/SDK/lib"
+mkdir -p "$HOME/SDK$platformPath/bin"
+mkdir -p "$HOME/SDK$platformPath/include"
+mkdir -p "$HOME/SDK$platformPath/lib"
 
 if ! grep -q "# set SDK PATH if exists" "$HOME/.profile"; then
 	echo "" >> "$HOME/.profile"
 	echo "# set SDK PATH if exists" >> "$HOME/.profile"
-	echo "if [ -d \"\$HOME/SDK/bin\" ] ; then" >> "$HOME/.profile"
-	echo "    PATH=\"\$HOME/SDK/bin:\$PATH\"" >> "$HOME/.profile"
-	echo "    LD_LIBRARY_PATH=\"\$HOME/SDK/bin:\$LD_LIBRARY_PATH\"" >> "$HOME/.profile"
+	echo "if [ -d \"\$HOME/SDK$platformPath/bin\" ] ; then" >> "$HOME/.profile"
+	echo "    PATH=\"\$HOME/SDK$platformPath/bin:\$PATH\"" >> "$HOME/.profile"
+	echo "    LD_LIBRARY_PATH=\"\$HOME/SDK$platformPath/bin:\$LD_LIBRARY_PATH\"" >> "$HOME/.profile"
 	echo "fi" >> "$HOME/.profile"
 	echo "" >> "$HOME/.profile"
 fi

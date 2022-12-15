@@ -5,6 +5,9 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform="ubuntu-20.04"
+export pathRepository=$HOME/SDK
+export pathRelease=$HOME/SDK/release
+export plaformPath=
 
 /bin/sh -- ./build/platform/ubuntu.sh $1
 RETV=$?

@@ -8,7 +8,7 @@ Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine")
 Fabricare.platformActive = Application.getFlagValue("platform-active");
 Fabricare.subroutine = Application.getFlagValue("subroutine", Fabricare.subroutine);
 
-Platform.subroutine = "platform/ubuntu";
+Platform.subroutine = "platform/mingw";
 
 if (!Fabricare.isPlatformSubroutine) {
 	if (Fabricare.platformActive != Platform.name) {

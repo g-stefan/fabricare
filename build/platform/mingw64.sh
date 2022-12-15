@@ -8,6 +8,7 @@ export platform=mingw64
 export pathRepository=$HOME/SDK/mingw64
 export pathRelease=$HOME/SDK/mingw64/release
 export PATH=$PATH:/c/msys64/mingw64/bin/../libexec;
+export plaformPath=/mingw64
 
 . ./build/ubuntu.config.sh
 
