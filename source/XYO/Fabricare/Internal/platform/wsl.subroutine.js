@@ -61,9 +61,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		Shell.filePutContents(tempFileSh, cmdSh);
 
 		var cmd = Platform.run + " -c \"" + wslTranslatePath(tempFileSh) + "\"";
-		var retV = Shell.system(cmd);
-		
-		Console.writeLn(subroutineArguments);
+		var retV = Shell.system(cmd);			
 
 		Shell.removeFile(tempFileArguments);
 		Shell.removeFile(tempFileSh);
