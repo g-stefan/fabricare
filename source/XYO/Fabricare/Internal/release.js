@@ -5,11 +5,21 @@
 
 messageAction("release");
 
+function commandFix(cmd){
+	if(Platform.name.indexOf("mingw")>=0) {
+		return "C:\\msys64\\usr\\bin\\sh -c \""+cmd.replace("\"","\\\"")+"\"";
+	};
+	return cmd;
+};
+
 var p7zipCompress = "7z a -mx9 -mmt4 -r- -w. -y -t7z";
 var pathSeparator = "/";
-if(OS.isWindows()){
+if(OS.isWindows()) {
 	p7zipCompress += " -sse";
 	pathSeparator = "\\";
+	if(Platform.name.indexOf("mingw")>=0) {
+		pathSeparator = "/";
+	};
 };
 
 var version = getVersion();
@@ -34,7 +44,7 @@ if(releaseBin) {
 	};
 	if(Shell.directoryExists("output/bin")) {
 		runInPath("output/bin", function() {
-			exitIf(Shell.system(p7zipCompress+" \".."+pathSeparator+".."+pathSeparator+"release"+pathSeparator+releaseName+".7z\" ."));
+			exitIf(Shell.system(commandFix(p7zipCompress+" \".."+pathSeparator+".."+pathSeparator+"release"+pathSeparator+releaseName+".7z\" .")));
 		});
 	};	
 	if(Shell.fileExists("release"+pathSeparator+releaseName+".7z")) {
@@ -58,7 +68,7 @@ if(releaseDev) {
 	};
 	if(Shell.directoryExists("output")) {
 		runInPath("output", function() {
-			exitIf(Shell.system(p7zipCompress+" \".."+pathSeparator+"release"+pathSeparator+releaseName+"-dev.7z\" ."));
+			exitIf(Shell.system(commandFix(p7zipCompress+" \".."+pathSeparator+"release"+pathSeparator+releaseName+"-dev.7z\" .")));
 		});
 	};
 	if(Shell.fileExists("release"+pathSeparator+releaseName+"-dev.7z")) {
