@@ -15,6 +15,11 @@
 #include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2017.cpp>
 #include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2019.cpp>
 #include <XYO/Fabricare/Internal.Source/platform/win64-msvc-2022.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/wsl-ubuntu-18.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/wsl-ubuntu-20.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/wsl-ubuntu-22.04.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/wsl.cpp>
+#include <XYO/Fabricare/Internal.Source/platform/wsl.subroutine.cpp>
 #include <XYO/Fabricare/Internal.Source/solution/xyo-cpp.cpp>
 #include <XYO/Fabricare/Internal.Source/solution/xyo-cpp.subroutine.cpp>
 #include <XYO/Fabricare/Internal.Source/project/xyo-cpp.cpp>
@@ -56,6 +61,11 @@ static void internalInitExecutive(Executive *executive){
 	executive->setIncludeSource("fabricare://platform/win64-msvc-2017.js", source_platform__win64_msvc_2017);
 	executive->setIncludeSource("fabricare://platform/win64-msvc-2019.js", source_platform__win64_msvc_2019);
 	executive->setIncludeSource("fabricare://platform/win64-msvc-2022.js", source_platform__win64_msvc_2022);
+	executive->setIncludeSource("fabricare://platform/wsl-ubuntu-18.04.js", source_platform__wsl_ubuntu_18_04);
+	executive->setIncludeSource("fabricare://platform/wsl-ubuntu-20.04.js", source_platform__wsl_ubuntu_20_04);
+	executive->setIncludeSource("fabricare://platform/wsl-ubuntu-22.04.js", source_platform__wsl_ubuntu_22_04);
+	executive->setIncludeSource("fabricare://platform/wsl.js", source_platform__wsl);
+	executive->setIncludeSource("fabricare://platform/wsl.subroutine.js", source_platform__wsl_subroutine);
 	executive->setIncludeSource("fabricare://solution/xyo-cpp.js", source_solution__xyo_cpp);
 	executive->setIncludeSource("fabricare://solution/xyo-cpp.subroutine.js", source_solution__xyo_cpp_subroutine);
 	executive->setIncludeSource("fabricare://project/xyo-cpp.js", source_project__xyo_cpp);

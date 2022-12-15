@@ -213,6 +213,8 @@ Fabricare.runInteractive = function(cmd) {
 Fabricare.loadUserConfig();
 Fabricare.loadConfig();
 Fabricare.configOk = false;
+Fabricare.isSolution = false;
+Fabricare.isProject = false;
 
 // ---
 
@@ -224,6 +226,7 @@ if (!Script.isNil(Config.solution)) {
 
 if (!Script.isNil(Solution.type)) {
 	Fabricare.configOk = true;
+	Fabricare.isSolution = true;
 	if(!Fabricare.include("solution/"+Solution.type)){
 		Console.writeLn("* Error: Solution type "+Solution.type+" not found!");
 	};
@@ -239,6 +242,7 @@ if (!Script.isNil(Config.project)) {
 
 if (!Script.isNil(Project.type)) {
 	Fabricare.configOk = true;
+	Fabricare.isProject = true;
 	if(!Fabricare.include("project/"+Project.type)){
 		Console.writeLn("* Error: Project type "+Project.type+" not found!");
 	};
