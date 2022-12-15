@@ -54,3 +54,6 @@
 /temp/
 /release/
 /vendor/
+/source/XYO/Fabricare/Internal.Source/
+/source/XYO/Fabricare/Internal.Source.cpp
+/source/XYO/Fabricare/Library.Source.cpp
