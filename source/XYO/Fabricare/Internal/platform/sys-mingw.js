@@ -31,7 +31,7 @@ if (Fabricare.action == "default") {
 
 var retV = 1;
 
-runInPath(buildPath, function() {
+runInPath(buildPath, function() {	
 	retV = Shell.system("fabricare "+ Fabricare.action);
 });
 
