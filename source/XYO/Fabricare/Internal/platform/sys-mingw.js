@@ -13,7 +13,7 @@ if(Fabricare.isProject) {
 	folderName = Project.name;
 };
 
-var buildPath = Shell.getenv("HOME") + "/SDK/source/" + folderName;
+var buildPath = Shell.getenv("HOME") + "/SDK/"+Platform.next+"/source/" + folderName;
 
 if (Fabricare.action == "clean") {
 	Shell.system("rm -rf \""+buildPath+"\"");
@@ -23,13 +23,16 @@ if (Fabricare.action == "clean") {
 Shell.mkdirRecursivelyIfNotExists(buildPath);
 
 if (Fabricare.action == "default") {
-	Shell.system("rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ \""+buildPath+"\"");
+	var cmd = "C:\\msys64\\usr\\bin\\sh --login -c \"";
+	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
+	cmd += "\\\"$HOME/SDK/"+Platform.next+"/source/"+folderName+"\\\"\"";
+	Shell.system(cmd);
 };
 
 var retV = 1;
 
 runInPath(buildPath, function() {
-	retV = Shell.system("fabricare "+ Fabricare.action);	
+	retV = Shell.system("fabricare "+ Fabricare.action);
 });
 
 if (Fabricare.action == "release") {

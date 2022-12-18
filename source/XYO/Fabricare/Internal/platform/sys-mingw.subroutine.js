@@ -70,4 +70,6 @@ if (!Fabricare.isPlatformSubroutine) {
 	};
 };
 
+Shell.setenv("XYO_PLATFORM",Platform.next);
+
 Fabricare.include(Fabricare.subroutine);
