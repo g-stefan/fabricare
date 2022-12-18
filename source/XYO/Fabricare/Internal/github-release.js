@@ -3,6 +3,12 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+if (!Script.isNil(Project.githubRelease)) {
+	if (!Project.githubRelease) {
+		return;
+	};
+};
+
 messageAction("github-release");
 
 exitIf(!Shell.directoryExists("release"), "no release");
