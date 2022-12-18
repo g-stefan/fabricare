@@ -15,6 +15,21 @@ if (OS.isWindows()) {
 		Platform.osType = "win32";
 	};
 
+	if (Shell.getenv("XYO_PLATFORM") != "") {
+		Platform.name = Shell.getenv("XYO_PLATFORM");
+		return;
+	};
+
+	if (Shell.getenv("MSYSTEM") != "MINGW32") {
+		Platform.name = "mingw32";
+		return;
+	};
+
+	if (Shell.getenv("MSYSTEM") != "MINGW64") {
+		Platform.name = "mingw64";
+		return;
+	};
+
 	Platform.version = "2022";
 	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
 	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
@@ -36,10 +51,6 @@ if (OS.isWindows()) {
 		return;
 	};
 
-	if (Shell.getenv("XYO_PLATFORM") != "") {
-		Platform.name = Shell.getenv("XYO_PLATFORM");
-		return;
-	};
 };
 
 if (OS.isLinux()) {

@@ -22,7 +22,7 @@ if [ "$action" = "" ]; then
 fi
 
 if [ "$platform" = "" ]; then
-	. ./build/platform/platform.detect.sh
+	. ./build/platform/detect.sh
 fi
 
 if [ -f "./build/platform/$platform.sh" ]; then

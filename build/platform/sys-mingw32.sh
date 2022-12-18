@@ -9,8 +9,13 @@ export pathRepository=$HOME/SDK/mingw32
 export pathRelease=$HOME/SDK/mingw32/release
 export PATH=$PATH:/c/msys64/mingw32/bin/../libexec;
 
-. ./build/platform/ubuntu.sh $1
+. ./build/ubuntu.config.sh
+
+export WSL_BUILD_PROCESS_PATH=$HOME/SDK/mingw32/source/$project
+
+/bin/sh -- ./build/platform/wsl.process.sh $1
 RETV=$?
+
 if [ "$RETV" = "1" ]; then
 	exit 1
 fi

@@ -26,7 +26,7 @@ set action=%1
 if "%1" == "" set action=default
 
 if "%platform%" == "" (
-	call ".\build\platform\platform.detect.cmd"
+	call ".\build\platform\detect.cmd"
 )
 
 if exist ".\build\platform\%platform%.cmd" (	

@@ -7,4 +7,4 @@ rem SPDX-License-Identifier: Unlicense
 set CHERE_INVOKING=enabled_from_arguments
 set SHLVL=2
 set MSYSTEM=MINGW32
-C:\msys64\usr\bin\sh --login -- ./build/platform/mingw32.sh %1
+C:\msys64\usr\bin\sh --login -- ./build/platform/sys-mingw32.sh %1
