@@ -16,10 +16,10 @@ if (!Fabricare.isPlatformSubroutine) {
 
 		var tempFileBase = Shell.getenv("TEMP") + "\\fabricare." + (new DateTime()).toUnixTime() + ".";
 		var tempIndex = 0;
-		var tempFileArguments;	
+		var tempFileArguments;
 		var tempFileSh;
 		while (true) {
-			tempFileArguments = tempFileBase + tempIndex + ".arguments";			
+			tempFileArguments = tempFileBase + tempIndex + ".arguments";
 			tempFileSh = tempFileBase + tempIndex + ".sh";
 			if (Shell.fileExists(tempFileArguments)) {
 				++tempIndex;
@@ -31,12 +31,12 @@ if (!Fabricare.isPlatformSubroutine) {
 			break;
 		};
 
-		function wslTranslatePath(path){
-			var list=path.split(":");
-			var drive=(list[0]).toLowerCaseAscii();
-			return "/mnt/"+drive+(list[1]).replace("\\","/");
+		function wslTranslatePath(path) {
+			var list = path.split(":");
+			var drive = (list[0]).toLowerCaseAscii();
+			return "/mnt/" + drive + (list[1]).replace("\\", "/");
 		};
-	
+
 		var subroutineArguments = "";
 		subroutineArguments += "--platform-subroutine=true\r\n";
 		subroutineArguments += "--platform-active=" + Fabricare.platformActive + "\r\n";
@@ -51,7 +51,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdSh += "if [ -d \"$HOME/SDK/bin\" ] ; then\n";
 		cmdSh += "	PATH=\"$HOME/SDK/bin:$PATH\"\n";
 		cmdSh += "	LD_LIBRARY_PATH=\"$HOME/SDK/bin:$LD_LIBRARY_PATH\"\n";
-		cmdSh += "fi\n";		
+		cmdSh += "fi\n";
 		cmdSh += "fabricare \"@" + wslTranslatePath(tempFileArguments) + "\"\n";
 		cmdSh += "RETV=$?\n";
 		cmdSh += "if [ \"$RETV\" = \"1\" ]; then\n";
@@ -59,7 +59,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdSh += "fi\n";
 		cmdSh += "exit 0\n";
 		Shell.filePutContents(tempFileSh, cmdSh);
-	
+
 		var cmd = Platform.run + " -c \"" + wslTranslatePath(tempFileSh) + "\"";
 		var retV = Shell.system(cmd);
 
@@ -71,6 +71,6 @@ if (!Fabricare.isPlatformSubroutine) {
 	};
 };
 
-Shell.setenv("XYO_PLATFORM",Platform.next);
+Shell.setenv("XYO_PLATFORM", Platform.next);
 
 Fabricare.include(Fabricare.subroutine);

@@ -6,38 +6,38 @@
 Fabricare.include("project/xyo-cpp.library");
 
 var folderName = "unknown";
-if(Fabricare.isSolution) {
+if (Fabricare.isSolution) {
 	folderName = Solution.name;
 };
-if(Fabricare.isProject) {
+if (Fabricare.isProject) {
 	folderName = Project.name;
 };
 
 var buildPath = Shell.getenv("HOME") + "/SDK/source/" + folderName;
 
 if (Fabricare.action == "clean") {
-	Shell.system("rm -rf \""+buildPath+"\"");
+	Shell.system("rm -rf \"" + buildPath + "\"");
 	return;
 };
 
 Shell.mkdirRecursivelyIfNotExists(buildPath);
 
 if (Fabricare.action == "default") {
-	Shell.system("rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ \""+buildPath+"\"");
+	Shell.system("rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ \"" + buildPath + "\"");
 };
 
 var retV = 1;
 
-runInPath(buildPath, function() {		
+runInPath(buildPath, function() {
 	Shell.system("chmod -R -x+X source");
-	if(Shell.directoryExists("vendor")) {
+	if (Shell.directoryExists("vendor")) {
 		Shell.system("chmod -R -x+X vendor");
-	};	
-	retV = Shell.system("fabricare "+ Fabricare.action);	
+	};
+	retV = Shell.system("fabricare " + Fabricare.action);
 });
 
 if (Fabricare.action == "release") {
-	exitIf(!Shell.copyDirRecursively(buildPath+"/release", "release"));
+	exitIf(!Shell.copyDirRecursively(buildPath + "/release", "release"));
 };
 
 exitIf(retV);

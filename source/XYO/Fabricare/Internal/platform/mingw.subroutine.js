@@ -13,6 +13,6 @@ Platform.subroutine = "platform/mingw";
 Fabricare.isPlatformSubroutine = true;
 Fabricare.platformActive = Platform.name;
 
-Shell.setenv("XYO_PLATFORM",Platform.name);
+Shell.setenv("XYO_PLATFORM", Platform.name);
 
 Fabricare.include(Fabricare.subroutine);

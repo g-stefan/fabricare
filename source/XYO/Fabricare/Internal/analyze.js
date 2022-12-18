@@ -5,13 +5,13 @@
 
 messageAction("analyze");
 
-if(OS.isWindows()) {
-	Shell.setenv("CXX","cl /analyze /analyze:stacksize 65536 /analyze:max_paths 1024");
+if (OS.isWindows()) {
+	Shell.setenv("CXX", "cl /analyze /analyze:stacksize 65536 /analyze:max_paths 1024");
 	Fabricare.include("make");
 	return;
 };
 
-if(OS.isLinux()) {
+if (OS.isLinux()) {
 	exitIf(Shell.system("scan-build fabricare make"));
 	return;
 };

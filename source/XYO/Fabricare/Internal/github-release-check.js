@@ -3,9 +3,9 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("github-update");
+messageAction("github-release-check");
 
-Shell.system("git fetch --prune --prune-tags");
-Shell.system("git add --all");
-Shell.system("git commit -m \"Update\"");
-Shell.system("git push");
+var versionInfo = getVersion();
+var version = version[Project.name].version;
+
+Shell.system("github-release info --repo " + Project.name + " --tag v" + version);

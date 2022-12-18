@@ -50,7 +50,6 @@ if (OS.isWindows()) {
 		Platform.name = Platform.osType + "-msvc-" + Platform.version;
 		return;
 	};
-
 };
 
 if (OS.isLinux()) {
