@@ -15,7 +15,7 @@ if (!Project.githubRelease) {
 messageAction("github-release-keep-last-3");
 
 var versionInfo = getVersion();
-var version = version[Project.name].version;
+var version = versionInfo[Project.name].version;
 
 Shell.system("github-release info --repo " + Project.name + " --tag v" + version);
 var json = JSON.decode(Fabricare.runInteractive("github-release info --repo " + Project.name + " --json"));
