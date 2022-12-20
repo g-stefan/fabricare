@@ -23,9 +23,14 @@ if (OS.isWindows()) {
 	};
 };
 
-var version = getVersion();
-var releaseName = Project.name + "-" + version[Project.name].version + "-" + Platform.name;
-var jsonFilename = "release" + pathSeparator + Project.name + "-" + version[Project.name].version + ".sha512.json";
+var version = Project.version;
+if(Script.isNil(version)){
+	var versionInfo = getVersion();
+	version = version[Project.name].version;
+};
+
+var releaseName = Project.name + "-" + version + "-" + Platform.name;
+var jsonFilename = "release" + pathSeparator + Project.name + "-" + version + ".sha512.json";
 var releaseDev = true;
 var releaseBin = true;
 
@@ -85,3 +90,8 @@ if (releaseDev) {
 		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
 	};
 };
+
+// Copy to local release repository
+copyFileIfExists("release" + pathSeparator + releaseName + ".7z",global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z",global.pathRelease);
+copyFileIfExists(jsonFilename,global.pathRelease);
