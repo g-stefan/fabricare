@@ -53,9 +53,9 @@ function processFolder(folder){
 	
 		//---
 		++index;
-		Console.write(infoMap[index%infoMap.length]+" ["+pad2(index)+"/"+list.length+"]\r");
+		Console.write(infoMap[index%infoMap.length]+" ["+pad2(index)+"/"+list.length+"] internal/"+folder+"\r");
 	};
-	Console.writeLn("- ["+pad2(index)+"/"+list.length+"]");
+	Console.writeLn("- ["+pad2(index)+"/"+list.length+"] internal/"+folder);
 };
 
 processFolder("platform");
