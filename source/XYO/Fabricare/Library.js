@@ -22,7 +22,7 @@ Script.requireExtension("Base16");
 Script.requireExtension("Base32");
 Script.requireExtension("Base64");
 Script.requireExtension("SHA256");
-Script.requireExtension("SHA512");                         
+Script.requireExtension("SHA512");
 Script.requireExtension("Random");
 
 // ---
@@ -77,20 +77,20 @@ UserConfig = {};
 
 Fabricare.loadUserConfig = function() {
 	var pathHome = null;
-	if(OS.isWindows()) {
-		pathHome=Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+	if (OS.isWindows()) {
+		pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
 	};
-	if(OS.isLinux()) {
-		pathHome=Shell.getenv("HOME");
-	};	
+	if (OS.isLinux()) {
+		pathHome = Shell.getenv("HOME");
+	};
 	if (Script.isNil(pathHome)) {
 		Console.writeLn("* Error: Unable to determine user home path!");
 		Script.exit(1);
 	};
-	
+
 	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
 
-	if(!Shell.fileExists(Fabricare.userConfigFile)){
+	if (!Shell.fileExists(Fabricare.userConfigFile)) {
 		global.UserConfig = {};
 		return false;
 	};
@@ -109,17 +109,17 @@ Fabricare.loadUserConfig = function() {
 
 Fabricare.saveUserConfig = function() {
 	var pathHome = null;
-	if(OS.isWindows()) {
-		pathHome=Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+	if (OS.isWindows()) {
+		pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
 	};
-	if(OS.isLinux()) {
-		pathHome=Shell.getenv("HOME");
-	};	
+	if (OS.isLinux()) {
+		pathHome = Shell.getenv("HOME");
+	};
 	if (Script.isNil(pathHome)) {
 		Console.writeLn("* Error: Unable to determine user home path!");
 		Script.exit(1);
 	};
-	
+
 	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
 
 	return Shell.filePutContents(Fabricare.userConfigFile, JSON.encodeWithIndentation(UserConfig));
@@ -186,24 +186,24 @@ xyoVersion = Internal.xyoVersion;
 
 // ---
 
-Fabricare.runInteractive = function(cmd) {	
+Fabricare.runInteractive = function(cmd) {
 	var line;
-	var retV="";
-	var process=new ProcessInteractive();	
-	process.execute(cmd);	
-	while(process.isRunning()) {		
-		if(process.waitToRead(10)) {			
-			line=process.readLn();
-			if(line){
-				retV+=line;
+	var retV = "";
+	var process = new ProcessInteractive();
+	process.execute(cmd);
+	while (process.isRunning()) {
+		if (process.waitToRead(10)) {
+			line = process.readLn();
+			if (line) {
+				retV += line;
 			};
-		};		
-	};	
+		};
+	};
 	// data in buffer after end
-	line=process.read();
-	if(line){
-		retV+=line;
-	};	
+	line = process.read();
+	if (line) {
+		retV += line;
+	};
 	process.close();
 	return retV;
 };
@@ -227,8 +227,8 @@ if (!Script.isNil(Config.solution)) {
 if (!Script.isNil(Solution.type)) {
 	Fabricare.configOk = true;
 	Fabricare.isSolution = true;
-	if(!Fabricare.include("solution/"+Solution.type)){
-		Console.writeLn("* Error: Solution type "+Solution.type+" not found!");
+	if (!Fabricare.include("solution/" + Solution.type)) {
+		Console.writeLn("* Error: Solution type " + Solution.type + " not found!");
 	};
 };
 
@@ -243,18 +243,18 @@ if (!Script.isNil(Config.project)) {
 if (!Script.isNil(Project.type)) {
 	Fabricare.configOk = true;
 	Fabricare.isProject = true;
-	if(!Fabricare.include("project/"+Project.type)){
-		Console.writeLn("* Error: Project type "+Project.type+" not found!");
+	if (!Fabricare.include("project/" + Project.type)) {
+		Console.writeLn("* Error: Project type " + Project.type + " not found!");
 	};
 };
 
 // ---
 
-if(Shell.fileExists("fabricare/fabricare.js")){
+if (Shell.fileExists("fabricare/fabricare.js")) {
 	Fabricare.configOk = true;
 };
 
-if(Application.getFlagValue("run-script")){
+if (Application.getFlagValue("run-script")) {
 	Fabricare.configOk = true;
 };
 

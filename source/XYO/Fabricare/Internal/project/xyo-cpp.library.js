@@ -58,3 +58,43 @@ global.forceRemoveDirRecursively = function(path) {
 		Shell.removeDirRecursively(Project.vendor);
 	};
 };
+
+global.flagExtra = function() {
+	var retV = [];
+	var flagList = [
+		"dependency-path",
+		"dependency-name",
+		"dependency-project",
+		"dependency-make"
+	];
+	var scan;
+	var flag;
+	for (flag of flagList) {
+		for (scan of Application.arguments) {
+			if (scan.indexOf("--" + flag) == 0) {
+				retV[retV.length] = scan;
+			};
+		};
+	};
+	return retV;
+};
+
+global.subroutineArgumentsExtra = function() {
+	var retV = "";
+	var flag;
+	var list = global.flagExtra();
+	for (flag of list) {
+		retV += flag + "\r\n";
+	};
+	return retV;
+};
+
+global.cmdArgumentsExtra = function() {
+	var retV = "";
+	var flag;
+	var list = global.flagExtra();
+	for (flag of list) {
+		retV += "\"" + flag + "\" ";
+	};
+	return retV;
+};

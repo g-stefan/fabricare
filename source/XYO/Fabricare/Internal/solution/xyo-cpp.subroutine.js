@@ -46,6 +46,7 @@ for (var project of Solution.projects) {
 	cmdArguments += "--platform-active=" + Fabricare.platformActive + " ";
 	cmdArguments += "--platform=" + Platform.name + " ";
 	cmdArguments += "\"--config=" + tempFileProject + "\" ";
+	cmdArguments += cmdArgumentsExtra();
 	cmdArguments += Fabricare.action;
 
 	var retV = Shell.system("fabricare " + cmdArguments);

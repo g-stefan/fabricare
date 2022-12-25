@@ -15,7 +15,7 @@ if (Fabricare.action == "install") {
 	};
 };
 
-if (Fabricare.action == "version") {
+if (Fabricare.action == "version" || Fabricare.action == "version-patch" || Fabricare.action == "version-minor" || Fabricare.action == "version-major") {
 	if (!Script.isNil(Project.noVersion)) {
 		if (Project.noVersion) {
 			return;

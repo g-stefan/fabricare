@@ -89,7 +89,7 @@ dependency[Project.name] = {
 	version : version[Project.name],
 	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
 	library : library,
-	dependency: getDependencyVersion()
+	dependency : getDependencyVersion()
 };
 
 exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));

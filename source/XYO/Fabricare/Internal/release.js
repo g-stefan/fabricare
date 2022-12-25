@@ -24,7 +24,7 @@ if (OS.isWindows()) {
 };
 
 var version = Project.version;
-if(Script.isNil(version)){
+if (Script.isNil(version)) {
 	var versionInfo = getVersion();
 	version = version[Project.name].version;
 };
@@ -92,6 +92,6 @@ if (releaseDev) {
 };
 
 // Copy to local release repository
-copyFileIfExists("release" + pathSeparator + releaseName + ".7z",global.pathRelease);
-copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z",global.pathRelease);
-copyFileIfExists(jsonFilename,global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + ".7z", global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z", global.pathRelease);
+copyFileIfExists(jsonFilename, global.pathRelease);

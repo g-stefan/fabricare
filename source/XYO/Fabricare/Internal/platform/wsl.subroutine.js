@@ -43,6 +43,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		subroutineArguments += "--platform=" + Platform.name + "\r\n";
 		subroutineArguments += "--subroutine=" + Fabricare.subroutine + "\r\n";
 		subroutineArguments += "--config=" + wslTranslatePath(Fabricare.configFile) + "\r\n";
+		subroutineArguments += subroutineArgumentsExtra();
 		subroutineArguments += Fabricare.action + "\r\n";
 		Shell.filePutContents(tempFileArguments, subroutineArguments);
 

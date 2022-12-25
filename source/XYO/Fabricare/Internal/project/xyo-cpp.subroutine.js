@@ -214,10 +214,10 @@ global.getDependency = function() {
 };
 
 global.compileProjectDependencyToLibrary = function(compileProject) {
-	var dependency = getDependency();	
+	var dependency = getDependency();
 	if (Script.isNil(compileProject.library)) {
 		var library = [];
-		for(var project of dependency) {
+		for (var project of dependency) {
 			library[library.length] = ":" + project;
 		};
 		compileProject.library = library;
@@ -228,13 +228,13 @@ global.compileProjectDependencyToLibrary = function(compileProject) {
 	};
 };
 
-global.getDependencyVersion = function(){
+global.getDependencyVersion = function() {
 	var dependencyVersion = {};
-	var projectDependency = getDependency();	
-	for(project of projectDependency){
+	var projectDependency = getDependency();
+	for (project of projectDependency) {
 		var info = getDependencyOfProject(project);
-		if(!Script.isNil(info[project].version)) {
-			dependencyVersion[project]=info[project].version.version;
+		if (!Script.isNil(info[project].version)) {
+			dependencyVersion[project] = info[project].version.version;
 		};
 	};
 	return dependencyVersion;
