@@ -20,8 +20,6 @@
 #include <XYO/QuantumScript.Extension/Math.hpp>
 #include <XYO/QuantumScript.Extension/ProcessInteractive.hpp>
 #include <XYO/QuantumScript.Extension/File.hpp>
-#include <XYO/QuantumScript.Extension/Base16.hpp>
-#include <XYO/QuantumScript.Extension/Base32.hpp>
 #include <XYO/QuantumScript.Extension/Base64.hpp>
 #include <XYO/QuantumScript.Extension/SHA256.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
@@ -202,8 +200,6 @@ namespace XYO::Fabricare {
 		Extension::Math::registerInternalExtension(executive);
 		Extension::ProcessInteractive::registerInternalExtension(executive);
 		Extension::File::registerInternalExtension(executive);
-		Extension::Base16::registerInternalExtension(executive);
-		Extension::Base32::registerInternalExtension(executive);
 		Extension::Base64::registerInternalExtension(executive);
 		Extension::SHA256::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);

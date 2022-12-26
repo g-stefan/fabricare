@@ -43,8 +43,6 @@ call :cmdVendor quantum-script--task
 call :cmdVendor quantum-script--math
 call :cmdVendor quantum-script--processinteractive
 call :cmdVendor quantum-script--file
-call :cmdVendor quantum-script--base16
-call :cmdVendor quantum-script--base32
 call :cmdVendor quantum-script--base64
 call :cmdVendor quantum-script--sha256
 call :cmdVendor quantum-script--sha512

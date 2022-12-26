@@ -22,8 +22,6 @@
 			"quantum-script--math",
 			"quantum-script--processinteractive",
 			"quantum-script--file",
-			"quantum-script--base16",
-			"quantum-script--base32",
 			"quantum-script--base64",
 			"quantum-script--sha256",
 			"quantum-script--sha512",

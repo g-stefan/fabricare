@@ -18,8 +18,6 @@ Script.requireExtension("Task");
 Script.requireExtension("Math");
 Script.requireExtension("ProcessInteractive");
 Script.requireExtension("File");
-Script.requireExtension("Base16");
-Script.requireExtension("Base32");
 Script.requireExtension("Base64");
 Script.requireExtension("SHA256");
 Script.requireExtension("SHA512");
