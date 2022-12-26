@@ -6,10 +6,10 @@
 messageAction("install");
 
 if (OS.isWindows()) {
-	messageError("run build.cmd install");
+	Console.writeLn("run build.cmd install");
 };
 if (OS.isLinux()) {
-	messageError("run build.sh install");
+	Console.writeLn("run build.sh install");
 };
 
-Script.exit(1);
+Script.exit(0);
