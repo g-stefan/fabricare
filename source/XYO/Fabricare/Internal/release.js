@@ -26,7 +26,7 @@ if (OS.isWindows()) {
 var version = Project.version;
 if (Script.isNil(version)) {
 	var versionInfo = getVersion();
-	version = version[Project.name].version;
+	version = versionInfo[Project.name].version;
 };
 
 var releaseName = Project.name + "-" + version + "-" + Platform.name;
