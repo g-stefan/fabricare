@@ -90,8 +90,3 @@ if (releaseDev) {
 		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
 	};
 };
-
-// Copy to local release repository
-copyFileIfExists("release" + pathSeparator + releaseName + ".7z", global.pathRelease);
-copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z", global.pathRelease);
-copyFileIfExists(jsonFilename, global.pathRelease);
