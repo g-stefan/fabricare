@@ -33,12 +33,21 @@ var releaseName = Project.name + "-" + version + "-" + Platform.name;
 var jsonFilename = "release" + pathSeparator + Project.name + "-" + version + ".sha512.json";
 var releaseDev = true;
 var releaseBin = true;
+var releaseOutput = false;
 
 if (!Script.isNil(Project.releaseDev)) {
 	releaseDev = Project.releaseDev;
 };
 if (!Script.isNil(Project.releaseBin)) {
 	releaseBin = Project.releaseBin;
+};
+if (!Script.isNil(Project.releaseOutput)) {
+	releaseOutput = Project.releaseOutput;	
+};
+
+if(releaseOutput){
+	releaseDev = false;
+	releaseBin = false;
 };
 
 Shell.mkdirRecursivelyIfNotExists("release");
@@ -90,3 +99,28 @@ if (releaseDev) {
 		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
 	};
 };
+
+// Release ouput
+if (releaseDev) {
+	if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
+		Shell.removeFile("release" + pathSeparator + releaseName + ".7z");
+	};
+	if (Shell.directoryExists("output")) {
+		runInPath("output", function() {
+			exitIf(Shell.system(commandFix(p7zipCompress + " \".." + pathSeparator + "release" + pathSeparator + releaseName + ".7z\" .")));
+		});
+	};
+	if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
+		var json = {};
+		var jsonFile = Shell.fileGetContents(jsonFilename);
+		if (jsonFile) {
+			json = JSON.decode(jsonFile);
+			if (Script.isNil(json)) {
+				json = {};
+			};
+		};
+		json[releaseName + ".7z"] = SHA512.fileHash("release" + pathSeparator + releaseName + ".7z");
+		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+	};
+};
+
