@@ -51,6 +51,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdScript += "set SHLVL=2\r\n";
 		cmdScript += "set MSYSTEM=" + Platform.next.toUpperCaseAscii() + "\r\n";
 		cmdScript += "C:\\msys64\\usr\\bin\\sh --login -- \"" + tempFileSh + "\"\r\n";
+		cmdScript += "if errorlevel 1 exit 1\r\n";
 		cmdScript += "del \"" + tempFileArguments + "\"\r\n";
 		cmdScript += "del \"" + tempFileSh + "\"\r\n";
 		cmdScript += "(goto) 2> NUL & del \"%~f0\"\r\n";

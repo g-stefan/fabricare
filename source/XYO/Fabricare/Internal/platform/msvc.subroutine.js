@@ -56,6 +56,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdScript += "call vcvarsall.bat " + Platform.machine + "\r\n";
 		cmdScript += "popd\r\n";
 		cmdScript += "fabricare \"@" + tempFileArguments + "\"\r\n";
+		cmdScript += "if errorlevel 1 exit 1\r\n";
 		cmdScript += "del \"" + tempFileArguments + "\"\r\n";
 		cmdScript += "(goto) 2> NUL & del \"%~f0\"\r\n";
 		Shell.filePutContents(tempFileCmd, cmdScript);
