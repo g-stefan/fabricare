@@ -16,5 +16,5 @@ cmd.exe /C "build.cmd --platform:%1 clean"
 goto :eof
 :buildAndInstallDefined
 
-for /F "eol=# tokens=1" %%i in (.\build-and-install-all-platforms.txt) do call :buildAndInstall %%i
+for /F "eol=# tokens=1" %%i in (.\install-platforms.txt) do call :buildAndInstall %%i
 
