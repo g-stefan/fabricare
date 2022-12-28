@@ -33,6 +33,7 @@
 			"file-to-js.application",
 			"xyo-cc.application",
 			"xyo-version.application"
-		]
+		],
+		"hasRelease" : true
 	}
 }

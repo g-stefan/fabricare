@@ -100,7 +100,7 @@ if (releaseDev) {
 	};
 };
 
-// Release ouput
+// Release output
 if (releaseOutput) {
 	if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 		Shell.removeFile("release" + pathSeparator + releaseName + ".7z");
