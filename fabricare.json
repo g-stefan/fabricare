@@ -24,6 +24,7 @@
 			"xyo-cc.application",
 			"xyo-version.application"
 		],
-		"hasRelease" : true
+		"hasRelease" : true,
+		"githubRelease" : true
 	}
 }
