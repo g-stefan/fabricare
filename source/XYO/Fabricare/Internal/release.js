@@ -38,10 +38,10 @@ if (!Script.isNil(Project.releaseBin)) {
 	releaseBin = Project.releaseBin;
 };
 if (!Script.isNil(Project.releaseOutput)) {
-	releaseOutput = Project.releaseOutput;	
+	releaseOutput = Project.releaseOutput;
 };
 
-if(releaseOutput){
+if (releaseOutput) {
 	releaseDev = false;
 	releaseBin = false;
 };
@@ -119,4 +119,3 @@ if (releaseOutput) {
 		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
 	};
 };
-

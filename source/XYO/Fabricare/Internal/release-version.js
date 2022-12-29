@@ -16,18 +16,18 @@ if (!Script.isNil(Project.releaseDev)) {
 	releaseDev = Project.releaseDev;
 };
 if (!Script.isNil(Project.releaseOutput)) {
-	releaseOutput = Project.releaseOutput;	
+	releaseOutput = Project.releaseOutput;
 };
-if(releaseOutput){
+if (releaseOutput) {
 	releaseDev = false;
 };
 
 var releaseName = Project.name + "-" + version + "-" + Platform.name;
 var releaseList = [];
 
-releaseList.push(releaseName+".7zip");
-if(releaseDev) {
-	releaseList.push(releaseName+"-dev.7zip");
+releaseList.push(releaseName + ".7zip");
+if (releaseDev) {
+	releaseList.push(releaseName + "-dev.7zip");
 };
 
 var release = {

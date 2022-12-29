@@ -14,10 +14,15 @@ if (!Project.githubRelease) {
 
 messageAction("github-release-keep-last-3");
 
+var repository = Project.name;
+if (!Script.isNil(Project.githubRepository)) {
+	repository = Project.githubRepository;
+};
+
 var version = getVersion();
 
-Shell.system("github-release info --repo " + Project.name + " --tag v" + version);
-var json = JSON.decode(Fabricare.runInteractive("github-release info --repo " + Project.name + " --json"));
+Shell.system("github-release info --repo " + repository + " --tag v" + version);
+var json = JSON.decode(Fabricare.runInteractive("github-release info --repo " + repository + " --json"));
 if (Script.isNil(json)) {
 	return;
 };
@@ -35,7 +40,7 @@ for (i = 0, index = 3; index < releaseList.length; ++i, ++index) {
 
 for (i = 0; i < releaseToDelete.length; ++i) {
 	Console.writeLn("Remove release " + releaseToDelete[i]["tag_name"]);
-	Shell.system("github-release delete --repo " + Project.name + " --tag \"" + releaseToDelete[i]["tag_name"] + "\"");
+	Shell.system("github-release delete --repo " + repository + " --tag \"" + releaseToDelete[i]["tag_name"] + "\"");
 	Shell.system("git push --delete origin \"" + releaseToDelete[i]["tag_name"] + "\"");
 };
 

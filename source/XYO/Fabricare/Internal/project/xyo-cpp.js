@@ -27,12 +27,12 @@ if (Fabricare.action == "version" || Fabricare.action == "version-patch" || Fabr
 	};
 };
 
-if (Fabricare.action == "release"|| Fabricare.action == "release-version") {
+if (Fabricare.action == "release" || Fabricare.action == "release-version") {
 	if (Script.isNil(Project.hasRelease)) {
 		return;
 	};
 	if (!Project.hasRelease) {
-		return;		
+		return;
 	};
 };
 

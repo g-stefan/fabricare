@@ -13,6 +13,11 @@ if (!Project.githubRelease) {
 
 messageAction("github-release-check");
 
+var repository = Project.name;
+if (!Script.isNil(Project.githubRepository)) {
+	repository = Project.githubRepository;
+};
+
 var version = getVersion();
 
-Shell.system("github-release info --repo " + Project.name + " --tag v" + version);
+Shell.system("github-release info --repo " + repository + " --tag v" + version);
