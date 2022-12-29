@@ -28,7 +28,7 @@ if (Script.isNil(Project.includePath)) {
 
 // ---
 
-var version = getVersion();
+var version = getVersionInfo();
 
 // ---
 

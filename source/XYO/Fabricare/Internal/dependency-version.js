@@ -12,7 +12,7 @@ var version = {
 };
 var projectVersion = Project.version;
 if (Script.isNil(projectVersion)) {
-	var versionInfo = getVersion();
+	var versionInfo = getVersionInfo();
 	version = versionInfo[Project.name];
 } else {
 	version.version = projectVersion;

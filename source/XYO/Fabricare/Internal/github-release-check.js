@@ -13,7 +13,6 @@ if (!Project.githubRelease) {
 
 messageAction("github-release-check");
 
-var versionInfo = getVersion();
-var version = versionInfo[Project.name].version;
+var version = getVersion();
 
 Shell.system("github-release info --repo " + Project.name + " --tag v" + version);

@@ -100,3 +100,50 @@ global.cmdArgumentsExtra = function() {
 	};
 	return retV;
 };
+
+global.getVersionInfo = function(file) {
+	if (Script.isNil(file)) {
+		file = "version.json";
+	};
+	var json = Shell.fileGetContents(file);
+	if (!Script.isNil(json)) {
+		var retV = JSON.decode(json);
+		exitIf(Script.isNil(retV));
+		if (!Script.isNil(Project.linkVersion)) {
+			if (!Script.isNil(retV[Project.linkVersion])) {
+				retV[Project.name] = retV[Project.linkVersion];
+				return retV;
+			};
+		};
+		if (!Script.isNil(Project.versionName)) {
+			if (!Script.isNil(retV[Project.versionName])) {
+				retV[Project.name] = retV[Project.versionName];
+				return retV;
+			};
+		};
+		if (!Script.isNil(retV[Project.name])) {
+			return retV;
+		};
+	};
+	if ((Fabricare.action == "version") || (Fabricare.action == "clean")) {
+		var retV = {};
+		retV[Project.name] = {
+			"version" : "0.0.0",
+			"build" : "0",
+			"date" : "0000-00-00",
+			"time" : "00:00:00"
+		};
+		return retV;
+	};
+	messageError("no version");
+	Script.exit(1);
+};
+
+global.getVersion = function(file) {
+	var version = Project.version;
+	if (Script.isNil(version)) {
+		var versionInfo = getVersionInfo();
+		version = versionInfo[Project.name].version;
+	};
+	return version;
+};

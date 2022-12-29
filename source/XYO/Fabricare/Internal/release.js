@@ -23,11 +23,7 @@ if (OS.isWindows()) {
 	};
 };
 
-var version = Project.version;
-if (Script.isNil(version)) {
-	var versionInfo = getVersion();
-	version = versionInfo[Project.name].version;
-};
+var version = getVersion();
 
 var releaseName = Project.name + "-" + version + "-" + Platform.name;
 var jsonFilename = "release" + pathSeparator + Project.name + "-" + version + ".sha512.json";

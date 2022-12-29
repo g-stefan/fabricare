@@ -37,7 +37,7 @@ Project.dependency = dependency;
 
 // ---
 
-var version = getVersion();
+var version = getVersionInfo();
 
 // ---
 

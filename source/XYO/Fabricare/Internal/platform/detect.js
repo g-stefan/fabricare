@@ -20,12 +20,12 @@ if (OS.isWindows()) {
 		return;
 	};
 
-	if (Shell.getenv("MSYSTEM") != "MINGW32") {
+	if (Shell.getenv("MSYSTEM") == "MINGW32") {
 		Platform.name = "mingw32";
 		return;
 	};
 
-	if (Shell.getenv("MSYSTEM") != "MINGW64") {
+	if (Shell.getenv("MSYSTEM") == "MINGW64") {
 		Platform.name = "mingw64";
 		return;
 	};

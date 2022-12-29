@@ -8,11 +8,7 @@ messageAction("release-version");
 var path = Application.getFlagValue("release-path");
 var name = Application.getFlagValue("release-name");
 
-var version = Project.version;
-if (Script.isNil(version)) {
-	var versionInfo = getVersion();
-	version = versionInfo[Project.name].version;
-};
+var version = getVersion();
 
 var releaseDev = true;
 var releaseOutput = false;

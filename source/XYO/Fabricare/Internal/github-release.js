@@ -15,8 +15,7 @@ messageAction("github-release");
 
 exitIf(!Shell.directoryExists("release"), "no release");
 
-var versionInfo = getVersion();
-var version = versionInfo[Project.name].version;
+var version = getVersion();
 var releaseName = Project.name + "-" + version + "-" + Platform.name;
 
 Console.writeLn("Release v" + version);
