@@ -173,16 +173,10 @@ namespace XYO::Fabricare {
 		Extension::DateTime::registerInternalExtension(executive);
 		Extension::JSON::registerInternalExtension(executive);
 		Extension::Application::registerInternalExtension(executive);
-		Extension::ApplicationVersion::registerInternalExtension(executive);
-		Extension::Make::registerInternalExtension(executive);
 		Extension::Shell::registerInternalExtension(executive);
 		Extension::ShellFind::registerInternalExtension(executive);
-		Extension::Thread::registerInternalExtension(executive);
-		Extension::Job::registerInternalExtension(executive);
-		Extension::Task::registerInternalExtension(executive);
 		Extension::Math::registerInternalExtension(executive);
 		Extension::ProcessInteractive::registerInternalExtension(executive);
-		Extension::File::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
 
 		executive->compileString("Script.requireExtension=Script.requireInternalExtension;");
