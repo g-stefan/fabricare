@@ -28,9 +28,9 @@ if (releaseOutput) {
 var releaseName = Project.name + "-" + version + "-" + Platform.name;
 var releaseList = [];
 
-releaseList.push(releaseName + ".7zip");
+releaseList.push(releaseName + ".7z");
 if (releaseDev) {
-	releaseList.push(releaseName + "-dev.7zip");
+	releaseList.push(releaseName + "-dev.7z");
 };
 
 var release = {
