@@ -13,7 +13,7 @@ if (Fabricare.isProject) {
 	folderName = Project.name;
 };
 
-var buildPath = Shell.getenv("HOME") + "/SDK/" + Platform.next + "/source/" + folderName;
+var buildPath = Shell.getenv("HOME") + "/SDK/source/" + folderName;
 
 if (Fabricare.action == "clean") {
 	Shell.system("rm -rf \"" + buildPath + "\"");
@@ -25,7 +25,7 @@ Shell.mkdirRecursivelyIfNotExists(buildPath);
 if (Fabricare.action == "default") {
 	var cmd = "C:\\msys64\\usr\\bin\\sh --login -c \"";
 	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
-	cmd += "\\\"$HOME/SDK/" + Platform.next + "/source/" + folderName + "\\\"\"";
+	cmd += "\\\"$HOME/SDK/source/" + folderName + "\\\"\"";
 	Shell.system(cmd);
 };
 
