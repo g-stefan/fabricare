@@ -12,7 +12,7 @@ if (!Project.githubRelease) {
 	return;
 };
 
-messageAction("github-release-keep-last-3");
+messageAction("github-release-remove-all");
 
 var version = getVersion();
 
@@ -22,16 +22,7 @@ if (Script.isNil(json)) {
 	return;
 };
 
-var releaseList = json["Releases"];
-if (releaseList.length <= 3) {
-	return;
-};
-var releaseToDelete = [];
-var index;
-var i;
-for (i = 0, index = 3; index < releaseList.length; ++i, ++index) {
-	releaseToDelete[i] = releaseList[index];
-};
+var releaseToDelete = json["Releases"];
 
 for (i = 0; i < releaseToDelete.length; ++i) {
 	Console.writeLn("Remove release " + releaseToDelete[i]["tag_name"]);
