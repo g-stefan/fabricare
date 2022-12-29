@@ -67,7 +67,8 @@ global.flagExtra = function() {
 		"dependency-project",
 		"dependency-make",
 		"release-path",
-		"release-name"
+		"release-name",
+		"no-message"
 	];
 	var scan;
 	var flag;

@@ -3,7 +3,10 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("release-version");
+var noMessage = Application.hasFlag("no-message");
+if (!noMessage) {
+	messageAction("release-version");
+};
 
 var path = Application.getFlagValue("release-path");
 var name = Application.getFlagValue("release-name");
