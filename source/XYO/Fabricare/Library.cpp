@@ -10,24 +10,14 @@
 #include <XYO/QuantumScript.Extension/DateTime.hpp>
 #include <XYO/QuantumScript.Extension/JSON.hpp>
 #include <XYO/QuantumScript.Extension/Application.hpp>
-#include <XYO/QuantumScript.Extension/ApplicationVersion.hpp>
-#include <XYO/QuantumScript.Extension/Make.hpp>
 #include <XYO/QuantumScript.Extension/Shell.hpp>
 #include <XYO/QuantumScript.Extension/ShellFind.hpp>
-#include <XYO/QuantumScript.Extension/Thread.hpp>
-#include <XYO/QuantumScript.Extension/Job.hpp>
-#include <XYO/QuantumScript.Extension/Task.hpp>
 #include <XYO/QuantumScript.Extension/Math.hpp>
 #include <XYO/QuantumScript.Extension/ProcessInteractive.hpp>
-#include <XYO/QuantumScript.Extension/File.hpp>
-#include <XYO/QuantumScript.Extension/Base64.hpp>
-#include <XYO/QuantumScript.Extension/SHA256.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
-#include <XYO/QuantumScript.Extension/Random.hpp>
 #include <XYO/FileToCS.Application.hpp>
 #include <XYO/FileToRC.Application.hpp>
 #include <XYO/HTMLToRC.Application.hpp>
-#include <XYO/FileToJS.Application.hpp>
 #include <XYO/CPPCompilerCommandDriver.Application.hpp>
 #include <XYO/Version.Application.hpp>
 
@@ -81,13 +71,6 @@ namespace XYO::Fabricare {
 		printf("- internal-html-to-rc\n");
 #endif
 		return internalCall<HTMLToRC::Application::Application>("html-to-rc", arguments);
-	};
-
-	TPointer<Variable> internalFileToJS(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- internal-file-to-js\n");
-#endif
-		return internalCall<FileToJS::Application::Application>("file-to-js", arguments);
 	};
 
 	TPointer<Variable> internalXYOCC(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -200,10 +183,7 @@ namespace XYO::Fabricare {
 		Extension::Math::registerInternalExtension(executive);
 		Extension::ProcessInteractive::registerInternalExtension(executive);
 		Extension::File::registerInternalExtension(executive);
-		Extension::Base64::registerInternalExtension(executive);
-		Extension::SHA256::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
-		Extension::Random::registerInternalExtension(executive);
 
 		executive->compileString("Script.requireExtension=Script.requireInternalExtension;");
 
@@ -211,7 +191,6 @@ namespace XYO::Fabricare {
 		executive->setFunction2("Internal.fileToCS", internalFileToCS);
 		executive->setFunction2("Internal.fileToRC", internalFileToRC);
 		executive->setFunction2("Internal.htmlToRC", internalHTMLToRC);
-		executive->setFunction2("Internal.fileToJS", internalFileToJS);
 		executive->setFunction2("Internal.xyoCC", internalXYOCC);
 		executive->setFunction2("Internal.xyoVersion", internalXYOVersion);
 

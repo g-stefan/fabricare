@@ -5,23 +5,14 @@
 
 Script.requireExtension("Console");
 Script.requireExtension("Application");
-Script.requireExtension("ApplicationVersion");
 Script.requireExtension("Buffer");
 Script.requireExtension("DateTime");
 Script.requireExtension("JSON");
-Script.requireExtension("Make");
 Script.requireExtension("Shell");
 Script.requireExtension("ShellFind");
-Script.requireExtension("Thread");
-Script.requireExtension("Job");
-Script.requireExtension("Task");
 Script.requireExtension("Math");
 Script.requireExtension("ProcessInteractive");
-Script.requireExtension("File");
-Script.requireExtension("Base64");
-Script.requireExtension("SHA256");
 Script.requireExtension("SHA512");
-Script.requireExtension("Random");
 
 // ---
 
