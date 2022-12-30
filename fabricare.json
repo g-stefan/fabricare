@@ -25,6 +25,7 @@
 			"xyo-version.application"
 		],
 		"hasRelease" : true,
-		"githubRelease" : true
+		"githubRelease" : true,
+		"releaseDev" : false
 	}
 }
