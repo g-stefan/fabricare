@@ -33,16 +33,16 @@ if (!Shell.system("git rev-parse --quiet \"v"+version+"\"")) {
 Shell.system("git tag -a \"v" + version + "\" -m \"v" + version + "\"");
 Shell.system("git push --tags");
 Console.writeLn("Create release v" + version);
-Shell.system("github-release release --repo " + repository + " --tag v" + version + " --name \"v" + version + "\" --description \"Release\"");
+Shell.system("github-release release --repo " + repository + " --tag \"v" + version + "\" --name \"v" + version + "\" --description \"Release\"");
 
 var fileList = Shell.getFileList("release/*.7z");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
-	Shell.system("github-release upload --repo " + repository + " --tag v" + version + " --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
+	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
 var fileList = Shell.getFileList("release/*.json");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
-	Shell.system("github-release upload --repo " + repository + " --tag v" + version + " --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
+	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
