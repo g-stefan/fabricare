@@ -30,7 +30,7 @@ if (!Shell.system("git rev-parse --quiet \"v"+version+"\"")) {
 	Console.writeLn("release v" + version + " already exists");
 	return;
 };
-Shell.system("git tag -a v" + version + " -m \"v" + version + "\"");
+Shell.system("git tag -a \"v" + version + "\" -m \"v" + version + "\"");
 Shell.system("git push --tags");
 Console.writeLn("Create release v" + version);
 Shell.system("github-release release --repo " + repository + " --tag v" + version + " --name \"v" + version + "\" --description \"Release\"");
