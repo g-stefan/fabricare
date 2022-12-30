@@ -26,7 +26,7 @@ var releaseName = repository + "-" + version + "-" + Platform.name;
 Console.writeLn("Release v" + version);
 
 Shell.system("git pull --tags origin main");
-if (!Shell.system("git rev-parse --quiet \"v%VERSION%\"")) {
+if (!Shell.system("git rev-parse --quiet \"v"+version+"\"")) {
 	Console.writeLn("release v" + version + " already exists");
 	return;
 };
