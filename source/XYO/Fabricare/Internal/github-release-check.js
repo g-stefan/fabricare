@@ -20,4 +20,4 @@ if (!Script.isNil(Project.githubRepository)) {
 
 var version = getVersion();
 
-Shell.system("github-release info --repo " + repository + " --tag v" + version);
+Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");

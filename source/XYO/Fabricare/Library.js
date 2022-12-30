@@ -13,6 +13,7 @@ Script.requireExtension("ShellFind");
 Script.requireExtension("Math");
 Script.requireExtension("ProcessInteractive");
 Script.requireExtension("SHA512");
+Script.requireExtension("Thread");
 
 // ---
 

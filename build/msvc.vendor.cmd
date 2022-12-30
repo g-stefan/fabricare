@@ -38,6 +38,7 @@ call :cmdVendor quantum-script--shellfind
 call :cmdVendor quantum-script--math
 call :cmdVendor quantum-script--processinteractive
 call :cmdVendor quantum-script--sha512
+call :cmdVendor quantum-script--thread
 call :cmdVendor file-json
 call :cmdVendor file-to-cs
 call :cmdVendor file-to-rc

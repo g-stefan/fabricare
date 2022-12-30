@@ -17,6 +17,7 @@
 			"quantum-script--math",
 			"quantum-script--processinteractive",
 			"quantum-script--sha512",
+			"quantum-script--thread",
 			"file-json",
 			"file-to-cs.application",
 			"file-to-rc.application",

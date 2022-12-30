@@ -31,6 +31,7 @@ cmdVendor quantum-script--shellfind
 cmdVendor quantum-script--math
 cmdVendor quantum-script--processinteractive
 cmdVendor quantum-script--sha512
+cmdVendor quantum-script--thread
 cmdVendor file-json
 cmdVendor file-to-cs
 cmdVendor file-to-rc

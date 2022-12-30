@@ -26,7 +26,7 @@ var releaseName = repository + "-" + version + "-" + Platform.name;
 Console.writeLn("Release v" + version);
 
 Shell.system("git pull --tags origin main");
-if (!Shell.system("git rev-parse --quiet \"v"+version+"\"")) {
+if (!Shell.system("git rev-parse --quiet \"v" + version + "\"")) {
 	Console.writeLn("release v" + version + " already exists");
 	return;
 };
@@ -34,6 +34,10 @@ Shell.system("git tag -a \"v" + version + "\" -m \"v" + version + "\"");
 Shell.system("git push --tags");
 Console.writeLn("Create release v" + version);
 Shell.system("github-release release --repo " + repository + " --tag \"v" + version + "\" --name \"v" + version + "\" --description \"Release\"");
+
+// Wait a little for github to update release info
+CurrentThread.sleep(1500);
+Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");
 
 var fileList = Shell.getFileList("release/*.7z");
 for (var file of fileList) {
