@@ -53,7 +53,11 @@ if (releaseBin) {
 		};
 		if (!Script.isNil(json[releaseName + ".7z"])) {
 			delete json[releaseName + ".7z"];
-			Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			if (json.length) {
+				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			} else {
+				Shell.remove(jsonFilename);
+			};
 		};
 	};
 };
@@ -74,7 +78,11 @@ if (releaseDev) {
 		};
 		if (!Script.isNil(json[releaseName + "-dev.7z"])) {
 			delete json[releaseName + "-dev.7z"];
-			Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			if (json.length) {
+				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			} else {
+				Shell.remove(jsonFilename);
+			};
 		};
 	};
 };
@@ -95,7 +103,11 @@ if (releaseOutput) {
 		};
 		if (!Script.isNil(json[releaseName + ".7z"])) {
 			delete json[releaseName + ".7z"];
-			Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			if (json.length) {
+				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+			} else {
+				Shell.remove(jsonFilename);
+			};
 		};
 	};
 };
