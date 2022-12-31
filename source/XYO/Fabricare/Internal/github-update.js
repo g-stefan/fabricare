@@ -5,6 +5,14 @@
 
 messageAction("github-update");
 
+if (Script.isNil(Project.githubRelease)) {
+	return;
+};
+
+if (!Project.githubRelease) {
+	return;
+};
+
 Shell.system("git fetch --prune --prune-tags");
 Shell.system("git add --all");
 Shell.system("git commit -m \"Update\"");
