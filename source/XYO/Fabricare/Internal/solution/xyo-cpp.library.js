@@ -3,11 +3,35 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+global.Project = {};
+global.projectReset = function() {
+	global.Project = {};
+	global.Project.name = "unknwon";
+	global.Project["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
+};
+global.projectReset();
+
+global.projectSet = function(project) {
+	global.projectReset();
+	for (var property in project) {
+		global.Project[property] = project[property];
+	};
+};
+
+global.forEachProject = function(fn) {
+	for (var project of Solution.projects) {
+		global.projectSet(project);
+		fn();
+	};
+};
+
+// ---
+
 global.messageAction = function(info) {
 	if (Script.isNil(info)) {
 		info = Fabricare.action;
 	};
-	Console.writeLn("- \x1B[32m" + Project.name + "\x1B[0m: " + info);
+	Console.writeLn("- \x1B[32m" + Solution.name + "\x1B[0m: " + info);
 };
 
 global.messageError = function(info) {
@@ -47,6 +71,8 @@ global.runInPath = function(path, fn) {
 		Shell.chdir(savePath);
 	};
 };
+
+// ---
 
 global.flagExtra = function() {
 	var retV = [];
@@ -91,7 +117,54 @@ global.cmdArgumentsExtra = function() {
 	return retV;
 };
 
+// ---
+
 global.getVersionInfo = function(file) {
+	if (Script.isNil(file)) {
+		file = "version.json";
+	};
+	var json = Shell.fileGetContents(file);
+	if (!Script.isNil(json)) {
+		var retV = JSON.decode(json);
+		exitIf(Script.isNil(retV));
+		if (!Script.isNil(Solution.linkVersion)) {
+			if (!Script.isNil(retV[Solution.linkVersion])) {
+				return retV[Solution.linkVersion];
+			};
+		};
+		if (!Script.isNil(Solution.versionName)) {
+			if (!Script.isNil(retV[Solution.versionName])) {
+				return retV[Solution.versionName];
+			};
+		};
+		if (!Script.isNil(retV[Solution.name])) {
+			return retV[Solution.name];
+		};
+	};
+	if ((Fabricare.action == "version") || (Fabricare.action == "clean")) {
+		return {
+			"version" : "0.0.0",
+			"build" : "0",
+			"date" : "0000-00-00",
+			"time" : "00:00:00"
+		};
+	};
+	messageError("no version");
+	Script.exit(1);
+};
+
+global.getVersion = function(file) {
+	var version = Solution.version;
+	if (Script.isNil(version)) {
+		var versionInfo = getVersionInfo();
+		version = versionInfo.version;
+	};
+	return version;
+};
+
+// ---
+
+global.getProjectVersionInfo = function(file) {
 	if (Script.isNil(file)) {
 		file = "version.json";
 	};
@@ -101,39 +174,44 @@ global.getVersionInfo = function(file) {
 		exitIf(Script.isNil(retV));
 		if (!Script.isNil(Project.linkVersion)) {
 			if (!Script.isNil(retV[Project.linkVersion])) {
-				retV[Project.name] = retV[Project.linkVersion];
-				return retV;
+				return retV[Project.linkVersion];
 			};
 		};
 		if (!Script.isNil(Project.versionName)) {
 			if (!Script.isNil(retV[Project.versionName])) {
-				retV[Project.name] = retV[Project.versionName];
-				return retV;
+				return retV[Project.versionName];
 			};
 		};
 		if (!Script.isNil(retV[Project.name])) {
-			return retV;
+			return retV[Project.name];
 		};
 	};
 	if ((Fabricare.action == "version") || (Fabricare.action == "clean")) {
-		var retV = {};
-		retV[Project.name] = {
+		return {
 			"version" : "0.0.0",
 			"build" : "0",
 			"date" : "0000-00-00",
 			"time" : "00:00:00"
 		};
-		return retV;
 	};
 	messageError("no version");
 	Script.exit(1);
 };
 
-global.getVersion = function(file) {
+global.getProjectVersion = function(file) {
 	var version = Project.version;
 	if (Script.isNil(version)) {
-		var versionInfo = getVersionInfo();
-		version = versionInfo[Project.name].version;
+		var versionInfo = getProjectVersionInfo();
+		version = versionInfo.version;
 	};
 	return version;
+};
+
+global.getProjectVersionAsInfo = function(file) {
+	if (Script.isNil(Project.version)) {
+		return getProjectVersionInfo();
+	};
+	return {
+		version : Project.version
+	};
 };

@@ -147,18 +147,15 @@ Platform.osType = "unknwon";
 
 // ---
 
-Project = {};
-Project.name = "unknwon";
-Project["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
-Project.type = null;
-
-// ---
-
 Solution = {};
 Solution.name = "unknwon";
 Solution["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
 Solution.type = null;
 Solution.projects = [];
+
+// ---
+
+
 
 // ---
 
@@ -203,9 +200,6 @@ Fabricare.runInteractive = function(cmd) {
 Fabricare.loadUserConfig();
 Fabricare.loadConfig();
 Fabricare.configOk = false;
-Fabricare.isSolution = false;
-Fabricare.isProject = false;
-
 // ---
 
 if (!Script.isNil(Config.solution)) {
@@ -215,26 +209,9 @@ if (!Script.isNil(Config.solution)) {
 };
 
 if (!Script.isNil(Solution.type)) {
-	Fabricare.configOk = true;
-	Fabricare.isSolution = true;
+	Fabricare.configOk = true;	
 	if (!Fabricare.include("solution/" + Solution.type)) {
 		Console.writeLn("* Error: Solution type " + Solution.type + " not found!");
-	};
-};
-
-// ---
-
-if (!Script.isNil(Config.project)) {
-	for (var property in Config.project) {
-		Project[property] = Config.project[property];
-	};
-};
-
-if (!Script.isNil(Project.type)) {
-	Fabricare.configOk = true;
-	Fabricare.isProject = true;
-	if (!Fabricare.include("project/" + Project.type)) {
-		Console.writeLn("* Error: Project type " + Project.type + " not found!");
 	};
 };
 

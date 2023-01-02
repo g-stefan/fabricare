@@ -11,4 +11,4 @@ Shell.setenv("PATH", pathRepository + "\\bin;" + Shell.getenv("PATH"));
 Shell.setenv("INCLUDE", pathRepository + "\\include;" + Shell.getenv("INCLUDE"));
 Shell.setenv("LIB", pathRepository + "\\lib;" + Shell.getenv("LIB"));
 
-Fabricare.include("project");
+Fabricare.include("solution");

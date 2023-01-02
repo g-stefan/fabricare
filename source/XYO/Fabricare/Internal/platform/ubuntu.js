@@ -10,4 +10,4 @@ global.pathRelease = pathRepository + "/release";
 Shell.setenv("PATH", pathRepository + "/bin:" + Shell.getenv("PATH"));
 Shell.setenv("LD_LIBRARY_PATH", pathRepository + "/bin:" + Shell.getenv("LD_LIBRARY_PATH"));
 
-Fabricare.include("project");
+Fabricare.include("solution");

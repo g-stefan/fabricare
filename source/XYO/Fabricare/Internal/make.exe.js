@@ -28,10 +28,6 @@ if (Script.isNil(Project.includePath)) {
 
 // ---
 
-var version = getVersionInfo();
-
-// ---
-
 compileExe({
 	project : Project.name,
 	defines : Project.defines,

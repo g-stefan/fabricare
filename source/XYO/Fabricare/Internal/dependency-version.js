@@ -7,30 +7,22 @@ messageAction("dependency-version");
 
 var path = Application.getFlagValue("dependency-path");
 var name = Application.getFlagValue("dependency-name");
-var version = {
-	version : "unknown"
-};
-var projectVersion = Project.version;
-if (Script.isNil(projectVersion)) {
-	var versionInfo = getVersionInfo();
-	version = versionInfo[Project.name];
-} else {
-	version.version = projectVersion;
-};
 
-var dependency = {
-	name : name,
-	project : Project.name,
-	type : Project.type,
-	make : Project.make,
-	version : version,
-	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	dependency : getDependencyVersion()
-};
+forEachProject(function() {
+	var dependency = {
+		name : name,
+		project : Project.name,
+		type : Project.type,
+		make : Project.make,
+		version : getProjectVersionAsInfo(),
+		"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
+		dependency : getDependencyVersion()
+	};
 
-if (!Script.isNil(path)) {
-	exitIf(!Shell.filePutContents(path + "/" + name + "." + Project.name + "." + Project.make + ".json", JSON.encodeWithIndentation(dependency)));
-	return;
-};
+	if (!Script.isNil(path)) {
+		exitIf(!Shell.filePutContents(path + "/" + name + "." + Project.name + "." + Project.make + ".json", JSON.encodeWithIndentation(dependency)));
+		return;
+	};
 
-Console.writeLn(JSON.encodeWithIndentation(dependency));
+	Console.writeLn(JSON.encodeWithIndentation(dependency));
+});

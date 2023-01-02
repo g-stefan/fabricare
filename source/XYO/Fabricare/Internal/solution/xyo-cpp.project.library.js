@@ -3,8 +3,6 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("project/xyo-cpp.library");
-
 Project.name = Application.getFlagValue("project", Project.name);
 
 global.getAllFileList = function(pathAndFilename) {
@@ -281,7 +279,3 @@ global.compileAndRunTest = function(compileProject) {
 		exitIf(Shell.system(compileProject.project));
 	});
 };
-
-// ---
-
-exitIf(!Fabricare.include(Platform.subroutine));

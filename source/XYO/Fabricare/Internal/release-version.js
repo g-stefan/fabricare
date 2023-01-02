@@ -3,6 +3,12 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+if (!Script.isNil(Solution.hasRelease)) {
+	if (!Solution.hasRelease) {
+		return;
+	};
+};
+
 var noMessage = Application.hasFlag("no-message");
 if (!noMessage) {
 	messageAction("release-version");
@@ -15,17 +21,17 @@ var version = getVersion();
 
 var releaseDev = true;
 var releaseOutput = false;
-if (!Script.isNil(Project.releaseDev)) {
-	releaseDev = Project.releaseDev;
+if (!Script.isNil(Solution.releaseDev)) {
+	releaseDev = Solution.releaseDev;
 };
-if (!Script.isNil(Project.releaseOutput)) {
-	releaseOutput = Project.releaseOutput;
+if (!Script.isNil(Solution.releaseOutput)) {
+	releaseOutput = Solution.releaseOutput;
 };
 if (releaseOutput) {
 	releaseDev = false;
 };
 
-var releaseName = Project.name + "-" + version + "-" + Platform.name;
+var releaseName = Solution.name + "-" + version + "-" + Platform.name;
 var releaseList = [];
 
 releaseList.push(releaseName + ".7z");
@@ -35,13 +41,13 @@ if (releaseDev) {
 
 var release = {
 	name : name,
-	project : Project.name,
+	project : Solution.name,
 	version : version,
 	release : releaseList
 };
 
 if (!Script.isNil(path)) {
-	exitIf(!Shell.filePutContents(path + "/" + name + "." + Project.name + ".json", JSON.encodeWithIndentation(release)));
+	exitIf(!Shell.filePutContents(path + "/" + name + "." + Solution.name + ".json", JSON.encodeWithIndentation(release)));
 	return;
 };
 

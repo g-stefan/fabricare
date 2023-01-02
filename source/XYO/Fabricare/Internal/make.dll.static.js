@@ -37,10 +37,6 @@ Project.dependency = dependency;
 
 // ---
 
-var version = getVersionInfo();
-
-// ---
-
 compileDllStatic({
 	project : Project.name,
 	defines : Project.defines,

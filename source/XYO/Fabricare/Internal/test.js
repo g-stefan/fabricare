@@ -8,20 +8,22 @@ messageAction("test");
 Shell.mkdirRecursivelyIfNotExists("output/test");
 Shell.mkdirRecursivelyIfNotExists("temp");
 
-// ---
+forEachProject(function() {
+	// ---
 
-if (Script.isNil(Project.includePath)) {
-	Project.includePath = [];
-};
+	if (Script.isNil(Project.includePath)) {
+		Project.includePath = [];
+	};
 
-// ---
+	// ---
 
-for (var testSource of Project.testSource) {
-	compileAndRunTest({
-		project : testSource,
-		includePath : Project.includePath.concat("source"),
-		cppSource : [ "test/" + testSource + ".cpp" ],
-		libraryPath : [ "output/lib" ],
-		library : [ Project.name ]
-	});
-};
+	for (var testSource of Project.testSource) {
+		compileAndRunTest({
+			project : testSource,
+			includePath : Project.includePath.concat("source"),
+			cppSource : [ "test/" + testSource + ".cpp" ],
+			libraryPath : [ "output/lib" ],
+			library : [ Project.name ]
+		});
+	};
+});

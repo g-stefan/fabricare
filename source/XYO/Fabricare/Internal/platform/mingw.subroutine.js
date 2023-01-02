@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("project/xyo-cpp.library");
+Fabricare.include("solution/xyo-cpp.library");
 
 Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");

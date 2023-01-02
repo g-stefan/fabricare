@@ -37,10 +37,6 @@ Project.dependency = dependency;
 
 // ---
 
-var version = getVersionInfo();
-
-// ---
-
 compileExeStatic({
 	project : Project.name,
 	defines : Project.defines,

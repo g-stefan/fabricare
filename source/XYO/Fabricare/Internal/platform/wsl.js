@@ -3,15 +3,9 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("project/xyo-cpp.library");
+Fabricare.include("solution/xyo-cpp.library");
 
-var folderName = "unknown";
-if (Fabricare.isSolution) {
-	folderName = Solution.name;
-};
-if (Fabricare.isProject) {
-	folderName = Project.name;
-};
+var folderName = Solution.name;
 
 var buildPath = Shell.getenv("HOME") + "/SDK/source/" + folderName;
 

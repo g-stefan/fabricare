@@ -3,6 +3,12 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+if (!Script.isNil(Solution.hasRelease)) {
+	if (!Solution.hasRelease) {
+		return;
+	};
+};
+
 messageAction("release-remove");
 
 var pathSeparator = "/";
@@ -16,20 +22,20 @@ if (OS.isWindows()) {
 
 var version = getVersion();
 
-var releaseName = Project.name + "-" + version + "-" + Platform.name;
-var jsonFilename = "release" + pathSeparator + Project.name + "-" + version + ".sha512.json";
+var releaseName = Solution.name + "-" + version + "-" + Platform.name;
+var jsonFilename = "release" + pathSeparator + Solution.name + "-" + version + ".sha512.json";
 var releaseDev = true;
 var releaseBin = true;
 var releaseOutput = false;
 
-if (!Script.isNil(Project.releaseDev)) {
-	releaseDev = Project.releaseDev;
+if (!Script.isNil(Solution.releaseDev)) {
+	releaseDev = Solution.releaseDev;
 };
-if (!Script.isNil(Project.releaseBin)) {
-	releaseBin = Project.releaseBin;
+if (!Script.isNil(Solution.releaseBin)) {
+	releaseBin = Solution.releaseBin;
 };
-if (!Script.isNil(Project.releaseOutput)) {
-	releaseOutput = Project.releaseOutput;
+if (!Script.isNil(Solution.releaseOutput)) {
+	releaseOutput = Solution.releaseOutput;
 };
 
 if (releaseOutput) {

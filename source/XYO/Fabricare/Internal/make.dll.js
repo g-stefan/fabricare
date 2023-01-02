@@ -28,10 +28,6 @@ if (Script.isNil(Project.includePath)) {
 
 // ---
 
-var version = getVersionInfo();
-
-// ---
-
 compileDll({
 	project : Project.name,
 	defines : Project.defines,
@@ -86,7 +82,7 @@ if (!Script.isNil(Project[property])) {
 
 var dependency = {};
 dependency[Project.name] = {
-	version : version[Project.name],
+	version : getProjectVersionAsInfo(),
 	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
 	library : library,
 	dependency : getDependencyVersion()
