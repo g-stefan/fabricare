@@ -32,7 +32,7 @@ if (releaseOutput) {
 };
 
 var releasePrefix = Solution.name;
-if(!Script.isNil(Solution.releaseName)){
+if (!Script.isNil(Solution.releaseName)) {
 	releasePrefix = Solution.releaseName;
 };
 

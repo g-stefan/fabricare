@@ -3,8 +3,6 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Project.name = Application.getFlagValue("project", Project.name);
-
 global.getAllFileList = function(pathAndFilename) {
 	var path = Shell.getFilePath(pathAndFilename);
 	var filename = Shell.getFileName(pathAndFilename);

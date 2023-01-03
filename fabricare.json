@@ -4,7 +4,7 @@
 		"type" : "xyo-cpp",
 		"projects": [
 			{
-				"name":"fabricare",		
+				"name" : "fabricare",		
 				"make" : "exe.static",
 				"SPDX-License-Identifier": "MIT",
 				"sourcePath" : "XYO/Fabricare",

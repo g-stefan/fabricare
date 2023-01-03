@@ -16,7 +16,7 @@ forEachProject(function() {
 
 	// ---
 
-	messageAction("version ["+Project.name+"]");
+	messageAction("version [" + Project.name + "]");
 
 	var project = Project.name;
 

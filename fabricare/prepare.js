@@ -71,3 +71,10 @@ source+="};\r\n";
 source+="\r\n";
 
 Shell.filePutContents("source/XYO/Fabricare/Internal.Source.cpp",source);
+
+// ---
+
+runInPath("source/XYO/Fabricare",function(){
+	exitIf(Shell.system("file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource"));
+});
+

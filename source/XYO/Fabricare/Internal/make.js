@@ -3,6 +3,11 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+selectMainProject();
+
+Fabricare.include("make.config");
+Fabricare.include("make.prepare");
+
 forEachProject(function() {
 	if (Script.isNil(Project.make)) {
 		messageError("No project.make defined!");

@@ -40,7 +40,7 @@ forEachProject(function() {
 		};
 	};
 
-	messageAction("version-minor ["+Project.name+"]");
+	messageAction("version-minor [" + Project.name + "]");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-minor",

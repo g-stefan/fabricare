@@ -3,11 +3,4 @@
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("make.prepare");
-
-forEachProject(function() {
-	if (!Fabricare.include("make." + Project.make)) {
-		messageError("Don't know how to make '" + Project.make + "'!");
-		exit(1);
-	};
-});
+// Implemented if required by derivate

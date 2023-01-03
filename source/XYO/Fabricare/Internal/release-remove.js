@@ -23,7 +23,7 @@ if (OS.isWindows()) {
 var version = getVersion();
 
 var releasePrefix = Solution.name;
-if(!Script.isNil(Solution.releaseName)){
+if (!Script.isNil(Solution.releaseName)) {
 	releasePrefix = Solution.releaseName;
 };
 

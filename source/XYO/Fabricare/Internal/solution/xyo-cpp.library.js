@@ -25,6 +25,20 @@ global.forEachProject = function(fn) {
 	};
 };
 
+global.selectMainProject = function() {
+	global.projectReset();
+	if (Solution.projects.length == 1) {
+		global.projectSet(Solution.projects[0]);
+		return;
+	};
+	for (var project of Solution.projects) {
+		if (Solution.name == project.name) {
+			global.projectSet(project);
+			return;
+		};
+	};
+};
+
 // ---
 
 global.messageAction = function(info) {
@@ -140,7 +154,7 @@ global.getVersionInfo = function(file) {
 		if (!Script.isNil(retV[Solution.name])) {
 			return retV[Solution.name];
 		};
-	};	
+	};
 	if ((Fabricare.action == "version") || (Fabricare.action == "clean")) {
 		return {
 			"version" : "0.0.0",
@@ -156,11 +170,11 @@ global.getVersionInfo = function(file) {
 global.getVersion = function(file) {
 	var version = Solution.version;
 	if (Script.isNil(version)) {
-		for(var project of Solution.projects){
-			if(Solution.name==project.name) {
-				if(!Script.isNil(project.version)){
+		for (var project of Solution.projects) {
+			if (Solution.name == project.name) {
+				if (!Script.isNil(project.version)) {
 					return project.version;
-				};				
+				};
 			};
 		};
 		var versionInfo = getVersionInfo();
