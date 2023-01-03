@@ -31,7 +31,12 @@ if (releaseOutput) {
 	releaseDev = false;
 };
 
-var releaseName = Solution.name + "-" + version + "-" + Platform.name;
+var releasePrefix = Solution.name;
+if(!Script.isNil(Solution.releaseName)){
+	releasePrefix = Solution.releaseName;
+};
+
+var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
 var releaseList = [];
 
 releaseList.push(releaseName + ".7z");

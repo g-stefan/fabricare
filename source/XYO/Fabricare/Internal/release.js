@@ -33,8 +33,13 @@ if (OS.isWindows()) {
 
 var version = getVersion();
 
-var releaseName = Solution.name + "-" + version + "-" + Platform.name;
-var jsonFilename = "release" + pathSeparator + Solution.name + "-" + version + ".sha512.json";
+var releasePrefix = Solution.name;
+if(!Script.isNil(Solution.releaseName)){
+	releasePrefix = Solution.releaseName;
+};
+
+var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
+var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
 var releaseDev = true;
 var releaseBin = true;
 var releaseOutput = false;
