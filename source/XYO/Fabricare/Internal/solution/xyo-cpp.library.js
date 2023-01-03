@@ -170,6 +170,11 @@ global.getVersionInfo = function(file) {
 global.getVersion = function(file) {
 	var version = Solution.version;
 	if (Script.isNil(version)) {
+		if (Solution.projects.length == 1) {
+			if (!Script.isNil(Solution.projects[0].version)) {
+				return Solution.projects[0].version;
+			};
+		};
 		for (var project of Solution.projects) {
 			if (Solution.name == project.name) {
 				if (!Script.isNil(project.version)) {
