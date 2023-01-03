@@ -5,13 +5,13 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=mingw32
-export pathRepository=$HOME/SDK
-export pathRelease=$HOME/SDK/release
+export pathRepository=$HOME/SDK/mingw32
+export pathRelease=$HOME/SDK/mingw32/release
 export PATH=$PATH:/c/msys64/mingw32/bin/../libexec;
 
 . ./build/ubuntu.config.sh
 
-export WSL_BUILD_PROCESS_PATH=$HOME/SDK/source/$project
+export WSL_BUILD_PROCESS_PATH=$HOME/SDK/mingw32/source/$project
 
 /bin/sh -- ./build/platform/wsl.process.sh $1
 RETV=$?

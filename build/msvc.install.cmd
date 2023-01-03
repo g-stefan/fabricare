@@ -23,7 +23,7 @@ exit 1
 rem ---
 
 set pathHome=%HOMEDRIVE%%HOMEPATH%
-set pathRepository=%pathHome%\SDK
+set pathRepository=%pathHome%\SDK\%platform%
 
 if not exist %pathRepository%\bin\ mkdir %pathRepository%\bin
 
