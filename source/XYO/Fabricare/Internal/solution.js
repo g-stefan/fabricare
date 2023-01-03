@@ -5,6 +5,8 @@
 
 Fabricare.include("solution/xyo-cpp.project.library");
 
+selectMainProject();
+
 if (Fabricare.include(Fabricare.action)) {
 	return;
 };
