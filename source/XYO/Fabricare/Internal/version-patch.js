@@ -40,7 +40,7 @@ forEachProject(function() {
 		};
 	};
 
-	messageAction("version-patch");
+	messageAction("version-patch ["+Project.name+"]");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-patch",

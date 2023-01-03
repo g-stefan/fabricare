@@ -40,7 +40,7 @@ forEachProject(function() {
 		};
 	};
 
-	messageAction("version-major");
+	messageAction("version-major ["+Project.name+"]");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-major",

@@ -1,32 +1,36 @@
 {
-	"project": {
-		"name":"fabricare",
-		"type":"xyo-cpp",
-		"make" : "exe.static",
-		"SPDX-License-Identifier": "MIT",
-		"sourcePath" : "XYO/Fabricare",
-		"dependency" : [
-			"quantum-script",
-			"quantum-script--console",
-			"quantum-script--application",
-			"quantum-script--buffer",
-			"quantum-script--datetime",
-			"quantum-script--json",
-			"quantum-script--shell",
-			"quantum-script--shellfind",
-			"quantum-script--math",
-			"quantum-script--processinteractive",
-			"quantum-script--sha512",
-			"quantum-script--thread",
-			"file-json",
-			"file-to-cs.application",
-			"file-to-rc.application",
-			"html-to-rc.application",
-			"xyo-cc.application",
-			"xyo-version.application"
+	"solution": {
+		"name" : "fabricare",
+		"type" : "xyo-cpp",
+		"projects": [
+			{
+				"name":"fabricare",		
+				"make" : "exe.static",
+				"SPDX-License-Identifier": "MIT",
+				"sourcePath" : "XYO/Fabricare",
+				"dependency" : [
+					"quantum-script",
+					"quantum-script--console",
+					"quantum-script--application",
+					"quantum-script--buffer",
+					"quantum-script--datetime",
+					"quantum-script--json",
+					"quantum-script--shell",
+					"quantum-script--shellfind",
+					"quantum-script--math",
+					"quantum-script--processinteractive",
+					"quantum-script--sha512",
+					"quantum-script--thread",
+					"file-json",
+					"file-to-cs.application",
+					"file-to-rc.application",
+					"html-to-rc.application",
+					"xyo-cc.application",
+					"xyo-version.application"
+				]
+			}
 		],
-		"hasRelease" : true,
-		"githubRelease" : true,
+		"hasGithub" : true,
 		"releaseDev" : false
 	}
 }
