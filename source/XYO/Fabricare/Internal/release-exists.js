@@ -5,11 +5,11 @@
 
 var noMessage = Application.hasFlag("no-message");
 if (!noMessage) {
-	messageAction("release-has");
+	messageAction("release-exists");
 };
 
 var releaseInfo = {
-	"hasRelease" : false,
+	"exists" : false,
 	"release" : []
 };
 
@@ -39,12 +39,12 @@ if (!Script.isNil(Solution.releaseName)) {
 var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
 
 if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
-	releaseInfo.hasRelease = true;
+	releaseInfo.exists = true;
 	releaseInfo.release.push(releaseName + ".7z");
 };
 
 if (Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
-	releaseInfo.hasRelease = true;
+	releaseInfo.exists = true;
 	releaseInfo.release.push(releaseName + "-dev.7z");
 };
 
