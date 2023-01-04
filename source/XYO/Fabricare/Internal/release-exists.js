@@ -8,6 +8,12 @@ if (!noMessage) {
 	messageAction("release-exists");
 };
 
+var separateData = "@DATA:";
+var hasSeparateData = Application.hasFlag("separate-data");
+if(hasSeparateData) {
+	separateData = Application.getFlagValue("separate-data",separateData);
+};
+
 var releaseInfo = {
 	"exists" : false,
 	"release" : []
@@ -46,6 +52,10 @@ if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 if (Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
 	releaseInfo.exists = true;
 	releaseInfo.release.push(releaseName + "-dev.7z");
+};
+
+if(hasSeparateData) {
+	Console.writeLn(separateData);
 };
 
 Console.writeLn(JSON.encodeWithIndentation(releaseInfo));
