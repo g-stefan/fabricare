@@ -13,6 +13,15 @@ if (!Script.isNil(Solution.hasRelease)) {
 
 messageAction("release-install");
 
+var pathSeparator = "/";
+if (OS.isWindows()) {
+	if (Platform.name.indexOf("mingw") >= 0) {
+		pathSeparator = "/";
+	} else {
+		pathSeparator = "\\";
+	};
+};
+
 var version = getVersion();
 
 var releasePrefix = Solution.name;
