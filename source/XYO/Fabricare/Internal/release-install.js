@@ -23,6 +23,8 @@ if (!Script.isNil(Solution.releaseName)) {
 var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
 var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
 
+Shell.mkdirRecursivelyIfNotExists(global.pathRelease);
+
 copyFileIfExists("release" + pathSeparator + releaseName + ".7z", global.pathRelease);
 copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z", global.pathRelease);
 copyFileIfExists(jsonFilename, global.pathRelease);
