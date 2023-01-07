@@ -32,7 +32,7 @@ if (!Fabricare.isPlatformSubroutine) {
 			tempFileCmd = tempFileBase + tempIndex + ".cmd";
 			if (Shell.fileExists(tempFileArguments)) {
 				++tempIndex;
-				if (tempIndex >= 16384) {
+				if (tempIndex >= 32768) {
 					break;
 				};
 				continue;
