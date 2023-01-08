@@ -155,8 +155,6 @@ Solution.projects = [];
 
 // ---
 
-
-
 // ---
 
 fileToCS = Internal.fileToCS;
@@ -173,10 +171,13 @@ xyoVersion = Internal.xyoVersion;
 
 // ---
 
-Fabricare.runInteractive = function(cmd) {
+Fabricare.runInteractive = function(cmd, useConPTY) {
 	var line;
 	var retV = "";
 	var process = new ProcessInteractive();
+	if (!Script.isUndefined(useConPTY)) {
+		process.useConPTY(useConPTY);
+	};
 	process.execute(cmd);
 	while (process.isRunning()) {
 		if (process.waitToRead(10)) {
@@ -209,7 +210,7 @@ if (!Script.isNil(Config.solution)) {
 };
 
 if (!Script.isNil(Solution.type)) {
-	Fabricare.configOk = true;	
+	Fabricare.configOk = true;
 	if (!Fabricare.include("solution/" + Solution.type)) {
 		Console.writeLn("* Error: Solution type " + Solution.type + " not found!");
 	};

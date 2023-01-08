@@ -10,8 +10,8 @@ if (!noMessage) {
 
 var separateData = "@DATA:";
 var hasSeparateData = Application.hasFlag("separate-data");
-if(hasSeparateData) {
-	separateData = Application.getFlagValue("separate-data",separateData);
+if (hasSeparateData) {
+	separateData = Application.getFlagValue("separate-data", separateData);
 };
 
 var releaseInfo = {
@@ -54,7 +54,7 @@ if (Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
 	releaseInfo.release.push(releaseName + "-dev.7z");
 };
 
-if(hasSeparateData) {
+if (hasSeparateData) {
 	Console.writeLn(separateData);
 };
 
