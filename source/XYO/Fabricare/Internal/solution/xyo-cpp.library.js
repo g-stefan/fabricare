@@ -98,7 +98,8 @@ global.flagExtra = function() {
 		"release-path",
 		"release-name",
 		"no-message",
-		"separate-data"
+		"separate-data",
+		"for-platform"
 	];
 	var scan;
 	var flag;

@@ -42,7 +42,9 @@ if (!Script.isNil(Solution.releaseName)) {
 	releasePrefix = Solution.releaseName;
 };
 
-var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
+var platformName = Application.getFlagValue("for-platform", platformName);
+
+var releaseName = releasePrefix + "-" + version + "-" + platformName;
 
 if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 	releaseInfo.exists = true;
