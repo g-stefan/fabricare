@@ -47,7 +47,7 @@ copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.g
 
 var library = [];
 for (var lib of Project.dependency) {
-	library[library.length] = lib + ".static";
+	library[library.length] = ":" + lib + ".static";
 };
 for (var lib of Project.library) {
 	library[library.length] = lib;
@@ -62,7 +62,7 @@ if (OS.isLinux()) {
 if (!Script.isNil(Project[property])) {
 	if (!Script.isNil(Project[property].dependency)) {
 		for (var lib of Project[property].dependency) {
-			library[library.length] = lib + ".static";
+			library[library.length] = ":" + lib + ".static";
 		};
 	};
 	if (!Script.isNil(Project[property].library)) {

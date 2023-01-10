@@ -82,14 +82,21 @@ global.copyFileIfExists = function(source, destinationPath) {
 	};
 };
 
+global.projectNameFromDependency = function(name) {
+	if (name.substring(0, 1) == ":") {
+		return name.substring(1);
+	};
+	return name;
+};
+
 global.getDependencyOfProject = function(projectName) {
-	var json = Shell.fileGetContents(pathRepository + "/lib/" + projectName + ".json");
+	var json = Shell.fileGetContents(pathRepository + "/lib/" + projectNameFromDependency(projectName) + ".json");
 	var retV = JSON.decode(json);
 	if (!Script.isNil(retV)) {
 		return retV;
 	};
 
-	var json = Shell.fileGetContents("output/lib/" + projectName + ".json");
+	var json = Shell.fileGetContents("output/lib/" + projectNameFromDependency(projectName) + ".json");
 	var retV = JSON.decode(json);
 	if (!Script.isNil(retV)) {
 		return retV;
@@ -112,6 +119,7 @@ global.dependencyProcess = function(projectName, projectDependency, level) {
 		return;
 	};
 
+	projectName = projectNameFromDependency(projectName);
 	var dependency = getDependencyOfProject(projectName);
 	if (dependency[projectName].library) {
 		for (var library of dependency[projectName].library) {
@@ -124,7 +132,7 @@ global.getDependency = function() {
 	var projectDependency = {};
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
-			dependencyProcess(dependency, projectDependency, 1);
+			dependencyProcess(":" + dependency, projectDependency, 1);
 		};
 	};
 	if (!Script.isNil(Project.library)) {
@@ -142,7 +150,7 @@ global.getDependency = function() {
 	if (!Script.isNil(Project[property])) {
 		if (!Script.isNil(Project[property].dependency)) {
 			for (var dependency of Project[property].dependency) {
-				dependencyProcess(dependency, projectDependency, 1);
+				dependencyProcess(":" + dependency, projectDependency, 1);
 			};
 		};
 		if (!Script.isNil(Project[property].library)) {
@@ -176,13 +184,13 @@ global.compileProjectDependencyToLibrary = function(compileProject) {
 	if (Script.isNil(compileProject.library)) {
 		var library = [];
 		for (var project of dependency) {
-			library[library.length] = ":" + project;
+			library[library.length] = project;
 		};
 		compileProject.library = library;
 		return;
 	};
 	for (var library of dependency) {
-		compileProject.library[compileProject.library.length] = ":" + library;
+		compileProject.library[compileProject.library.length] = library;
 	};
 };
 
@@ -191,8 +199,9 @@ global.getDependencyVersion = function() {
 	var projectDependency = getDependency();
 	for (project of projectDependency) {
 		var info = getDependencyOfProject(project);
-		if (!Script.isNil(info[project].version)) {
-			dependencyVersion[project] = info[project].version.version;
+		var projectName = projectNameFromDependency(project);
+		if (!Script.isNil(info[projectName].version)) {
+			dependencyVersion[projectName] = info[projectName].version.version;
 		};
 	};
 	return dependencyVersion;
