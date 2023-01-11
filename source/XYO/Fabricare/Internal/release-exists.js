@@ -44,6 +44,12 @@ if (!Script.isNil(Solution.releaseName)) {
 
 var platformName = Application.getFlagValue("for-platform", platformName);
 
+if (platformName.indexOf("sys-") >= 0) {
+	platformName = platformName.substring(4);
+} else if (platformName.indexOf("wsl-") >= 0) {
+	platformName = platformName.substring(4);
+};
+
 var releaseName = releasePrefix + "-" + version + "-" + platformName;
 
 if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
