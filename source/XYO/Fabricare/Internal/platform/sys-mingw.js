@@ -10,6 +10,7 @@ var folderName = Solution.name;
 var buildPath = Shell.getenv("HOME") + "/SDK/" + Platform.next + "/source/" + folderName;
 
 if (Fabricare.action == "clean") {
+	messageAction("clean");
 	Shell.system("rm -rf \"" + buildPath + "\"");
 	return;
 };

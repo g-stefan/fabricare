@@ -55,6 +55,9 @@ for (var lib of Project.library) {
 var property = "osUnknown";
 if (OS.isWindows()) {
 	property = "osWindows";
+	if (OS.isMinGW()) {
+		property = "osLinux";
+	};
 };
 if (OS.isLinux()) {
 	property = "osLinux";

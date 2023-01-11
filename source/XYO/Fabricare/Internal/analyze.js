@@ -6,6 +6,12 @@
 messageAction("analyze");
 
 if (OS.isWindows()) {
+
+	if (OS.isMinGW()) {
+		exitIf(Shell.system("scan-build fabricare make"));
+		return;
+	};
+
 	Shell.setenv("CXX", "cl /analyze /analyze:stacksize 65536 /analyze:max_paths 1024");
 	Fabricare.include("make");
 	return;

@@ -165,6 +165,14 @@ namespace XYO::Fabricare {
 #endif
 	};
 
+	TPointer<Variable> osIsMinGW(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#if defined(XYO_OS_MINGW)
+		return VariableBoolean::newVariable(true);
+#else
+		return VariableBoolean::newVariable(false);
+#endif
+	};
+
 #include <XYO/Fabricare/Library.Source.cpp>
 #include <XYO/Fabricare/Internal.Source.cpp>
 
@@ -197,6 +205,7 @@ namespace XYO::Fabricare {
 		executive->compileStringX("var OS={};");
 		executive->setFunction2("OS.isWindows", osIsWindows);
 		executive->setFunction2("OS.isLinux", osIsLinux);
+		executive->setFunction2("OS.isMinGW", osIsMinGW);
 
 		internalInitExecutive(executive);
 

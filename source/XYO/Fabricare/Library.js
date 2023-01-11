@@ -68,7 +68,14 @@ UserConfig = {};
 Fabricare.loadUserConfig = function() {
 	var pathHome = null;
 	if (OS.isWindows()) {
-		pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+		if (OS.isMinGW()) {
+			pathHome = Shell.getenv("HOME");
+			if (Script.isNil(pathHome)) {
+				pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+			};
+		} else {
+			pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+		};
 	};
 	if (OS.isLinux()) {
 		pathHome = Shell.getenv("HOME");
@@ -100,7 +107,14 @@ Fabricare.loadUserConfig = function() {
 Fabricare.saveUserConfig = function() {
 	var pathHome = null;
 	if (OS.isWindows()) {
-		pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+		if (OS.isMinGW()) {
+			pathHome = Shell.getenv("HOME");
+			if (Script.isNil(pathHome)) {
+				pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+			};
+		} else {
+			pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
+		};
 	};
 	if (OS.isLinux()) {
 		pathHome = Shell.getenv("HOME");
