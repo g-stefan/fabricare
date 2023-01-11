@@ -30,7 +30,7 @@ if (Script.isNil(Project.includePath)) {
 
 var dependency = [];
 for (var project of Project.dependency) {
-	dependency[dependency.length] = ":" + project + ".static";
+	dependency[dependency.length] = project + ".static";
 };
 
 Project.dependency = dependency;
