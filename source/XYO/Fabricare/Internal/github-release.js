@@ -45,7 +45,7 @@ for (var file of fileList) {
 	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
-var fileList = Shell.getFileList("release/*-" + version + "-*.json");
+var fileList = Shell.getFileList("release/*-" + version + ".json");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
