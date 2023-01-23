@@ -24,11 +24,15 @@ forEachProject(function() {
 		project = Project.versionName;
 	};
 
-	// get first Project.sourcePath
-	var sourcePath = ([].concat(Project.sourcePath))[0];
+	var sourceVersionPath = "source/";
+	if (!Script.isNil(Project.sourcePath)) {
+		// get first Project.sourcePath
+		sourceVersionPath += ([].concat(Project.sourcePath))[0];
+		sourceVersionPath += "/";
+	};
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-build",
-	                  "--file-in=source/" + sourcePath + "/Version.Template.rh",
-	                  "--file-out=source/" + sourcePath + "/Version.rh"));
+	                  "--file-in=" + sourceVersionPath + "Version.Template.rh",
+	                  "--file-out=" + sourceVersionPath + "Version.rh"));
 });

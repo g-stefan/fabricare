@@ -40,8 +40,10 @@ compileLib({
 
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp", "output/include");
 copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rh", "output/include");
-var sourcePath = [].concat(Project.sourcePath);
-copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.getFilePath(sourcePath[0]));
+if (!Script.isNil(Project.sourcePath)) {
+	var sourcePath = [].concat(Project.sourcePath);
+	copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.getFilePath(sourcePath[0]));
+};
 
 // ---
 

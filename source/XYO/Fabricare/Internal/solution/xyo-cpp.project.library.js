@@ -43,7 +43,12 @@ global.getFileListIgnoreSpecials = function(files) {
 };
 
 global.getFileListIgnoreSpecialsSourcePath = function(basePath, sourcePath, extension) {
-	var paths = [].concat(sourcePath);
+	var paths = [];
+	if(!Script.isNil(sourcePath)) {
+		paths=paths.concat(sourcePath);
+	}else {
+		paths[0]="@source";
+	};
 	var files = [];
 	for (var path of paths) {
 		var pathToScan = basePath + "/" + path + "/" + extension;

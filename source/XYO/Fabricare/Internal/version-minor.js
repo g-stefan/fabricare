@@ -22,8 +22,12 @@ forEachProject(function() {
 		project = Project.versionName;
 	};
 
-	// get first Project.sourcePath
-	var sourcePath = ([].concat(Project.sourcePath))[0];
+	var sourceVersionPath = "source/";
+	if (!Script.isNil(Project.sourcePath)) {
+		// get first Project.sourcePath
+		sourceVersionPath += ([].concat(Project.sourcePath))[0];
+		sourceVersionPath += "/";
+	};
 
 	var dependencyProject = Application.getFlagValue("dependency-project");
 	var dependencyMake = Application.getFlagValue("dependency-make");
@@ -44,6 +48,6 @@ forEachProject(function() {
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-minor",
-	                  "--file-in=source/" + sourcePath + "/Version.Template.rh",
-	                  "--file-out=source/" + sourcePath + "/Version.rh"));
+	                  "--file-in=" + sourceVersionPath + "Version.Template.rh",
+	                  "--file-out=" + sourceVersionPath + "Version.rh"));
 });
