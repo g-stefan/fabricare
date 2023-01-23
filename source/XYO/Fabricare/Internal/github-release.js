@@ -39,13 +39,13 @@ Shell.system("github-release release --repo " + repository + " --tag \"v" + vers
 CurrentThread.sleep(1500);
 Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");
 
-var fileList = Shell.getFileList("release/*-" + version + "-*.7z");
+var fileList = Shell.getFileList("release/*-" + version + "*.7z");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
-var fileList = Shell.getFileList("release/*-" + version + ".sha512.json");
+var fileList = Shell.getFileList("release/*-" + version + "*.json");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
