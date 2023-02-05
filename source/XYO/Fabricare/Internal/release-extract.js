@@ -55,13 +55,13 @@ if (Shell.fileExists(filenameDev)) {
 	outputFile = filenameDev;
 };
 
-if(Script.isNil(outputFile)) {
-	exit(1,"Release not found for version "+version);
+if (Script.isNil(outputFile)) {
+	exit(1, "Release not found for version " + version);
 };
 
 if (Shell.fileExists(outputFile)) {
 	Shell.removeDirRecursively("output");
 	Shell.mkdirRecursivelyIfNotExists(outputPath);
 
-	exitIf(Shell.system(commandFix(p7zipDecompress + " -o" + outputPath + " "+outputFile)));
+	exitIf(Shell.system(commandFix(p7zipDecompress + " -o" + outputPath + " " + outputFile)));
 };
