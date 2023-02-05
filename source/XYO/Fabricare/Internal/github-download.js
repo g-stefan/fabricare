@@ -24,7 +24,8 @@ var version = getVersion();
 
 var json = JSON.decode(Fabricare.runInteractive("github-release info --repo " + repository + " --tag \"v" + version + "\" --json"));
 if (Script.isNil(json)) {
-	exit(1, "Release not found for version " + version);
+	Console.writeLn("Release not found for version " + version);
+	return;
 };
 
 var releaseToDownload = json["Releases"];
