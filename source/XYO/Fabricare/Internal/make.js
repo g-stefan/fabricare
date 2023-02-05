@@ -17,3 +17,5 @@ forEachProject(function() {
 		exit(1);
 	};
 });
+
+Fabricare.include("make.done");
