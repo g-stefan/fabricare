@@ -5,5 +5,5 @@
 
 messageAction("install-from-release");
 
-Fabricare.include("release-load");
+Fabricare.include("release-extract");
 Fabricare.include("install");
