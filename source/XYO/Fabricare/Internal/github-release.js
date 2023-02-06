@@ -48,27 +48,10 @@ if (Script.isNil(json)) {
 	return;
 };
 
-var releaseToCheck = json["Releases"];
-var i, j;
-var releaseList = {};
-
-for (i = 0; i < releaseToCheck.length; ++i) {
-	Console.writeLn("Check release " + releaseToCheck[i]["tag_name"]);
-	for (j = 0; j < releaseToCheck[i].assets.length; ++j) {
-		Console.writeLn("\t- " + releaseToCheck[i].assets[j].name);
-		if (Shell.fileExists("release/" + releaseToCheck[i].assets[j].name)) {
-			releaseList["release/" + releaseToCheck[i].assets[j].name] = true;
-		};
-	};
-};
-
-
 var fileList = Shell.getFileList("release/*-" + version + "*.7z");
 for (var file of fileList) {
-	if(Script.isNil(releaseList[file])) {
-		Console.writeLn("Upload " + Shell.getFileName(file));
-		Shell.system("github-release upload --replace --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
-	};
+	Console.writeLn("Upload " + Shell.getFileName(file));
+	Shell.system("github-release upload --replace --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
 var fileList = Shell.getFileList("release/*-" + version + "*.json");
