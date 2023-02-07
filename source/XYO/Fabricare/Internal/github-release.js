@@ -37,8 +37,8 @@ if (Shell.system("git rev-parse --quiet \"v" + version + "\"")) {
 	// Wait a little for github to update release info
 	CurrentThread.sleep(1500);
 } else {
-	if(!Application.hasFlag("replace")){
-		Console.writeLn("Release v" + version +" exists");
+	if (!Application.hasFlag("replace")) {
+		Console.writeLn("Release v" + version + " exists");
 		return;
 	};
 };
@@ -62,4 +62,3 @@ for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --replace --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
-

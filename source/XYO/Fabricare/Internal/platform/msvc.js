@@ -7,8 +7,10 @@ global.pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
 global.pathRepository = pathHome + "/SDK/" + Platform.name;
 global.pathRelease = pathRepository + "/release";
 
-Shell.setenv("PATH", pathRepository + "\\bin;" + Shell.getenv("PATH"));
-Shell.setenv("INCLUDE", pathRepository + "\\include;" + Shell.getenv("INCLUDE"));
-Shell.setenv("LIB", pathRepository + "\\lib;" + Shell.getenv("LIB"));
+global.pathSuper = Application.getPathExecutable();
+
+Shell.setenv("PATH", pathRepository + "\\bin;" + pathSuper + ";" + Shell.getenv("PATH"));
+Shell.setenv("INCLUDE", pathRepository + "\\include;" + pathSuper + "\\..\\include;" + Shell.getenv("INCLUDE"));
+Shell.setenv("LIB", pathRepository + "\\lib;" + pathSuper + "\\..\\lib;" + Shell.getenv("LIB"));
 
 Fabricare.include("solution");

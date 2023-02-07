@@ -7,7 +7,9 @@ global.pathHome = Shell.getenv("HOME");
 global.pathRepository = pathHome + "/SDK/" + Platform.name;
 global.pathRelease = pathRepository + "/release";
 
-Shell.setenv("PATH", pathRepository + "\\bin;" + Shell.getenv("PATH"));
-Shell.setenv("LD_LIBRARY_PATH", pathRepository + "/bin:" + Shell.getenv("LD_LIBRARY_PATH"));
+global.pathSuper = Application.getPathExecutable();
+
+Shell.setenv("PATH", pathRepository + "\\bin;" + pathSuper + ";" + Shell.getenv("PATH"));
+Shell.setenv("LD_LIBRARY_PATH", pathRepository + "/bin:" + pathSuper + ":" + Shell.getenv("LD_LIBRARY_PATH"));
 
 Fabricare.include("solution");

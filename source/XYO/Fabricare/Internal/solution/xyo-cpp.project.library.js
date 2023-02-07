@@ -44,10 +44,10 @@ global.getFileListIgnoreSpecials = function(files) {
 
 global.getFileListIgnoreSpecialsSourcePath = function(basePath, sourcePath, extension) {
 	var paths = [];
-	if(!Script.isNil(sourcePath)) {
-		paths=paths.concat(sourcePath);
-	}else {
-		paths[0]="@source";
+	if (!Script.isNil(sourcePath)) {
+		paths = paths.concat(sourcePath);
+	} else {
+		paths[0] = "@source";
 	};
 	var files = [];
 	for (var path of paths) {
@@ -95,6 +95,12 @@ global.projectNameFromDependency = function(name) {
 };
 
 global.getDependencyOfProject = function(projectName) {
+	var json = Shell.fileGetContents(global.pathSuper + "/../lib/" + projectNameFromDependency(projectName) + ".json");
+	var retV = JSON.decode(json);
+	if (!Script.isNil(retV)) {
+		return retV;
+	};
+
 	var json = Shell.fileGetContents(pathRepository + "/lib/" + projectNameFromDependency(projectName) + ".json");
 	var retV = JSON.decode(json);
 	if (!Script.isNil(retV)) {
@@ -224,7 +230,11 @@ global.xyoCCExtra = function() {
 
 	    "--inc=" + pathRepository + "/include",
 	    "--use-lib-path=" + pathRepository + "/lib",
-	    "--rc-inc=" + pathRepository + "/include"
+	    "--rc-inc=" + pathRepository + "/include",
+
+	    "--inc=" + pathSuper + "/../include",
+	    "--use-lib-path=" + pathSuper + "/../lib",
+	    "--rc-inc=" + pathSuper + "/../include"
 
 	);
 	return arguments;
