@@ -6,7 +6,7 @@
 Fabricare.include("make.config");
 Fabricare.include("make.prepare");
 
-forEachProject(function() {
+forEachProject("make", function() {
 	if (Script.isNil(Project.make)) {
 		messageError("No project.make defined!");
 		exit(1);

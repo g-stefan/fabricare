@@ -8,7 +8,7 @@ messageAction("dependency-version");
 var path = Application.getFlagValue("dependency-path");
 var name = Application.getFlagValue("dependency-name");
 
-forEachProject(function() {
+forEachProject("make", function() {
 	var dependency = {
 		name : name,
 		project : Project.name,

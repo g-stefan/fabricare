@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-forEachProject(function() {
+forEachProject("make", function() {
 	if (!Script.isNil(Project.noVersion)) {
 		if (Project.noVersion) {
 			return;

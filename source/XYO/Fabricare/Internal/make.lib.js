@@ -26,20 +26,24 @@ if (Script.isNil(Project.includePath)) {
 	Project.includePath = [];
 };
 
+if (Script.isNil(Project.sourcePrefix)) {
+	Project.sourcePrefix = "";
+};
+
 // ---
 
 compileLib({
 	project : Project.name,
 	defines : Project.defines,
 	includePath : Project.includePath.concat("source"),
-	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp")
+	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
+	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp")
 });
 
 // ---
 
-copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp", "output/include");
-copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rh", "output/include");
+copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp", "output/include");
+copyHeaderFilesIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rh", "output/include");
 if (!Script.isNil(Project.sourcePath)) {
 	var sourcePath = [].concat(Project.sourcePath);
 	copyFileIfExists("source/" + sourcePath[0] + ".hpp", "output/include/" + Shell.getFilePath(sourcePath[0]));

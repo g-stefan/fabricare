@@ -26,18 +26,22 @@ if (Script.isNil(Project.includePath)) {
 	Project.includePath = [];
 };
 
+if (Script.isNil(Project.sourcePrefix)) {
+	Project.sourcePrefix = "";
+};
+
 // ---
 
 compileExe({
 	project : Project.name,
 	defines : Project.defines,
 	includePath : Project.includePath.concat("source"),
-	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.cpp"),
+	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
+	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
 	resources : {
 		"includePath" : [
 			"source"
 		],
-		"rcSource" : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, "*.rc")
+		"rcSource" : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rc")
 	}
 });

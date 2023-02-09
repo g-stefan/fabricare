@@ -7,6 +7,7 @@ global.Project = {};
 global.projectReset = function() {
 	global.Project = {};
 	global.Project.name = "unknwon";
+	global.Project.category = "unknwon";
 	global.Project["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
 };
 global.projectReset();
@@ -16,12 +17,23 @@ global.projectSet = function(project) {
 	for (var property in project) {
 		global.Project[property] = project[property];
 	};
+	if(Script.isNil(global.Project.category)) {
+		global.Project.category = "make";
+	};
 };
 
-global.forEachProject = function(fn) {
+global.forEachProject = function(category, fn) {
+	if (Script.isNil(category)) {
+		category = "make";
+	};
 	for (var project of Solution.projects) {
-		global.projectSet(project);
-		fn();
+		if(Script.isNil(project.category)) {
+			project.category = "make";
+		};
+		if (project.category == category) {
+			global.projectSet(project);
+			fn();
+		};
 	};
 };
 
@@ -37,6 +49,26 @@ global.selectMainProject = function() {
 			return;
 		};
 	};
+};
+
+global.prepareProjects = function () {
+	var projectList = [];
+	for (var project of Solution.projects) {
+		if(!Script.isArray(project.name)) {
+			projectList[projectList.length]=project;
+			continue;
+		};
+		for(var name of project.name) {
+			var newProject = {};
+			for (var property in project) {
+				newProject[property] = project[property];
+			};
+			newProject.name = name;
+			projectList[projectList.length]=newProject;
+		};
+	};
+
+	Solution.projects = projectList;
 };
 
 // ---
