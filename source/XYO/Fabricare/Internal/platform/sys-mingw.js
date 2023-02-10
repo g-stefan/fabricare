@@ -22,6 +22,9 @@ if ((Fabricare.action == "default")||(Fabricare.action == "sync")) {
 	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
 	cmd += "\\\"$HOME/SDK/" + Platform.next + "/source/" + folderName + "\\\"\"";
 	Shell.system(cmd);
+	if(Fabricare.action == "sync") {
+		return;
+	};
 };
 
 var retV = 1;
