@@ -132,7 +132,8 @@ global.flagExtra = function() {
 		"no-message",
 		"separate-data",
 		"for-platform",
-		"replace"
+		"replace",
+		"debug"
 	];
 	var scan;
 	var flag;

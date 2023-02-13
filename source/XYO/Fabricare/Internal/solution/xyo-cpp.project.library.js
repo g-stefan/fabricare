@@ -237,6 +237,11 @@ global.xyoCCExtra = function() {
 	    "--rc-inc=" + pathSuper + "/../include"
 
 	);
+
+	if(Application.hasFlag("debug")){
+		arguments.push("--debug");
+	};
+
 	return arguments;
 };
 
