@@ -35,7 +35,7 @@ if (Shell.system("git rev-parse --quiet \"v" + version + "\"")) {
 	Shell.system("github-release release --repo " + repository + " --tag \"v" + version + "\" --name \"v" + version + "\" --description \"Release\"");
 
 	// Wait a little for github to update release info
-	CurrentThread.sleep(1500);
+	CurrentThread.sleep(3000);
 } else {
 	if (!Application.hasFlag("replace")) {
 		Console.writeLn("Release v" + version + " exists");
