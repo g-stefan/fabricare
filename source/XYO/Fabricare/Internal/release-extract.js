@@ -11,7 +11,7 @@ if (!Script.isNil(Solution.hasRelease)) {
 
 // ---
 
-messageAction("release-load");
+messageAction("release-extract");
 
 function commandFix(cmd) {
 	if (Platform.name.indexOf("mingw") >= 0) {
@@ -53,6 +53,15 @@ if (Shell.fileExists(filenameBin)) {
 if (Shell.fileExists(filenameDev)) {
 	outputPath = "output";
 	outputFile = filenameDev;
+};
+
+if (!Script.isNil(Solution.releaseOutput)) {
+	releaseOutput = Solution.releaseOutput;
+};
+
+if (releaseOutput) {
+	outputPath = "output";
+	outputFile = filenameBin;
 };
 
 if (Script.isNil(outputFile)) {
