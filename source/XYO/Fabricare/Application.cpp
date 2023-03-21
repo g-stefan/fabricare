@@ -17,7 +17,7 @@ namespace XYO::Fabricare {
 	void Application::showUsage() {
 		printf("Fabricare - Build system\n");
 		showVersion();
-		printf("%s\n\n", Fabricare::Copyright::copyright());
+		printf("%s\n\n", Fabricare::Copyright::copyright().c_str());
 
 		printf("%s",
 		       "options:\n"
@@ -30,7 +30,7 @@ namespace XYO::Fabricare {
 	};
 
 	void Application::showLicense() {
-		printf("%s", Fabricare::License::license());
+		printf("%s", Fabricare::License::license().c_str());
 	};
 
 	void Application::showVersion() {
@@ -140,21 +140,21 @@ namespace XYO::Fabricare {
 				ExecutiveX::includePath(Shell::getFilePath(applicationFile));
 				if (ExecutiveX::executeFile(applicationFile)) {
 					exitCode = ExecutiveX::getExitCode();
-					ExecutiveX::endProcessing();					
+					ExecutiveX::endProcessing();
 					return exitCode;
 				};
 
 			} else {
 
 				exitCode = ExecutiveX::getExitCode();
-				ExecutiveX::endProcessing();				
+				ExecutiveX::endProcessing();
 				return exitCode;
 			};
 		};
 
 		printf("%s\n", (ExecutiveX::getError()).value());
 		printf("%s", (ExecutiveX::getStackTrace()).value());
-		ExecutiveX::endProcessing();		
+		ExecutiveX::endProcessing();
 		return 1;
 	};
 };

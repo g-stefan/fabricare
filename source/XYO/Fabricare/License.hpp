@@ -13,8 +13,8 @@
 
 namespace XYO::Fabricare::License {
 
-	const char *license();	
-	const char *shortLicense();
+	std::string license();
+	std::string shortLicense();
 
 };
 
