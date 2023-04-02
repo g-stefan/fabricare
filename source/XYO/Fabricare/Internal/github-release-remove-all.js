@@ -21,7 +21,7 @@ if (!Script.isNil(Solution.githubRepository)) {
 var version = getVersion();
 
 Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");
-var json = JSON.decode(Fabricare.runInteractive("github-release info --repo " + repository + " --json"));
+var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + repository + " --json"));
 if (Script.isNil(json)) {
 	return;
 };
