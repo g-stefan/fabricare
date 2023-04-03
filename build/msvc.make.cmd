@@ -43,3 +43,4 @@ call :cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Librar
 popd
 
 call :cmdX xyo-cc.exe --output-path=output/bin @build/fabricare.compile.json
+
