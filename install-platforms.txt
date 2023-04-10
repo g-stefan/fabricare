@@ -1,7 +1,3 @@
-win32-msvc-2022
 win64-msvc-2022
-
-sys-mingw32
-sys-mingw64
 
 wsl-ubuntu-22.04
