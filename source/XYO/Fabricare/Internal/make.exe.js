@@ -30,6 +30,10 @@ if (Script.isNil(Project.sourcePrefix)) {
 	Project.sourcePrefix = "";
 };
 
+if (Script.isNil(Project.libraryPath)) {
+	Project.libraryPath = [];
+};
+
 // ---
 
 compileExe({
@@ -38,6 +42,7 @@ compileExe({
 	includePath : Project.includePath.concat("source"),
 	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
 	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
+	libraryPath : Project.libraryPath,
 	resources : {
 		"includePath" : [
 			"source"
