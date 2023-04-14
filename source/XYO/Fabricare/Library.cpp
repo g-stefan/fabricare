@@ -217,6 +217,7 @@ namespace XYO::Fabricare {
 
 		internalInitExecutive(executive);
 
+		executive->compileStringX("var Fabricare={};");
 		executive->setFunction2("Fabricare.getVersion()", getVersion);
 
 		executive->compileStringX(librarySource);

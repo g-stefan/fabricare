@@ -21,7 +21,6 @@ Script.resetIncludePath();
 
 // ---
 
-Fabricare = {};
 Fabricare.configFile = "";
 Fabricare.userConfigFile = "";
 Fabricare.action = Application.getArgument(0, "default");
