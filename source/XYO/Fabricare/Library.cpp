@@ -21,6 +21,7 @@
 #include <XYO/HTMLToRC.Application.hpp>
 #include <XYO/CPPCompilerCommandDriver.Application.hpp>
 #include <XYO/Version.Application.hpp>
+#include <XYO/Fabricare/Version.hpp>
 
 namespace XYO::Fabricare {
 
@@ -173,6 +174,13 @@ namespace XYO::Fabricare {
 #endif
 	};
 
+	static TPointer<Variable> getVersion(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
+		printf("- fabricare-get-version\n");
+#endif
+		return VariableString::newVariable(XYO::Fabricare::Version::versionWithBuild());
+	};
+
 #include <XYO/Fabricare/Library.Source.cpp>
 #include <XYO/Fabricare/Internal.Source.cpp>
 
@@ -208,6 +216,8 @@ namespace XYO::Fabricare {
 		executive->setFunction2("OS.isMinGW", osIsMinGW);
 
 		internalInitExecutive(executive);
+
+		executive->setFunction2("Fabricare.getVersion()", getVersion);
 
 		executive->compileStringX(librarySource);
 	};

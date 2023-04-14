@@ -189,6 +189,19 @@ Fabricare.loadUserConfig();
 Fabricare.loadConfig();
 Fabricare.configOk = false;
 // ---
+Fabricare.isDebug = function() {
+	if (Application.hasFlag("debug")) {
+		return true;
+	};
+	if (Shell.hasEnv("XYO_COMPILE_DEBUG")) {
+		return true
+	};
+	return false;
+};
+Fabricare.isRelease = function() {
+	return !Fabricare.isDebug();
+};
+// ---
 
 if (!Script.isNil(Config.solution)) {
 	for (var property in Config.solution) {

@@ -12,4 +12,4 @@ if (Fabricare.include(Fabricare.action)) {
 	return;
 };
 
-exit(1,"Action " + Fabricare.action + " not found!");
+exit(1, "Action " + Fabricare.action + " not found!");
