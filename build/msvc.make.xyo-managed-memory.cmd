@@ -52,6 +52,18 @@ rem set DEF= %DEF% /DXYO_TMEMORYPOOL_ACTIVE_AS_UNIFIED
 rem set DEF= %DEF% /DXYO_TMEMORYPOOL_ACTIVE_LEVEL_IS_SYSTEM
 rem set DEF= %DEF% /DXYO_TMEMORYPOOL_UNIFIED_AS_SYSTEM
 
+rem ---
+goto :expandDEFDefined
+:expandDEF
+if "%1" == "" goto :eof
+set DEF=%DEF% /D%1
+shift
+goto :expandDEF
+:expandDEFDefined
+
+call :expandDEF %XYO_MANAGED_MEMORY_CONFIG%
+rem ---
+
 set INC=
 set INC= %INC% /Ivendor\xyo-managed-memory\source
 

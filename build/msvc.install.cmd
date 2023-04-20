@@ -25,6 +25,10 @@ rem ---
 set pathHome=%HOMEDRIVE%%HOMEPATH%
 set pathRepository=%pathHome%\SDK\%platform%
 
+if  not "%XYO_PATH_REPOSITORY%" == "" set pathRepository=%XYO_PATH_REPOSITORY%
+
 if not exist %pathRepository%\bin\ mkdir %pathRepository%\bin
 
 call :cmdX copy /Y /B output\bin\fabricare.exe %pathRepository%\bin\fabricare.exe
+if exist output\bin\fabricare.pdb call :cmdX copy /Y /B output\bin\fabricare.pdb %pathRepository%\bin\fabricare.pdb
+
