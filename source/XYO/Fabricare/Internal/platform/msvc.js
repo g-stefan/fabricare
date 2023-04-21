@@ -11,7 +11,7 @@ if(Shell.hasEnv("XYO_PATH_REPOSITORY")) {
 	global.pathRepository=Shell.getenv("XYO_PATH_REPOSITORY");
 };
 if(Shell.hasEnv("XYO_PATH_RELEASE")) {
-	global.pathRelease=Shell.getenv("XYO_PATH_REPOSITORY");
+	global.pathRelease=Shell.getenv("XYO_PATH_RELEASE");
 };
 
 global.pathSuper = Application.getPathExecutable();
