@@ -126,26 +126,17 @@ namespace XYO::Fabricare {
 
 		// ---
 
-		if (Shell::fileExists("fabricare/fabricare.js")) {
-			applicationFile = "fabricare/fabricare.js";
-		};
-
-		// ---
-
 		int exitCode = 0;
 
 		if (ExecutiveX::initExecutive(appCmdN, appCmdS, initExecutive)) {
 			if (applicationFile.length()) {
-
 				ExecutiveX::includePath(Shell::getFilePath(applicationFile));
 				if (ExecutiveX::executeFile(applicationFile)) {
 					exitCode = ExecutiveX::getExitCode();
 					ExecutiveX::endProcessing();
 					return exitCode;
 				};
-
 			} else {
-
 				exitCode = ExecutiveX::getExitCode();
 				ExecutiveX::endProcessing();
 				return exitCode;
