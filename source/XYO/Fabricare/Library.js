@@ -163,7 +163,7 @@ Platform.osType = "unknwon";
 Solution = {};
 Solution.name = "unknwon";
 Solution["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
-Solution.type = null;
+Solution.type = "xyo-cpp";
 Solution.projects = [];
 
 // ---
@@ -187,6 +187,7 @@ xyoVersion = Internal.xyoVersion;
 Fabricare.loadUserConfig();
 Fabricare.loadConfig();
 Fabricare.configOk = false;
+Fabricare.solutionOk = false;
 // ---
 Fabricare.isDebug = function() {
 	if (Application.hasFlag("debug")) {
@@ -208,9 +209,15 @@ if (!Script.isNil(Config.solution)) {
 	};
 };
 
+// ---
+
+Fabricare.include("library");
+
 if (!Script.isNil(Solution.type)) {
 	Fabricare.configOk = true;
-	if (!Fabricare.include("solution/" + Solution.type)) {
+	if (Fabricare.include("solution/" + Solution.type)) {
+		Fabricare.solutionOk = true;
+	} else {
 		Console.writeLn("* Error: Solution type " + Solution.type + " not found!");
 	};
 };
@@ -228,5 +235,6 @@ if (Application.getFlagValue("run-script")) {
 // ---
 
 if (!Fabricare.configOk) {
-	Console.writeLn("fabricare [--platform=...] [action]");
+	Fabricare.include("usage");
 };
+
