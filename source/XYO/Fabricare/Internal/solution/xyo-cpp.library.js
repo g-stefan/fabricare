@@ -102,15 +102,15 @@ global.exitIf = function(retV, message) {
 
 global.exitIfTest = function(retV, message) {
 	if (!Script.isNil(message)) {
-		message=": "+message;
+		message+=" : ";
 	}else{
 		message="";
 	};
 	if (retV) {
-		messageAction("\x1B[33m[ \x1B[31mFAIL\x1B[33m ] \x1B[0m"+message);
+		messageAction(message+"\x1B[33m[ \x1B[31mFAIL\x1B[33m ] \x1B[0m");
 		Script.exit(retV);
 	} else {		
-		messageAction("\x1B[33m[ \x1B[32mPASS\x1B[33m ] \x1B[0m"+message);
+		messageAction(message+"\x1B[33m[ \x1B[32mPASS\x1B[33m ] \x1B[0m");
 	};
 };
 
