@@ -16,9 +16,9 @@ if (Fabricare.action == "clean") {
 
 Shell.mkdirRecursivelyIfNotExists(buildPath);
 
-if ((Fabricare.action == "default")||(Fabricare.action == "sync")) {
+if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
 	Shell.system("rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ \"" + buildPath + "\"");
-	if(Fabricare.action == "sync") {
+	if (Fabricare.action == "sync") {
 		return;
 	};
 };

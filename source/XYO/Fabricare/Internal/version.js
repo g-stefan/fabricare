@@ -16,7 +16,7 @@ forEachProject("make", function() {
 
 	// ---
 
-	messageAction("version [" + Project.name + "]");
+	messageAction("version");
 
 	var project = Project.name;
 

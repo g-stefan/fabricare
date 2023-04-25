@@ -44,7 +44,7 @@ forEachProject("make", function() {
 		};
 	};
 
-	messageAction("version-major [" + Project.name + "]");
+	messageAction("version-major");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-major",

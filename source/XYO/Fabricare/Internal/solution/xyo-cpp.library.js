@@ -17,7 +17,7 @@ global.projectSet = function(project) {
 	for (var property in project) {
 		global.Project[property] = project[property];
 	};
-	if(Script.isNil(global.Project.category)) {
+	if (Script.isNil(global.Project.category)) {
 		global.Project.category = "make";
 	};
 };
@@ -27,7 +27,7 @@ global.forEachProject = function(category, fn) {
 		category = "make";
 	};
 	for (var project of Solution.projects) {
-		if(Script.isNil(project.category)) {
+		if (Script.isNil(project.category)) {
 			project.category = "make";
 		};
 		if (project.category == category) {
@@ -51,20 +51,20 @@ global.selectMainProject = function() {
 	};
 };
 
-global.prepareProjects = function () {
+global.prepareProjects = function() {
 	var projectList = [];
 	for (var project of Solution.projects) {
-		if(!Script.isArray(project.name)) {
-			projectList[projectList.length]=project;
+		if (!Script.isArray(project.name)) {
+			projectList[projectList.length] = project;
 			continue;
 		};
-		for(var name of project.name) {
+		for (var name of project.name) {
 			var newProject = {};
 			for (var property in project) {
 				newProject[property] = project[property];
 			};
 			newProject.name = name;
-			projectList[projectList.length]=newProject;
+			projectList[projectList.length] = newProject;
 		};
 	};
 
@@ -77,14 +77,20 @@ global.messageAction = function(info) {
 	if (Script.isNil(info)) {
 		info = Fabricare.action;
 	};
-	Console.writeLn("- \x1B[32m" + Solution.name + "\x1B[0m: " + info);
+	var name = Solution.name;
+	if (Solution.name != Project.name) {
+		name += "." + Project.name;
+	};
+	Console.writeLn("- \x1B[32m" + name + "\x1B[0m: " + info);
 };
 
 global.messageError = function(info) {
-	if (Script.isNil(info)) {
-		info = Fabricare.action;
+	if (!Script.isNil(info)) {
+		info=": "+info;
+	}else {
+		info="";
 	};
-	Console.writeLn("- \x1B[31m* Error\x1B[0m: " + info);
+	global.messageAction("\x1B[33m[ \x1B[31mERROR\x1B[33m ] \x1B[0m" + info);
 };
 
 global.exitIf = function(retV, message) {
@@ -93,6 +99,21 @@ global.exitIf = function(retV, message) {
 		Script.exit(retV);
 	};
 };
+
+global.exitIfTest = function(retV, message) {
+	if (!Script.isNil(message)) {
+		message=": "+message;
+	}else{
+		message="";
+	};
+	if (retV) {
+		messageAction("\x1B[33m[ \x1B[31mFAIL\x1B[33m ] \x1B[0m"+message);
+		Script.exit(retV);
+	} else {		
+		messageAction("\x1B[33m[ \x1B[32mPASS\x1B[33m ] \x1B[0m"+message);
+	};
+};
+
 
 global.exit = function(retV, message) {
 	messageError(message);

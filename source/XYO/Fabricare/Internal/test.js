@@ -55,7 +55,7 @@ if (OS.isWindows()) {
 // Run
 forEachProject("test", function() {
 	runInPath("output/test", function() {
-		messageAction("run [" + Project.name + "]");
-		exitIf(Shell.system(Project.name));
+		messageAction("run");
+		exitIfTest(Shell.system(Project.name));
 	});
 });

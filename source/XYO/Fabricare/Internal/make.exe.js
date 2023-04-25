@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("make.exe [" + Project.name + "]");
+messageAction("make.exe");
 
 Shell.mkdirRecursivelyIfNotExists("output");
 Shell.mkdirRecursivelyIfNotExists("temp");

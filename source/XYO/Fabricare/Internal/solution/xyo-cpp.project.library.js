@@ -238,7 +238,7 @@ global.xyoCCExtra = function() {
 
 	);
 
-	if(Application.hasFlag("debug")){
+	if (Application.hasFlag("debug")) {
 		arguments.push("--debug");
 	};
 

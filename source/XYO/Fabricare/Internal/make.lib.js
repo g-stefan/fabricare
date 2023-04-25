@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("make.lib [" + Project.name + "]");
+messageAction("make.lib");
 
 Shell.mkdirRecursivelyIfNotExists("output");
 Shell.mkdirRecursivelyIfNotExists("temp");

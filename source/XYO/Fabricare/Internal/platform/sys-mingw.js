@@ -17,12 +17,12 @@ if (Fabricare.action == "clean") {
 
 Shell.mkdirRecursivelyIfNotExists(buildPath);
 
-if ((Fabricare.action == "default")||(Fabricare.action == "sync")) {
+if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
 	var cmd = "C:\\msys64\\usr\\bin\\sh --login -c \"";
 	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
 	cmd += "\\\"$HOME/SDK/" + Platform.next + "/source/" + folderName + "\\\"\"";
 	Shell.system(cmd);
-	if(Fabricare.action == "sync") {
+	if (Fabricare.action == "sync") {
 		return;
 	};
 };

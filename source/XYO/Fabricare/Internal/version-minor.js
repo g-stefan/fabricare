@@ -44,7 +44,7 @@ forEachProject("make", function() {
 		};
 	};
 
-	messageAction("version-minor [" + Project.name + "]");
+	messageAction("version-minor");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-minor",

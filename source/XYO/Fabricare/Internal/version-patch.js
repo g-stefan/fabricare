@@ -44,7 +44,7 @@ forEachProject("make", function() {
 		};
 	};
 
-	messageAction("version-patch [" + Project.name + "]");
+	messageAction("version-patch");
 
 	exitIf(xyoVersion("--project=" + project,
 	                  "--bump-patch",
