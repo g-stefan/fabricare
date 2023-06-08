@@ -6,11 +6,14 @@
 
 echo "- $project: vendor"
 
-SOURCE_HOST=https://github.com/g-stefan
+if [ "$FABRICARE_SOURCE_GIT" = "" ]; then
+	FABRICARE_SOURCE_GIT=https://gitea.xyosecurity.ro/g-stefan
+fi
 
 cmdVendor() {
 	if ! [ -d "./$1" ]; then
-		if ! git clone --depth 1 "$SOURCE_HOST/$1" ; then
+		echo "$FABRICARE_SOURCE_GIT/$1"
+		if ! git clone --depth 1 "$FABRICARE_SOURCE_GIT/$1" ; then
 			echo "* Error: vendor"
 			exit 1
 		fi
@@ -21,6 +24,7 @@ cmdVendor() {
 
 cd vendor
 
+echo "Using $FABRICARE_SOURCE_GIT"
 cmdVendor quantum-script
 cmdVendor quantum-script--application
 cmdVendor quantum-script--buffer
@@ -32,6 +36,7 @@ cmdVendor quantum-script--math
 cmdVendor quantum-script--processinteractive
 cmdVendor quantum-script--sha512
 cmdVendor quantum-script--thread
+cmdVendor quantum-script--csv
 cmdVendor file-json
 cmdVendor file-to-cs
 cmdVendor file-to-rc

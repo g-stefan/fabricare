@@ -21,6 +21,7 @@
 					"quantum-script--processinteractive",
 					"quantum-script--sha512",
 					"quantum-script--thread",
+					"quantum-script--csv",
 					"file-json",
 					"file-to-cs.application",
 					"file-to-rc.application",
@@ -29,8 +30,7 @@
 					"xyo-version.application"
 				]
 			}
-		],
-		"hasGithub" : true,
+		],		
 		"releaseDev" : false
 	}
 }

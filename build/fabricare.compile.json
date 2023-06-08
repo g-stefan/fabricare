@@ -19,6 +19,7 @@
 		"XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_NO_VERSION",
 		"XYO_QUANTUMSCRIPT_EXTENSION_SHA512_NO_VERSION",
 		"XYO_QUANTUMSCRIPT_EXTENSION_THREAD_NO_VERSION",
+		"XYO_QUANTUMSCRIPT_EXTENSION_CSV_NO_VERSION",
 		"XYO_QUANTUMSCRIPT_FABRICARE_NO_VERSION",
 		"XYO_FILETOCS_NO_VERSION_LIBRARY",
 		"XYO_FILETOCS_APPLICATION_LIBRARY",
@@ -31,7 +32,8 @@
 		"XYO_FILEJSON_NO_VERSION",		
 		"XYO_VERSION_NO_VERSION_LIBRARY",
 		"XYO_VERSION_APPLICATION_LIBRARY",
-		"XYO_CRYPTOGRAPHY_NO_VERSION"
+		"XYO_CRYPTOGRAPHY_NO_VERSION",
+		"XYO_MAGNET_STATIC"
 	],
 	"includePath": [
 		"source",
@@ -45,6 +47,7 @@
 		"vendor/quantum-script--processinteractive/source",
 		"vendor/quantum-script--sha512/source",
 		"vendor/quantum-script--thread/source",
+		"vendor/quantum-script--csv/source",
 		"vendor/quantum-script/source",
 		"vendor/xyo-managed-memory/source",
 		"vendor/xyo-data-structures/source",
@@ -76,6 +79,7 @@
 		"vendor/quantum-script--processinteractive/source/XYO/QuantumScript.Extension/ProcessInteractive.Amalgam.cpp",
 		"vendor/quantum-script--sha512/source/XYO/QuantumScript.Extension/SHA512.Amalgam.cpp",
 		"vendor/quantum-script--thread/source/XYO/QuantumScript.Extension/Thread.Amalgam.cpp",
+		"vendor/quantum-script--csv/source/XYO/QuantumScript.Extension/CSV.Amalgam.cpp",
 		"vendor/quantum-script/source/XYO/QuantumScript.Amalgam.cpp",
 		"vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp",
 		"vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp",

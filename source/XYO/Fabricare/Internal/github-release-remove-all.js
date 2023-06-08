@@ -3,14 +3,6 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-if (Script.isNil(Solution.hasGithub)) {
-	return;
-};
-
-if (!Solution.hasGithub) {
-	return;
-};
-
 messageAction("github-release-remove-all");
 
 var repository = Solution.name;
@@ -20,7 +12,6 @@ if (!Script.isNil(Solution.githubRepository)) {
 
 var version = getVersion();
 
-Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");
 var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + repository + " --json"));
 if (Script.isNil(json)) {
 	return;

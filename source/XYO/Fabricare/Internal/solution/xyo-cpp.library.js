@@ -86,9 +86,9 @@ global.messageAction = function(info) {
 
 global.messageError = function(info) {
 	if (!Script.isNil(info)) {
-		info=": "+info;
-	}else {
-		info="";
+		info = ": " + info;
+	} else {
+		info = "";
 	};
 	global.messageAction("\x1B[33m[ \x1B[31mERROR\x1B[33m ] \x1B[0m" + info);
 };
@@ -102,18 +102,17 @@ global.exitIf = function(retV, message) {
 
 global.exitIfTest = function(retV, message) {
 	if (!Script.isNil(message)) {
-		message+=" : ";
-	}else{
-		message="";
+		message += " : ";
+	} else {
+		message = "";
 	};
 	if (retV) {
-		messageAction(message+"\x1B[33m[ \x1B[31mFAIL\x1B[33m ] \x1B[0m");
+		messageAction(message + "\x1B[33m[ \x1B[31mFAIL\x1B[33m ] \x1B[0m");
 		Script.exit(retV);
-	} else {		
-		messageAction(message+"\x1B[33m[ \x1B[32mPASS\x1B[33m ] \x1B[0m");
+	} else {
+		messageAction(message + "\x1B[33m[ \x1B[32mPASS\x1B[33m ] \x1B[0m");
 	};
 };
-
 
 global.exit = function(retV, message) {
 	messageError(message);
@@ -297,4 +296,16 @@ global.getProjectVersionAsInfo = function(file) {
 	return {
 		version : Project.version
 	};
+};
+
+global.csvDecode = function(csv) {
+	if (Script.isNil(csv)) {
+		return null;
+	};
+	var csvLines = csv.split("\n");
+	var csvTable = [];
+	for (var line of csvLines) {
+		csvTable.push(CSV.decode(line));
+	};
+	return csvTable;
 };

@@ -16,6 +16,7 @@
 #include <XYO/QuantumScript.Extension/ProcessInteractive.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
 #include <XYO/QuantumScript.Extension/Thread.hpp>
+#include <XYO/QuantumScript.Extension/CSV.hpp>
 #include <XYO/FileToCS.Application.hpp>
 #include <XYO/FileToRC.Application.hpp>
 #include <XYO/HTMLToRC.Application.hpp>
@@ -196,6 +197,7 @@ namespace XYO::Fabricare {
 		Extension::ProcessInteractive::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
 		Extension::Thread::registerInternalExtension(executive);
+		Extension::CSV::registerInternalExtension(executive);
 
 		executive->compileString("Script.requireExtension=Script.requireInternalExtension;");
 

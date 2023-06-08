@@ -3,14 +3,6 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-if (Script.isNil(Solution.hasGithub)) {
-	return;
-};
-
-if (!Solution.hasGithub) {
-	return;
-};
-
 messageAction("github-release");
 
 var repository = Solution.name;
@@ -52,6 +44,12 @@ if (Script.isNil(json)) {
 };
 
 var fileList = Shell.getFileList("release/*-" + version + "*.7z");
+for (var file of fileList) {
+	Console.writeLn("Upload " + Shell.getFileName(file));
+	Shell.system("github-release upload --replace --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
+};
+
+var fileList = Shell.getFileList("release/*-" + version + "*.exe");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --replace --repo " + repository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
