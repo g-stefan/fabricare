@@ -5,4 +5,4 @@
 
 Platform.name = "mingw32";
 
-Fabricare.include("platform/mingw.subroutine");
+Fabricare.include("platform/mingw.run");

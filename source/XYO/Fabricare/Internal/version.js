@@ -24,15 +24,6 @@ forEachProject("make", function() {
 		project = Project.versionName;
 	};
 
-	var sourceVersionPath = "source/";
-	if (!Script.isNil(Project.sourcePath)) {
-		// get first Project.sourcePath
-		sourceVersionPath += ([].concat(Project.sourcePath))[0];
-		sourceVersionPath += "/";
-	};
-
 	exitIf(xyoVersion("--project=" + project,
-	                  "--bump-build",
-	                  "--file-in=" + sourceVersionPath + "Version.Template.rh",
-	                  "--file-out=" + sourceVersionPath + "Version.rh"));
+	                  "--bump-build"));
 });

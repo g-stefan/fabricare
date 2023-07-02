@@ -10,7 +10,6 @@ Script.requireExtension("Shell");
 Shell.mkdirRecursivelyIfNotExists("source/XYO/Fabricare/Internal.Source");
 Shell.mkdirRecursivelyIfNotExists("source/XYO/Fabricare/Internal.Source/platform");
 Shell.mkdirRecursivelyIfNotExists("source/XYO/Fabricare/Internal.Source/solution");
-Shell.mkdirRecursivelyIfNotExists("source/XYO/Fabricare/Internal.Source/project");
 
 function pad2(x){
 	if(x<10){
@@ -60,7 +59,6 @@ function processFolder(folder){
 
 processFolder("platform");
 processFolder("solution");
-processFolder("project");
 processFolder("");
 
 var source=sourceInternal;

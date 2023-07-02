@@ -3,14 +3,11 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("solution/xyo-cpp.library");
+Fabricare.include("solution/generic.library");
 
 Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");
 Fabricare.platformActive = Application.getFlagValue("platform-active");
-Fabricare.subroutine = Application.getFlagValue("subroutine", Fabricare.subroutine);
-
-Platform.subroutine = "platform/sys-mingw";
 
 if (!Fabricare.isPlatformSubroutine) {
 	if (Fabricare.platformActive != Platform.name) {
@@ -39,8 +36,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		subroutineArguments += "--platform-subroutine=true\r\n";
 		subroutineArguments += "--platform-active=" + Fabricare.platformActive + "\r\n";
 		subroutineArguments += "--platform=" + Platform.name + "\r\n";
-		subroutineArguments += "--subroutine=" + Fabricare.subroutine + "\r\n";
-		subroutineArguments += "--config=" + Fabricare.configFile + "\r\n";
+		subroutineArguments += "--workspace=" + Fabricare.workspaceFile + "\r\n";
 		subroutineArguments += subroutineArgumentsExtra();
 		subroutineArguments += Fabricare.action + "\r\n";
 		Shell.filePutContents(tempFileArguments, subroutineArguments);
@@ -76,4 +72,38 @@ if (!Fabricare.isPlatformSubroutine) {
 
 Shell.setenv("XYO_PLATFORM", Platform.next);
 
-Fabricare.include(Fabricare.subroutine);
+// ---
+
+var folderName = Solution.name;
+
+var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/" + Platform.next + "/source/" + folderName;
+
+if (Fabricare.action == "clean") {
+	messageAction("clean");
+	Shell.system("rm -rf \"" + buildPath + "\"");
+	return;
+};
+
+Shell.mkdirRecursivelyIfNotExists(buildPath);
+
+if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
+	var cmd = "C:\\msys64\\usr\\bin\\sh --login -c \"";
+	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
+	cmd += "\\\"$HOME/.xyo-sdk/" + Platform.next + "/source/" + folderName + "\\\"\"";
+	Shell.system(cmd);
+	if (Fabricare.action == "sync") {
+		return;
+	};
+};
+
+var retV = 1;
+
+runInPath(buildPath, function() {
+	retV = Shell.system("fabricare " + Fabricare.action);
+});
+
+if (Fabricare.action == "release") {
+	exitIf(!Shell.copyDirRecursively(buildPath + "/release", "release"));
+};
+
+exitIf(retV);

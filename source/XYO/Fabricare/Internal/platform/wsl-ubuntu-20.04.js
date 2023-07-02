@@ -7,4 +7,4 @@ Platform.name = "wsl-ubuntu-20.04";
 Platform.run = "ubuntu2004.exe";
 Platform.next = "ubuntu-20.04";
 
-Fabricare.include("platform/wsl.subroutine");
+Fabricare.include("platform/wsl.run");

@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=mingw64
-export pathRepository=$HOME/SDK/mingw64
-export pathRelease=$HOME/SDK/mingw64/release
+export pathRepository=$HOME/.xyo-sdk/mingw64
+export pathRelease=$HOME/.xyo-sdk/mingw64/release
 export PATH=$PATH:/c/msys64/mingw64/bin/../libexec;
 
 . ./build/platform/ubuntu.sh $1

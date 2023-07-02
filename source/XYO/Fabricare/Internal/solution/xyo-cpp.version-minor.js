@@ -22,8 +22,17 @@ forEachProject("make", function() {
 		project = Project.versionName;
 	};
 
-	messageAction("version-patch");
+	var sourceVersionPath = "source/";
+	if (!Script.isNil(Project.sourcePath)) {
+		// get first Project.sourcePath
+		sourceVersionPath += ([].concat(Project.sourcePath))[0];
+		sourceVersionPath += "/";
+	};
+
+	messageAction("version-minor");
 
 	exitIf(xyoVersion("--project=" + project,
-	                  "--bump-patch"));
+	                  "--bump-minor",
+	                  "--file-in=" + sourceVersionPath + "Version.Template.rh",
+	                  "--file-out=" + sourceVersionPath + "Version.rh"));
 });

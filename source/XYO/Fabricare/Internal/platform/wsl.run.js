@@ -3,14 +3,11 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("solution/xyo-cpp.library");
+Fabricare.include("solution/generic.library");
 
 Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");
 Fabricare.platformActive = Application.getFlagValue("platform-active");
-Fabricare.subroutine = Application.getFlagValue("subroutine", Fabricare.subroutine);
-
-Platform.subroutine = "platform/wsl";
 
 if (!Fabricare.isPlatformSubroutine) {
 	if (Fabricare.platformActive != Platform.name) {
@@ -43,17 +40,16 @@ if (!Fabricare.isPlatformSubroutine) {
 		subroutineArguments += "--platform-subroutine=true\r\n";
 		subroutineArguments += "--platform-active=" + Fabricare.platformActive + "\r\n";
 		subroutineArguments += "--platform=" + Platform.name + "\r\n";
-		subroutineArguments += "--subroutine=" + Fabricare.subroutine + "\r\n";
-		subroutineArguments += "--config=" + wslTranslatePath(Fabricare.configFile) + "\r\n";
+		subroutineArguments += "--workspace=" + wslTranslatePath(Fabricare.workspaceFile) + "\r\n";
 		subroutineArguments += subroutineArgumentsExtra();
 		subroutineArguments += Fabricare.action + "\r\n";
 		Shell.filePutContents(tempFileArguments, subroutineArguments);
 
 		var cmdSh = "";
 		cmdSh += "#!/bin/sh\n";
-		cmdSh += "if [ -d \"$HOME/SDK/bin\" ] ; then\n";
-		cmdSh += "	PATH=\"$HOME/SDK/bin:$PATH\"\n";
-		cmdSh += "	LD_LIBRARY_PATH=\"$HOME/SDK/bin:$LD_LIBRARY_PATH\"\n";
+		cmdSh += "if [ -d \"$HOME/.xyo-sdk/"+Platform.next+"/bin\" ] ; then\n";
+		cmdSh += "	PATH=\"$HOME/.xyo-sdk/"+Platform.next+"/bin:$PATH\"\n";
+		cmdSh += "	LD_LIBRARY_PATH=\"$HOME/.xyo-sdk/"+Platform.next+"/bin:$LD_LIBRARY_PATH\"\n";
 		cmdSh += "fi\n";
 		cmdSh += "fabricare \"@" + wslTranslatePath(tempFileArguments) + "\"\n";
 		cmdSh += "RETV=$?\n";
@@ -76,4 +72,38 @@ if (!Fabricare.isPlatformSubroutine) {
 
 Shell.setenv("XYO_PLATFORM", Platform.next);
 
-Fabricare.include(Fabricare.subroutine);
+// ---
+
+var folderName = Solution.name;
+
+var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/source/" + folderName;
+
+if (Fabricare.action == "clean") {
+	Shell.system("rm -rf \"" + buildPath + "\"");
+	return;
+};
+
+Shell.mkdirRecursivelyIfNotExists(buildPath);
+
+if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
+	Shell.system("rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ \"" + buildPath + "\"");
+	if (Fabricare.action == "sync") {
+		return;
+	};
+};
+
+var retV = 1;
+
+runInPath(buildPath, function() {
+	Shell.system("chmod -R -x+X source");
+	if (Shell.directoryExists("vendor")) {
+		Shell.system("chmod -R -x+X vendor");
+	};
+	retV = Shell.system("fabricare " + Fabricare.action);
+});
+
+if (Fabricare.action == "release") {
+	exitIf(!Shell.copyDirRecursively(buildPath + "/release", "release"));
+};
+
+exitIf(retV);

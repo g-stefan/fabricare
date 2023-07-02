@@ -68,9 +68,12 @@ if (Script.isNil(outputFile)) {
 	exit(1, "Release not found for version " + version);
 };
 
-if (Shell.fileExists(outputFile)) {
-	Shell.removeDirRecursively("output");
-	Shell.mkdirRecursivelyIfNotExists(outputPath);
-
-	exitIf(Shell.system(commandFix(p7zipDecompress + " -o" + outputPath + " " + outputFile)));
+if (!Shell.fileExists(outputFile)) {
+	exit(1, "Release not found for version " + version);
 };
+
+Shell.removeDirRecursively("output");
+Shell.mkdirRecursivelyIfNotExists(outputPath);
+
+exitIf(Shell.system(commandFix(p7zipDecompress + " -o" + outputPath + " " + outputFile)));
+

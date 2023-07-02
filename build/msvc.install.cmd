@@ -22,10 +22,8 @@ exit 1
 
 rem ---
 
-set pathHome=%HOMEDRIVE%%HOMEPATH%
-set pathRepository=%pathHome%\SDK\%platform%
-
-if  not "%XYO_PATH_REPOSITORY%" == "" set pathRepository=%XYO_PATH_REPOSITORY%
+set pathRepository=%USERPROFILE%\.xyo-sdk\%platform%
+if  not "%XYO_PLATFORM_PATH%" == "" set pathRepository=%XYO_PLATFORM_PATH%
 
 if not exist %pathRepository%\bin\ mkdir %pathRepository%\bin
 

@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform="ubuntu-20.04"
-export pathRepository=$HOME/SDK
-export pathRelease=$HOME/SDK/release
+export pathRepository=$HOME/.xyo-sdk/$platform
+export pathRelease=$HOME/.xyo-sdk/$platform/release
 
 /bin/sh -- ./build/platform/ubuntu.sh $1
 RETV=$?

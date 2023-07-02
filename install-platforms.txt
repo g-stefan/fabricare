@@ -1,3 +1,2 @@
 win64-msvc-2022
-
 wsl-ubuntu-22.04

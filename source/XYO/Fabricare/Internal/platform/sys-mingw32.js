@@ -6,4 +6,4 @@
 Platform.name = "sys-mingw32";
 Platform.next = "mingw32";
 
-Fabricare.include("platform/sys-mingw.subroutine");
+Fabricare.include("platform/sys-mingw.run");

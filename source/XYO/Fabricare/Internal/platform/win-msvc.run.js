@@ -3,20 +3,21 @@
 // SPDX-FileCopyrightText: 2021-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-Fabricare.include("solution/xyo-cpp.library");
+Fabricare.include("solution/generic.library");
 
 Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");
 Fabricare.platformActive = Application.getFlagValue("platform-active");
-Fabricare.subroutine = Application.getFlagValue("subroutine", Fabricare.subroutine);
-
-Platform.subroutine = "platform/msvc";
 
 Platform.name = Platform.osType + "-msvc-" + Platform.version;
 
+global.pathRepository = Shell.getenv("USERPROFILE") + "/.xyo-sdk/"+ Platform.name;
 if (Shell.getenv("XYO_PLATFORM") == Platform.name) {
 	Fabricare.isPlatformSubroutine = true;
 	Fabricare.platformActive = Platform.name;
+	if(Shell.hasEnv("XYO_PLATFORM_PATH")) {
+		global.pathRepository = Shell.getenv("XYO_PLATFORM_PATH");
+	};
 };
 
 if (!Fabricare.isPlatformSubroutine) {
@@ -44,8 +45,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		subroutineArguments += "--platform-subroutine=true\r\n";
 		subroutineArguments += "--platform-active=" + Fabricare.platformActive + "\r\n";
 		subroutineArguments += "--platform=" + Platform.name + "\r\n";
-		subroutineArguments += "--subroutine=" + Fabricare.subroutine + "\r\n";
-		subroutineArguments += "--config=" + Fabricare.configFile + "\r\n";
+		subroutineArguments += "--workspace=" + Fabricare.workspaceFile + "\r\n";
 		subroutineArguments += subroutineArgumentsExtra();
 		subroutineArguments += Fabricare.action + "\r\n";
 		Shell.filePutContents(tempFileArguments, subroutineArguments);
@@ -69,4 +69,14 @@ if (!Fabricare.isPlatformSubroutine) {
 
 Shell.setenv("XYO_PLATFORM", Platform.name);
 
-Fabricare.include(Fabricare.subroutine);
+// ---
+
+global.pathRelease = pathRepository + "/release";
+
+global.pathSuper = Application.getPathExecutable();
+
+Shell.setenv("PATH", pathRepository + "\\bin;" + pathSuper + ";" + Shell.getenv("PATH"));
+Shell.setenv("INCLUDE", pathRepository + "\\include;" + pathSuper + "\\..\\include;" + Shell.getenv("INCLUDE"));
+Shell.setenv("LIB", pathRepository + "\\lib;" + pathSuper + "\\..\\lib;" + Shell.getenv("LIB"));
+
+Fabricare.processWorkspace();

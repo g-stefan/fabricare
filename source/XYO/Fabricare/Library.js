@@ -24,6 +24,7 @@ Script.resetIncludePath();
 
 Fabricare.configFile = "";
 Fabricare.userConfigFile = "";
+Fabricare.workspaceFile = "";
 Fabricare.action = Application.getArgument(0, "default");
 
 // ---
@@ -36,7 +37,7 @@ Fabricare.loadConfig = function() {
 		cwd += "/";
 	};
 
-	Fabricare.configFile = Application.getFlagValue("config", cwd + "fabricare.json");
+	Fabricare.configFile = Application.getFlagValue("config", cwd + ".fabricare.json");
 
 	var json = Shell.fileGetContents(Fabricare.configFile);
 	if (!Script.isNil(json)) {
@@ -56,7 +57,7 @@ Fabricare.saveConfig = function() {
 		cwd += "/";
 	};
 
-	Fabricare.configFile = Application.getFlagValue("config", cwd + "fabricare.json");
+	Fabricare.configFile = Application.getFlagValue("config", cwd + ".fabricare.json");
 
 	return Shell.filePutContents(Fabricare.configFile, JSON.encodeWithIndentation(Config));
 };
@@ -131,25 +132,7 @@ Fabricare.saveUserConfig = function() {
 
 // ---
 
-Fabricare.include = function(file) {
-	var internal = "fabricare://" + file + ".js";
-	var application = Application.getPathExecutable() + "/fabricare/" + file + ".js";
-	var local = Shell.getcwd() + "/fabricare/" + file + ".js";
-
-	if (Shell.fileExists(local)) {
-		Script.include(local);
-		return true;
-	};
-	if (Shell.fileExists(application)) {
-		Script.include(application);
-		return true;
-	};
-	if (Script.hasIncludeSource(internal)) {
-		Script.include(internal);
-		return true;
-	};
-	return false;
-};
+Workspace = {};
 
 // ---
 
@@ -169,6 +152,35 @@ Solution.projects = [];
 
 // ---
 
+Fabricare.include = function(file) {	
+	var files = [
+		// Local
+		Shell.getcwd() + "/fabricare/solution/" + Solution.type + "." + file + ".js",
+		Shell.getcwd() + "/fabricare/" + file + ".js",
+		// Application
+		Application.getPathExecutable() + "/fabricare/solution/" + Solution.type + "." + file + ".js",
+		Application.getPathExecutable() + "/fabricare/" + file + ".js"
+	];
+	for (var index=0;index<files.length; ++index) {
+		if (Shell.fileExists(files[index])) {			
+			Script.include(files[index]);
+			return true;
+		};
+	};
+	files = [
+		// Internal
+		"fabricare://solution/" + Solution.type + "." + file + ".js",
+		"fabricare://" + file + ".js"
+	];
+	for (var index=0;index<files.length; ++index) {
+		if (Script.hasIncludeSource(files[index])) {			
+			Script.include(files[index]);
+			return true;
+		};
+	};
+	return false;
+};
+
 // ---
 
 fileToCS = Internal.fileToCS;
@@ -185,9 +197,9 @@ xyoVersion = Internal.xyoVersion;
 
 // ---
 
-Fabricare.loadUserConfig();
 Fabricare.loadConfig();
-Fabricare.configOk = false;
+Fabricare.loadUserConfig();
+
 // ---
 Fabricare.isDebug = function() {
 	if (Application.hasFlag("debug")) {
@@ -202,11 +214,48 @@ Fabricare.isRelease = function() {
 	return !Fabricare.isDebug();
 };
 // ---
-
-if (!Script.isNil(Config.solution)) {
-	for (var property in Config.solution) {
-		Solution[property] = Config.solution[property];
+Fabricare.loadWorkspace = function() {
+	var cwd = Shell.getcwd();
+	if (!Script.isNil(cwd)) {
+		cwd += "/";
 	};
+
+	Fabricare.workspaceFile = Application.getFlagValue("workspace", cwd + "fabricare.json");
+
+	var json = Shell.fileGetContents(Fabricare.workspaceFile);
+	if (!Script.isNil(json)) {
+		jsonWorkspace = JSON.decode(json);
+		if (!Script.isNil(jsonWorkspace)) {
+			for (var property in jsonWorkspace) {
+				Workspace[property] = jsonWorkspace[property];
+			};
+		};
+	};
+};
+Fabricare.loadWorkspace();
+if (!Script.isNil(Workspace.solution)) {
+
+	for (var property in Workspace.solution) {
+		Solution[property] = Workspace.solution[property];
+	};
+};
+
+if (Script.isNil(Solution.type)) {
+	Solution.type = "generic";
+};
+
+// ---
+
+Fabricare.processSolution = function() {	
+	return Fabricare.include("solution/" + Solution.type + ".solution");
+};
+
+Fabricare.processWorkspace = function() {
+	var runWorkspace=Shell.getcwd() + "/fabricare/workspace.js";
+	if (Shell.fileExists(runWorkspace)) {
+		return Script.include(runWorkspace);
+	};
+	return Fabricare.processSolution();
 };
 
 // ---
@@ -217,18 +266,16 @@ if (Application.getFlagValue("run-script")) {
 	return;
 };
 
-if (Shell.fileExists("fabricare/fabricare.js")) {
-	Script.include("fabricare/fabricare.js");
-	return;
+// ---
+
+Platform.name = Application.getFlagValue("platform");
+if (!Platform.name) {
+	Fabricare.include("platform/detect");
+};
+if (!Fabricare.include("platform/" + Platform.name)) {
+	Console.writeLn("Error: Platform " + Platform.name + " not found!");
+	Script.exit(1);
 };
 
-if (!Script.isNil(Solution.type)) {
-	if (Fabricare.include("solution/" + Solution.type)) {
-		return;
-	};
-	Console.writeLn("* Error: Solution type " + Solution.type + " not found!");
-	return;
-};
-
-Fabricare.include("usage");
+// ---
 })();

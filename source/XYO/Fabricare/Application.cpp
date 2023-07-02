@@ -21,11 +21,13 @@ namespace XYO::Fabricare {
 
 		printf("%s",
 		       "options:\n"
-		       "    --usage             this info\n"
-		       "    --license           show license\n"
-		       "    --version           show version\n"
-		       "    --run-script=file   run script\n"
-		       "    --config=file       use config file\n");
+		       "    --usage                this info\n"
+		       "    --license              show license\n"
+		       "    --version              show version\n"
+		       "    --run-script=file      run script\n"
+		       "    --config=file          use config file\n"
+		       "    --workspace=file       use workspace file\n"
+		       "    --platform=[platform]  select specified platform\n");
 		printf("\n");
 	};
 

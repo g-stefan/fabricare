@@ -9,4 +9,4 @@ Platform.osType = "win64";
 Platform.version = "2022";
 Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
 
-Fabricare.include("platform/msvc.subroutine");
+Fabricare.include("platform/win-msvc.run");

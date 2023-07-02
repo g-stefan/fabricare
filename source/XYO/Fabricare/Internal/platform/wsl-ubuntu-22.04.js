@@ -7,4 +7,4 @@ Platform.name = "wsl-ubuntu-22.04";
 Platform.run = "ubuntu2204.exe";
 Platform.next = "ubuntu-22.04";
 
-Fabricare.include("platform/wsl.subroutine");
+Fabricare.include("platform/wsl.run");

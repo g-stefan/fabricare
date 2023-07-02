@@ -16,14 +16,23 @@ forEachProject("make", function() {
 
 	// ---
 
+	messageAction("version");
+
 	var project = Project.name;
 
 	if (!Script.isNil(Project.versionName)) {
 		project = Project.versionName;
 	};
 
-	messageAction("version-patch");
+	var sourceVersionPath = "source/";
+	if (!Script.isNil(Project.sourcePath)) {
+		// get first Project.sourcePath
+		sourceVersionPath += ([].concat(Project.sourcePath))[0];
+		sourceVersionPath += "/";
+	};
 
 	exitIf(xyoVersion("--project=" + project,
-	                  "--bump-patch"));
+	                  "--bump-build",
+	                  "--file-in=" + sourceVersionPath + "Version.Template.rh",
+	                  "--file-out=" + sourceVersionPath + "Version.rh"));
 });

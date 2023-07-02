@@ -7,4 +7,4 @@ Platform.name = "wsl-ubuntu-18.04";
 Platform.run = "ubuntu1804.exe";
 Platform.next = "ubuntu-18.04";
 
-Fabricare.include("platform/wsl.subroutine");
+Fabricare.include("platform/wsl.run");
