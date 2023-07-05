@@ -76,4 +76,3 @@ Shell.removeDirRecursively("output");
 Shell.mkdirRecursivelyIfNotExists(outputPath);
 
 exitIf(Shell.system(commandFix(p7zipDecompress + " -o" + outputPath + " " + outputFile)));
-

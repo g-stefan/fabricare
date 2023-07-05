@@ -5,11 +5,11 @@
 
 messageAction("github-release-check");
 
-var repository = Solution.name;
+var gitRepository = Solution.name;
 if (!Script.isNil(Solution.githubRepository)) {
-	repository = Solution.githubRepository;
+	gitRepository = Solution.githubRepository;
 };
 
 var version = getVersion();
 
-Shell.system("github-release info --repo " + repository + " --tag \"v" + version + "\"");
+Shell.system("github-release info --repo " + gitRepository + " --tag \"v" + version + "\"");

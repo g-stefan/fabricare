@@ -37,6 +37,7 @@ cmdVendor quantum-script--processinteractive
 cmdVendor quantum-script--sha512
 cmdVendor quantum-script--thread
 cmdVendor quantum-script--csv
+cmdVendor quantum-script--url
 cmdVendor file-json
 cmdVendor file-to-cs
 cmdVendor file-to-rc

@@ -1,6 +1,13 @@
 # Fabricare
 
-Build system
+Build system based on scripts
+
+## Require external programs
+
+- 7zip
+- git
+- tea
+- github-release
 
 ## License
 

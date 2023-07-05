@@ -7,14 +7,14 @@ messageAction("github-download");
 
 Shell.mkdirRecursivelyIfNotExists("release");
 
-var repository = Solution.name;
+var gitRepository = Solution.name;
 if (!Script.isNil(Solution.githubRepository)) {
-	repository = Solution.githubRepository;
+	gitRepository = Solution.githubRepository;
 };
 
 var version = getVersion();
 
-var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + repository + " --tag \"v" + version + "\" --json"));
+var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + gitRepository + " --tag \"v" + version + "\" --json"));
 if (Script.isNil(json)) {
 	Console.writeLn("Release not found for version " + version);
 	return;

@@ -40,6 +40,7 @@ call :cmdVendor quantum-script--processinteractive
 call :cmdVendor quantum-script--sha512
 call :cmdVendor quantum-script--thread
 call :cmdVendor quantum-script--csv
+call :cmdVendor quantum-script--url
 call :cmdVendor file-json
 call :cmdVendor file-to-cs
 call :cmdVendor file-to-rc
