@@ -22,6 +22,7 @@
 					"quantum-script--sha512",
 					"quantum-script--thread",
 					"quantum-script--csv",
+					"quantum-script--url",
 					"file-json",
 					"file-to-cs.application",
 					"file-to-rc.application",
