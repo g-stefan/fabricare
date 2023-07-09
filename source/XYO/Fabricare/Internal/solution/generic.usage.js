@@ -42,3 +42,4 @@ Console.writeLn("    github-release-check          check release if exists");
 Console.writeLn("- related to gitea:");
 Console.writeLn("    gitea-release                create and upload current release");
 Console.writeLn("    gitea-release-remove-all     remove all releases");
+Console.writeLn("    gitea-download               download current release");
