@@ -40,6 +40,7 @@ call :cmdX fabricare-prepare.exe
 
 pushd "source\XYO\Fabricare"
 call :cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource
+call :cmdX file-to-cs --touch=Application.cpp --file-in=Process.js --file-out=Process.Source.cpp --is-string --name=processSource
 popd
 
 call :cmdX xyo-cc.exe --output-path=output/bin @build/fabricare.compile.json

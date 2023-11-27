@@ -36,6 +36,9 @@ cmdVendor quantum-script--math
 cmdVendor quantum-script--processinteractive
 cmdVendor quantum-script--sha512
 cmdVendor quantum-script--thread
+cmdVendor quantum-script--task
+cmdVendor quantum-script--job
+cmdVendor quantum-script--make
 cmdVendor quantum-script--csv
 cmdVendor quantum-script--url
 cmdVendor file-json

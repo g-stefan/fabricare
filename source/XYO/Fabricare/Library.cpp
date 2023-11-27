@@ -16,6 +16,9 @@
 #include <XYO/QuantumScript.Extension/ProcessInteractive.hpp>
 #include <XYO/QuantumScript.Extension/SHA512.hpp>
 #include <XYO/QuantumScript.Extension/Thread.hpp>
+#include <XYO/QuantumScript.Extension/Task.hpp>
+#include <XYO/QuantumScript.Extension/Job.hpp>
+#include <XYO/QuantumScript.Extension/Make.hpp>
 #include <XYO/QuantumScript.Extension/CSV.hpp>
 #include <XYO/QuantumScript.Extension/URL.hpp>
 #include <XYO/FileToCS.Application.hpp>
@@ -198,6 +201,9 @@ namespace XYO::Fabricare {
 		Extension::ProcessInteractive::registerInternalExtension(executive);
 		Extension::SHA512::registerInternalExtension(executive);
 		Extension::Thread::registerInternalExtension(executive);
+		Extension::Task::registerInternalExtension(executive);
+		Extension::Job::registerInternalExtension(executive);
+		Extension::Make::registerInternalExtension(executive);
 		Extension::CSV::registerInternalExtension(executive);
 		Extension::URL::registerInternalExtension(executive);
 

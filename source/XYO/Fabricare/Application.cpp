@@ -14,6 +14,8 @@
 
 namespace XYO::Fabricare {
 
+#include <XYO/Fabricare/Process.Source.cpp>
+
 	void Application::showUsage() {
 		printf("Fabricare - Build system\n");
 		showVersion();
@@ -144,9 +146,11 @@ namespace XYO::Fabricare {
 					return exitCode;
 				};
 			} else {
-				exitCode = ExecutiveX::getExitCode();
-				ExecutiveX::endProcessing();
-				return exitCode;
+				if(ExecutiveX::executeString(processSource)) {
+					exitCode = ExecutiveX::getExitCode();
+					ExecutiveX::endProcessing();
+					return exitCode;
+				};
 			};
 		};
 

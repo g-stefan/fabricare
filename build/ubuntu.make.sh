@@ -43,6 +43,7 @@ cmdX fabricare-prepare
 
 cd "source/XYO/Fabricare"
 cmdX file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource
+cmdX file-to-cs --touch=Application.cpp --file-in=Process.js --file-out=Process.Source.cpp --is-string --name=processSource
 cd ../../..
 
 cmdX xyo-cc --output-path=output/bin @build/fabricare.compile.json

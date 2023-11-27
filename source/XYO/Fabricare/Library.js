@@ -14,6 +14,9 @@ Script.requireExtension("Math");
 Script.requireExtension("ProcessInteractive");
 Script.requireExtension("SHA512");
 Script.requireExtension("Thread");
+Script.requireExtension("Task");
+Script.requireExtension("Job");
+Script.requireExtension("Make");
 Script.requireExtension("CSV");
 Script.requireExtension("URL");
 
@@ -260,23 +263,3 @@ Fabricare.processWorkspace = function() {
 };
 
 // ---
-
-(function() {
-
-if (Application.getFlagValue("run-script")) {
-	return;
-};
-
-// ---
-
-Platform.name = Application.getFlagValue("platform");
-if (!Platform.name) {
-	Fabricare.include("platform/detect");
-};
-if (!Fabricare.include("platform/" + Platform.name)) {
-	Console.writeLn("Error: Platform " + Platform.name + " not found!");
-	Script.exit(1);
-};
-
-// ---
-})();

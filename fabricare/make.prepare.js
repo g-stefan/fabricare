@@ -9,4 +9,5 @@ exitIf(!Fabricare.include("prepare"));
 
 runInPath("source/XYO/Fabricare",function(){
 	exitIf(Shell.system("file-to-cs --touch=Library.cpp --file-in=Library.js --file-out=Library.Source.cpp --is-string --name=librarySource"));
+	exitIf(Shell.system("file-to-cs --touch=Application.cpp --file-in=Process.js --file-out=Process.Source.cpp --is-string --name=processSource"));
 });
