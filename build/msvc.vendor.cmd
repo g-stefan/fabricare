@@ -56,5 +56,6 @@ call :cmdVendor xyo-data-structures
 call :cmdVendor xyo-managed-memory
 call :cmdVendor xyo-multithreading
 call :cmdVendor xyo-cryptography
+call :cmdVendor xyo-platform
 
 popd

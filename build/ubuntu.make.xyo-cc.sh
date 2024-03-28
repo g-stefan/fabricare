@@ -20,6 +20,7 @@ if [ "$CXX" = "" ]; then
 fi
 
 DEF=""
+DEF="$DEF -DXYO_PLATFORM_NO_VERSION"
 DEF="$DEF -DXYO_MANAGEDMEMORY_NO_VERSION"
 DEF="$DEF -DXYO_DATASTRUCTURES_NO_VERSION"
 DEF="$DEF -DXYO_MULTITHREADING_NO_VERSION"
@@ -31,6 +32,7 @@ DEF="$DEF -DXYO_CPPCOMPILERCOMMANDDRIVER_APPLICATION_NO_VERSION"
 
 INC=""
 INC="$INC -Ivendor/xyo-cc/source"
+INC="$INC -Ivendor/xyo-platform/source"
 INC="$INC -Ivendor/xyo-managed-memory/source"
 INC="$INC -Ivendor/xyo-data-structures/source"
 INC="$INC -Ivendor/xyo-multithreading/source"
@@ -41,6 +43,7 @@ INC="$INC -Ivendor/file-json/source"
 SRC=""
 SRC="$SRC vendor/xyo-cc/source/XYO/CPPCompilerCommandDriver.Application.Amalgam.cpp"
 SRC="$SRC vendor/file-json/source/XYO/FileJSON.Amalgam.cpp"
+SRC="$SRC vendor/xyo-platform/source/XYO/Platform.Amalgam.cpp"
 SRC="$SRC vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp"
 SRC="$SRC vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp"
 SRC="$SRC vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp"

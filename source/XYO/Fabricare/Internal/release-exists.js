@@ -51,6 +51,12 @@ if (platformName.indexOf("sys-") >= 0) {
 };
 
 var releaseName = releasePrefix + "-" + version + "-" + platformName;
+if (!Script.isNil(Solution.releaseNoPlatform)) {
+	if (Solution.releaseNoPlatform) {
+		releaseName = releasePrefix + "-" + version;
+	};
+};
+
 
 if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 	releaseInfo.exists = true;

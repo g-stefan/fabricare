@@ -97,54 +97,54 @@ namespace XYO::Fabricare {
 	TPointer<Variable> xyoIsConfigDefined(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 		String isDefined((arguments->index(0))->toString());
 // -- Operating System
-#ifdef XYO_OS_WINDOWS
-		if (isDefined == "XYO_OS_WINDOWS") {
+#ifdef XYO_PLATFORM_OS_WINDOWS
+		if (isDefined == "XYO_PLATFORM_OS_WINDOWS") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
-#ifdef XYO_OS_LINUX
-		if (isDefined == "XYO_OS_LINUX") {
+#ifdef XYO_PLATFORM_OS_LINUX
+		if (isDefined == "XYO_PLATFORM_OS_LINUX") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
-#ifdef XYO_OS_MINGW
-		if (isDefined == "XYO_OS_MINGW") {
+#ifdef XYO_PLATFORM_OS_MINGW
+		if (isDefined == "XYO_PLATFORM_OS_MINGW") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
 
 // -- Compiler
-#ifdef XYO_COMPILER_MSVC
-		if (isDefined == "XYO_COMPILER_MSVC") {
+#ifdef XYO_PLATFORM_COMPILER_MSVC
+		if (isDefined == "XYO_PLATFORM_COMPILER_MSVC") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
-#ifdef XYO_COMPILER_GCC
-		if (isDefined == "XYO_COMPILER_GCC") {
+#ifdef XYO_PLATFORM_COMPILER_GCC
+		if (isDefined == "XYO_PLATFORM_COMPILER_GCC") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
 
 // -- Application
-#ifdef XYO_APPLICATION_64BIT
-		if (isDefined == "XYO_APPLICATION_64BIT") {
+#ifdef XYO_PLATFORM_64BIT
+		if (isDefined == "XYO_PLATFORM_64BIT") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
-#ifdef XYO_APPLICATION_32BIT
-		if (isDefined == "XYO_APPLICATION_32BIT") {
+#ifdef XYO_PLATFORM_32BIT
+		if (isDefined == "XYO_PLATFORM_32BIT") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
 
 // -- Thread support
-#ifdef XYO_SINGLE_THREAD
-		if (isDefined == "XYO_SINGLE_THREAD") {
+#ifdef XYO_PLATFORM_SINGLE_THREAD
+		if (isDefined == "XYO_PLATFORM_SINGLE_THREAD") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
-#ifdef XYO_MULTI_THREAD
-		if (isDefined == "XYO_MULTI_THREAD") {
+#ifdef XYO_PLATFORM_MULTI_THREAD
+		if (isDefined == "XYO_PLATFORM_MULTI_THREAD") {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
@@ -152,11 +152,11 @@ namespace XYO::Fabricare {
 	};
 
 	TPointer<Variable> xyoGetPlatform(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-		return VariableString::newVariable(XYO_PLATFORM);
+		return VariableString::newVariable(XYO_PLATFORM_NAME);
 	};
 
 	TPointer<Variable> osIsWindows(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#if defined(XYO_OS_WINDOWS) || defined(XYO_OS_MINGW)
+#if defined(XYO_PLATFORM_OS_WINDOWS) || defined(XYO_PLATFORM_OS_MINGW)
 		return VariableBoolean::newVariable(true);
 #else
 		return VariableBoolean::newVariable(false);
@@ -164,7 +164,7 @@ namespace XYO::Fabricare {
 	};
 
 	TPointer<Variable> osIsLinux(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#if defined(XYO_OS_LINUX)
+#if defined(XYO_PLATFORM_OS_LINUX)
 		return VariableBoolean::newVariable(true);
 #else
 		return VariableBoolean::newVariable(false);
@@ -172,7 +172,7 @@ namespace XYO::Fabricare {
 	};
 
 	TPointer<Variable> osIsMinGW(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#if defined(XYO_OS_MINGW)
+#if defined(XYO_PLATFORM_OS_MINGW)
 		return VariableBoolean::newVariable(true);
 #else
 		return VariableBoolean::newVariable(false);

@@ -5,11 +5,9 @@
 # SPDX-License-Identifier: Unlicense
 
 if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-	export platform="ubuntu"
-	if [ -f "/etc/lsb-release" ]; then
-		RELEASE=`cat /etc/lsb-release | grep DISTRIB_RELEASE| cut -d "=" -f 2`
-		export platform="ubuntu-$RELEASE"
-	fi
+	export ID=`lsb_release --id | cut -d ':' -f 2 | sed -e 's/\(.*\)/\L\1/' | xargs`
+	export RELEASE=`lsb_release --release | cut -d ':' -f 2 | xargs`
+	export platform="$ID-$RELEASE"
 	if command -v termux-setup-storage >/dev/null; then
 		export platform="termux"
 	fi

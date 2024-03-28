@@ -3,6 +3,7 @@
 	"type": "exe",
 	"defines": [
 		"_CRT_SECURE_NO_WARNINGS",
+		"XYO_PLATFORM_NO_VERSION",
 		"XYO_MANAGEDMEMORY_NO_VERSION",
 		"XYO_DATASTRUCTURES_NO_VERSION",
 		"XYO_MULTITHREADING_NO_VERSION",
@@ -57,6 +58,7 @@
 		"vendor/quantum-script--csv/source",
 		"vendor/quantum-script--url/source",
 		"vendor/quantum-script/source",
+		"vendor/xyo-platform/source",
 		"vendor/xyo-managed-memory/source",
 		"vendor/xyo-data-structures/source",
 		"vendor/xyo-multithreading/source",
@@ -93,6 +95,7 @@
 		"vendor/quantum-script--csv/source/XYO/QuantumScript.Extension/CSV.Amalgam.cpp",
 		"vendor/quantum-script--url/source/XYO/QuantumScript.Extension/URL.Amalgam.cpp",
 		"vendor/quantum-script/source/XYO/QuantumScript.Amalgam.cpp",
+		"vendor/xyo-platform/source/XYO/Platform.Amalgam.cpp",
 		"vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp",
 		"vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp",
 		"vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp",
@@ -112,7 +115,7 @@
 		],
 		"includePath":[
 			"source",
-			"vendor/xyo-managed-memory/source"
+			"vendor/xyo-platform/source"
 		],
 		"rcSource":[
 			"source/XYO/Fabricare/Application.rc"

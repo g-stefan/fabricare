@@ -209,7 +209,7 @@ Fabricare.isDebug = function() {
 	if (Application.hasFlag("debug")) {
 		return true;
 	};
-	if (Shell.hasEnv("XYO_COMPILE_DEBUG")) {
+	if (Shell.hasEnv("XYO_PLATFORM_COMPILE_DEBUG")) {
 		return true
 	};
 	return false;

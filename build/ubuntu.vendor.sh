@@ -53,5 +53,6 @@ cmdVendor xyo-data-structures
 cmdVendor xyo-managed-memory
 cmdVendor xyo-multithreading
 cmdVendor xyo-cryptography
+cmdVendor xyo-platform
 
 cd "./.."

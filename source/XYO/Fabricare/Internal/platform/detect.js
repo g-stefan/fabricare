@@ -53,13 +53,11 @@ if (OS.isWindows()) {
 };
 
 if (OS.isLinux()) {
-	var info = ProcessInteractive.run("uname -s").trim();
-	if (info.indexOf("Linux") >= 0) {
-		Platform.name = "ubuntu";
-		if (Shell.fileExists("/etc/lsb-release")) {
-			var release = ProcessInteractive.run("/bin/sh -c \"cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d \\\"=\\\" -f 2\"").trim();
-			Platform.name += "-" + release;
-		};
+	var info = ProcessInteractive.run("uname -s").trim().toLowerCaseAscii();
+	if (info.indexOf("linux") >= 0) {
+		var id=ProcessInteractive.run("/bin/sh -c \"lsb_release --id | cut -d ':' -f 2\"").trim().toLowerCaseAscii();
+		var release=ProcessInteractive.run("/bin/sh -c \"lsb_release --release | cut -d ':' -f 2\"").trim().toLowerCaseAscii();
+		Platform.name = id + "-" + release;
 		return;
 	};
 };

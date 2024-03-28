@@ -54,8 +54,16 @@ if (OS.isWindows()) {
 
 // Run
 forEachProject("test", function() {
-	runInPath("output/test", function() {
+	if (Script.isNil(Project.outputPath)) {
+		Project.outputPath = "output/test";
+	};
+	runInPath(Project.outputPath, function() {
 		messageAction("run");
-		exitIfTest(Shell.system(Project.name));
+		if(Platform.osName=="debian") {
+			exitIfTest(Shell.system("./"+Project.name));
+		} else {
+			exitIfTest(Shell.system(Project.name));
+		};
 	});
 });
+

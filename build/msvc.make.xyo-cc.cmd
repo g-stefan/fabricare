@@ -28,6 +28,7 @@ rem ---
 
 set DEF=
 set DEF= %DEF% /D_CRT_SECURE_NO_WARNINGS
+set DEF= %DEF% /DXYO_PLATFORM_NO_VERSION
 set DEF= %DEF% /DXYO_MANAGEDMEMORY_NO_VERSION
 set DEF= %DEF% /DXYO_DATASTRUCTURES_NO_VERSION
 set DEF= %DEF% /DXYO_MULTITHREADING_NO_VERSION
@@ -39,6 +40,7 @@ set DEF= %DEF% /DXYO_CPPCOMPILERCOMMANDDRIVER_APPLICATION_NO_VERSION
 
 set INC=
 set INC= %INC% /Ivendor\xyo-cc\source
+set INC= %INC% /Ivendor\xyo-platform\source
 set INC= %INC% /Ivendor\xyo-managed-memory\source
 set INC= %INC% /Ivendor\xyo-data-structures\source
 set INC= %INC% /Ivendor\xyo-multithreading\source
@@ -49,6 +51,7 @@ set INC= %INC% /Ivendor\file-json\source
 set SRC=
 set SRC=%SRC% vendor\xyo-cc\source\XYO\CPPCompilerCommandDriver.Application.Amalgam.cpp
 set SRC=%SRC% vendor\file-json\source\XYO\FileJSON.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-platform\source\XYO\Platform.Amalgam.cpp
 set SRC=%SRC% vendor\xyo-managed-memory\source\XYO\ManagedMemory.Amalgam.cpp
 set SRC=%SRC% vendor\xyo-data-structures\source\XYO\DataStructures.Amalgam.cpp
 set SRC=%SRC% vendor\xyo-multithreading\source\XYO\Multithreading.Amalgam.cpp

@@ -38,6 +38,13 @@ if (!Script.isNil(Solution.releaseName)) {
 };
 
 var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
+if (!Script.isNil(Solution.releaseNoPlatform)) {
+	if (Solution.releaseNoPlatform) {
+		releaseName = releasePrefix + "-" + version;
+	};
+};
+
+
 
 var filenameBin = "release" + pathSeparator + releaseName + ".7z";
 var filenameDev = "release" + pathSeparator + releaseName + "-dev.7z";

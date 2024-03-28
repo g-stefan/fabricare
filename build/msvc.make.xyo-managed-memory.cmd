@@ -27,19 +27,8 @@ if "%CXX%" == "" set CXX=cl
 rem ---
 
 set DEF=
-set DEF= %DEF% /DXYO_OS_WINDOWS
-set DEF= %DEF% /DXYO_COMPILER_MSVC
-if "%platform%" == "win64-msvc-2022" set DEF= %DEF% /DXYO_APPLICATION_64BIT
-if "%platform%" == "win32-msvc-2022" set DEF= %DEF% /DXYO_APPLICATION_32BIT
-if "%platform%" == "win64-msvc-2019" set DEF= %DEF% /DXYO_APPLICATION_64BIT
-if "%platform%" == "win32-msvc-2019" set DEF= %DEF% /DXYO_APPLICATION_32BIT
-if "%platform%" == "win64-msvc-2017" set DEF= %DEF% /DXYO_APPLICATION_64BIT
-if "%platform%" == "win32-msvc-2017" set DEF= %DEF% /DXYO_APPLICATION_32BIT
 set DEF= %DEF% /D_CRT_SECURE_NO_WARNINGS
-set DEF= %DEF% /DXYO_MULTI_THREAD
-set DEF= %DEF% /DXYO_PLATFORM="%platform%"
 
-rem set DEF= %DEF% /DXYO_MEMORY_LEAK_DETECTOR_VLD
 rem set DEF= %DEF% /DXYO_TMEMORYPOOL_CHECK
 rem set DEF= %DEF% /DXYO_TMEMORYPOOL_CHECK_INFO
 rem set DEF= %DEF% /DXYO_TMEMORYPOOL_CHECK_COUNT_INFO

@@ -23,6 +23,9 @@ fi
 
 PATH=$PWD/temp:$PATH
 
+if ! [ -f "./temp/xyo-platform.config" ]; then
+	cmdX /bin/sh -- ./build/ubuntu.make.xyo-platform.sh
+fi
 if ! [ -f "./temp/xyo-managed-memory.config" ]; then
 	cmdX /bin/sh -- ./build/ubuntu.make.xyo-managed-memory.sh
 fi

@@ -53,6 +53,9 @@ if (!Script.isNil(Solution.releaseBin)) {
 if (!Script.isNil(Solution.releaseOutput)) {
 	releaseOutput = Solution.releaseOutput;
 };
+if (!Script.isNil(Solution.releaseNoPlatform)) {
+	releaseName = releasePrefix + "-" + version;
+};
 
 if (releaseOutput) {
 	releaseDev = false;

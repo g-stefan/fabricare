@@ -3,6 +3,7 @@
 	"type": "exe",
 	"defines": [
 		"_CRT_SECURE_NO_WARNINGS",
+		"XYO_PLATFORM_NO_VERSION",
 		"XYO_MANAGEDMEMORY_NO_VERSION",
 		"XYO_DATASTRUCTURES_NO_VERSION",
 		"XYO_MULTITHREADING_NO_VERSION",
@@ -19,6 +20,7 @@
 		"vendor/quantum-script--shell/source",
 		"vendor/quantum-script--shellfind/source",
 		"vendor/quantum-script--buffer/source",
+		"vendor/xyo-platform/source",
 		"vendor/xyo-managed-memory/source",
 		"vendor/xyo-data-structures/source",
 		"vendor/xyo-multithreading/source",
@@ -32,6 +34,7 @@
 		"vendor/quantum-script--shell/source/XYO/QuantumScript.Extension/Shell.Amalgam.cpp",
 		"vendor/quantum-script--shellfind/source/XYO/QuantumScript.Extension/ShellFind.Amalgam.cpp",
 		"vendor/quantum-script--buffer/source/XYO/QuantumScript.Extension/Buffer.Amalgam.cpp",
+		"vendor/xyo-platform/source/XYO/Platform.Amalgam.cpp",
 		"vendor/xyo-managed-memory/source/XYO/ManagedMemory.Amalgam.cpp",
 		"vendor/xyo-data-structures/source/XYO/DataStructures.Amalgam.cpp",
 		"vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp",

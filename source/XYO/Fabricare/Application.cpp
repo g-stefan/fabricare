@@ -146,7 +146,7 @@ namespace XYO::Fabricare {
 					return exitCode;
 				};
 			} else {
-				if(ExecutiveX::executeString(processSource)) {
+				if (ExecutiveX::executeString(processSource)) {
 					exitCode = ExecutiveX::getExitCode();
 					ExecutiveX::endProcessing();
 					return exitCode;

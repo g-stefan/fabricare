@@ -30,7 +30,15 @@ if (!Script.isNil(Solution.releaseName)) {
 };
 
 var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
+if (!Script.isNil(Solution.releaseNoPlatform)) {
+	if (Solution.releaseNoPlatform) {
+		releaseName = releasePrefix + "-" + version;
+	};
+};
+
+
 var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
+
 
 Shell.mkdirRecursivelyIfNotExists(global.pathRelease);
 

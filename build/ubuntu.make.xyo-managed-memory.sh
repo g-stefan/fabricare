@@ -19,25 +19,9 @@ if [ "$CXX" = "" ]; then
 	export CXX=$CXX
 fi
 
-XYO_APPLICATION="XYO_APPLICATION_64BIT"
-XYO_OS="XYO_OS_LINUX"
 CC_LIB=""
 
-if [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
-	XYO_OS="XYO_OS_MINGW"
-	XYO_APPLICATION="XYO_APPLICATION_32BIT"
-	CC_LIB="-luser32 -lws2_32"
-elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW64_NT" ]; then
-	XYO_OS="XYO_OS_MINGW"
-	CC_LIB="-luser32 -lws2_32"
-fi
-
 DEF=""
-DEF="$DEF -D$XYO_OS"
-DEF="$DEF -DXYO_COMPILER_GCC"
-DEF="$DEF -DXYO_APPLICATION_64BIT"
-DEF="$DEF -DXYO_PLATFORM=$platform"
-DEF="$DEF -DXYO_MULTI_THREAD"
 
 INC=""
 INC="$INC -Ivendor/xyo-managed-memory/source"

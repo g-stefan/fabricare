@@ -30,6 +30,7 @@ if "%CXX%" == "" set CXX=cl
 rem ---
 set PATH=%CD%\temp;%PATH%
 
+if not exist temp\xyo-platform.config.exe       call :cmdX cmd.exe /C ".\build\msvc.make.xyo-platform.cmd"
 if not exist temp\xyo-managed-memory.config.exe call :cmdX cmd.exe /C ".\build\msvc.make.xyo-managed-memory.cmd"
 if not exist temp\xyo-system.config.exe         call :cmdX cmd.exe /C ".\build\msvc.make.xyo-system.cmd"
 if not exist temp\xyo-cc.exe                    call :cmdX cmd.exe /C ".\build\msvc.make.xyo-cc.cmd"
