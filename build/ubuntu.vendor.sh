@@ -7,7 +7,7 @@
 echo "- $project: vendor"
 
 if [ "$FABRICARE_SOURCE_GIT" = "" ]; then
-	FABRICARE_SOURCE_GIT=https://gitea.xyosecurity.ro/g-stefan
+	FABRICARE_SOURCE_GIT=https://github.com/g-stefan
 fi
 
 cmdVendor() {
