@@ -16,6 +16,7 @@ call vcvarsall.bat x64
 popd
 set platformActive=%platformMachine%-msvc-%platformVersion%
 set platform=%platformActive%
+set XYO_PLATFORM_PATH=
 
 :process
 call .\build\platform\msvc.cmd %1

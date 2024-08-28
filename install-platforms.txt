@@ -1,2 +1,4 @@
 win64-msvc-2022
+win64-msvc-2022.static
 wsl-ubuntu-22.04
+wsl-ubuntu-24.04

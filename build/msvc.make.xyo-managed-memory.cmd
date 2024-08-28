@@ -59,7 +59,7 @@ set INC= %INC% /Ivendor\xyo-managed-memory\source
 set SRC=
 set SRC=%SRC% vendor\xyo-managed-memory\source\XYO\ManagedMemory.Config.cpp
 
-call :cmdX %CXX% /std:c++17 /MTd /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-managed-memory.config.pdb /Fetemp\xyo-managed-memory.config.exe
+call :cmdX %CXX% /std:c++17 /MD /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-managed-memory.config.pdb /Fetemp\xyo-managed-memory.config.exe
 
 pushd "vendor\xyo-managed-memory"
 if not exist temp\ mkdir temp

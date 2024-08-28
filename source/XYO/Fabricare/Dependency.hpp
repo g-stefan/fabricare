@@ -18,6 +18,10 @@
 #else
 #	define XYO_FABRICARE_EXPORT XYO_PLATFORM_LIBRARY_IMPORT
 #endif
+#ifdef XYO_FABRICARE_LIBRARY
+#	undef XYO_FABRICARE_EXPORT
+#	define XYO_FABRICARE_EXPORT
+#endif
 
 namespace XYO::Fabricare {
 	using namespace XYO::System;

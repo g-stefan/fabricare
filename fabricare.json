@@ -1,14 +1,14 @@
 {
 	"solution": {
-		"name" : "fabricare",
-		"type" : "xyo-cpp",
+		"name": "fabricare",
+		"type": "xyo-cpp",
 		"projects": [
 			{
-				"name" : "fabricare",		
-				"make" : "exe.static",
+				"name": "fabricare",
+				"make": "exe",
 				"SPDX-License-Identifier": "MIT",
-				"sourcePath" : "XYO/Fabricare",
-				"dependency" : [
+				"sourcePath": "XYO/Fabricare",
+				"dependency": [
 					"quantum-script",
 					"quantum-script--console",
 					"quantum-script--application",
@@ -27,14 +27,17 @@
 					"quantum-script--csv",
 					"quantum-script--url",
 					"file-json",
-					"file-to-cs.application",
-					"file-to-rc.application",
-					"html-to-rc.application",
-					"xyo-cc.application",
-					"xyo-version.application"
+					"file-to-cs.application.static",
+					"file-to-rc.application.static",
+					"html-to-rc.application.static",
+					"xyo-cc.application.static",
+					"xyo-version.application.static"
+				],
+				"defines": [
+					"XYO_FABRICARE_LIBRARY"
 				]
 			}
-		],		
-		"releaseDev" : false
+		],
+		"releaseDev": false
 	}
 }

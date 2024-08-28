@@ -59,7 +59,7 @@ set INC= %INC% /Ivendor\xyo-platform\source
 set SRC=
 set SRC=%SRC% vendor\xyo-platform\source\XYO\Platform.Config.cpp
 
-call :cmdX %CXX% /std:c++17 /MTd /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-platform.config.pdb /Fetemp\xyo-platform.config.exe
+call :cmdX %CXX% /std:c++17 /MD /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-platform.config.pdb /Fetemp\xyo-platform.config.exe
 
 pushd "vendor\xyo-platform"
 if not exist temp\ mkdir temp

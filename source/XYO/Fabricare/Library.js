@@ -210,12 +210,31 @@ Fabricare.isDebug = function() {
 		return true;
 	};
 	if (Shell.hasEnv("XYO_PLATFORM_COMPILE_DEBUG")) {
-		return true
+		var env=Shell.getenv("XYO_PLATFORM_COMPILE_DEBUG");
+		if((env=="1")||(env=="ON")||(env=="TRUE")){
+			return true;
+		};
 	};
 	return false;
 };
 Fabricare.isRelease = function() {
 	return !Fabricare.isDebug();
+};
+// ---
+Fabricare.isStatic = function() {
+	if (Application.hasFlag("static")) {
+		return true;
+	};
+	if (Shell.hasEnv("XYO_PLATFORM_COMPILE_STATIC")) {
+		var env=Shell.getenv("XYO_PLATFORM_COMPILE_STATIC");
+		if((env=="1")||(env=="ON")||(env=="TRUE")){
+			return true;
+		};		
+	};
+	return false;
+};
+Fabricare.isDynamic = function() {
+	return !Fabricare.isStatic();
 };
 // ---
 Fabricare.loadWorkspace = function() {

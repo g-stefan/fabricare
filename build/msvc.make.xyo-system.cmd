@@ -34,7 +34,7 @@ set DEF=
 set SRC=
 set SRC=%SRC% vendor\xyo-system\source\XYO\System.Config.cpp
 
-call :cmdX %CXX% /std:c++17 /MTd /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-system.config.pdb /Fetemp\xyo-system.config.exe
+call :cmdX %CXX% /std:c++17 /MD /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-system.config.pdb /Fetemp\xyo-system.config.exe
 
 pushd "vendor\xyo-system"
 if not exist temp\ mkdir temp

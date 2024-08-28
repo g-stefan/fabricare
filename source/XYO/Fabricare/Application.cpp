@@ -161,6 +161,6 @@ namespace XYO::Fabricare {
 	};
 };
 
-#ifndef XYO_FABRICARE_LIBRARY
+#ifndef XYO_FABRICARE_APPLICATION_LIBRARY
 XYO_APPLICATION_MAIN(XYO::Fabricare::Application);
 #endif

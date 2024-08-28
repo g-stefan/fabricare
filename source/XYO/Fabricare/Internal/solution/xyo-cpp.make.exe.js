@@ -36,17 +36,23 @@ if (Script.isNil(Project.libraryPath)) {
 
 // ---
 
-compileExe({
-	project : Project.name,
-	defines : Project.defines,
-	includePath : Project.includePath.concat("source"),
-	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
-	libraryPath : Project.libraryPath,
-	resources : {
-		"includePath" : [
+compileProject = {
+	project: Project.name,
+	defines: Project.defines,
+	includePath: Project.includePath.concat("source"),
+	hppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
+	cppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
+	libraryPath: Project.libraryPath,
+	resources: {
+		"includePath": [
 			"source"
 		],
-		"rcSource" : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rc")
+		"rcSource": getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rc")
 	}
-});
+};
+
+if (!Script.isNil(Project.crt)) {
+	compileProject.crt = Project.crt;
+};
+
+compileExe(compileProject);

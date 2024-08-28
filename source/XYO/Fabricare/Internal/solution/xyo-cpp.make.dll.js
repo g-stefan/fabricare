@@ -36,20 +36,27 @@ if (Script.isNil(Project.libraryPath)) {
 
 // ---
 
-compileDll({
-	project : Project.name,
-	defines : Project.defines,
-	includePath : Project.includePath.concat("source"),
-	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
-	libraryPath : Project.libraryPath,
-	resources : {
-		"includePath" : [
+
+compileProject = {
+	project: Project.name,
+	defines: Project.defines,
+	includePath: Project.includePath.concat("source"),
+	hppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
+	cppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp"),
+	libraryPath: Project.libraryPath,
+	resources: {
+		"includePath": [
 			"source"
 		],
-		"rcSource" : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rc")
+		"rcSource": getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.rc")
 	}
-});
+};
+
+if (!Script.isNil(Project.crt)) {
+	compileProject.crt = Project.crt;
+};
+
+compileDll(compileProject);
 
 // ---
 
@@ -96,10 +103,14 @@ if (!Script.isNil(Project[property])) {
 
 var dependency = {};
 dependency[Project.name] = {
-	version : getProjectVersionAsInfo(),
-	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	library : library,
-	dependency : getDependencyVersion()
+	version: getProjectVersionAsInfo(),
+	"SPDX-License-Identifier": Project["SPDX-License-Identifier"],
+	library: library,
+	dependency: getDependencyVersion()
+};
+
+if (!Script.isNil(Project.crt)) {
+	dependency[Project.name].crt = Project.crt;
 };
 
 exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));

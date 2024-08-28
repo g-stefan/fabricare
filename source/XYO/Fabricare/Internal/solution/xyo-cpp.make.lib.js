@@ -30,15 +30,25 @@ if (Script.isNil(Project.sourcePrefix)) {
 	Project.sourcePrefix = "";
 };
 
+if (Script.isNil(Project.libraryPath)) {
+	Project.libraryPath = [];
+};
+
 // ---
 
-compileLib({
-	project : Project.name,
-	defines : Project.defines,
-	includePath : Project.includePath.concat("source"),
-	hppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
-	cppSource : getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp")
-});
+compileProject = {
+	project: Project.name,
+	defines: Project.defines,
+	includePath: Project.includePath.concat("source"),
+	hppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
+	cppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp")
+};
+
+if (!Script.isNil(Project.crt)) {
+	compileProject.crt = Project.crt;
+};
+
+compileLib(compileProject);
 
 // ---
 
@@ -53,7 +63,7 @@ if (!Script.isNil(Project.sourcePath)) {
 
 var library = [];
 for (var lib of Project.dependency) {
-	library[library.length] = ":" + lib + ".static";
+	library[library.length] = ":" + lib;
 };
 for (var lib of Project.library) {
 	library[library.length] = lib;
@@ -71,7 +81,7 @@ if (OS.isLinux()) {
 if (!Script.isNil(Project[property])) {
 	if (!Script.isNil(Project[property].dependency)) {
 		for (var lib of Project[property].dependency) {
-			library[library.length] = ":" + lib + ".static";
+			library[library.length] = ":" + lib;
 		};
 	};
 	if (!Script.isNil(Project[property].library)) {
@@ -84,11 +94,15 @@ if (!Script.isNil(Project[property])) {
 // ---
 
 var dependency = {};
-dependency[Project.name + ".static"] = {
-	version : getProjectVersionAsInfo(),
-	"SPDX-License-Identifier" : Project["SPDX-License-Identifier"],
-	library : library,
-	dependency : getDependencyVersion()
+dependency[Project.name] = {
+	version: getProjectVersionAsInfo(),
+	"SPDX-License-Identifier": Project["SPDX-License-Identifier"],
+	library: library,
+	dependency: getDependencyVersion()
 };
 
-exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".static.json", JSON.encodeWithIndentation(dependency)));
+if (!Script.isNil(Project.crt)) {
+	dependency[Project.name].crt = Project.crt;
+};
+
+exitIf(!Shell.filePutContents("output/lib/" + Project.name + ".json", JSON.encodeWithIndentation(dependency)));

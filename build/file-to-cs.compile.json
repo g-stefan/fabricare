@@ -3,14 +3,13 @@
 	"type": "exe",
 	"defines": [
 		"_CRT_SECURE_NO_WARNINGS",
-		"XYO_PLATFORM_NO_VERSION",
-		"XYO_MANAGEDMEMORY_NO_VERSION",
-		"XYO_DATASTRUCTURES_NO_VERSION",
-		"XYO_MULTITHREADING_NO_VERSION",
-		"XYO_ENCODING_NO_VERSION",
-		"XYO_SYSTEM_NO_VERSION",
-		"XYO_FILETOCS_NO_VERSION",
-		"XYO_FILETOCS_APPLICATION_NO_VERSION"
+		"XYO_PLATFORM_LIBRARY",
+		"XYO_MANAGEDMEMORY_LIBRARY",
+		"XYO_DATASTRUCTURES_LIBRARY",
+		"XYO_MULTITHREADING_LIBRARY",
+		"XYO_ENCODING_LIBRARY",
+		"XYO_SYSTEM_LIBRARY",
+		"XYO_FILETOCS_LIBRARY"
 	],
 	"includePath": [
 		"vendor/file-to-cs/source",
@@ -29,6 +28,5 @@
 		"vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp",
 		"vendor/xyo-encoding/source/XYO/Encoding.Amalgam.cpp",
 		"vendor/xyo-system/source/XYO/System.Amalgam.cpp"		
-	],
-	"crt": "static"
+	]
 }

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-global.getAllFileList = function(pathAndFilename) {
+global.getAllFileList = function (pathAndFilename) {
 	var path = Shell.getFilePath(pathAndFilename);
 	var filename = Shell.getFileName(pathAndFilename);
 	var dirList = Shell.getDirList(path + "/*");
@@ -24,7 +24,7 @@ global.getAllFileList = function(pathAndFilename) {
 	return files;
 };
 
-global.getFileListIgnoreSpecials = function(files) {
+global.getFileListIgnoreSpecials = function (files) {
 	var retV = [];
 	var fileList = Shell.getFileList(files);
 	for (var file of fileList) {
@@ -42,7 +42,7 @@ global.getFileListIgnoreSpecials = function(files) {
 	return retV;
 };
 
-global.getFileListIgnoreSpecialsSourcePath = function(basePath, sourcePath, extension) {
+global.getFileListIgnoreSpecialsSourcePath = function (basePath, sourcePath, extension) {
 	var paths = [];
 	if (!Script.isNil(sourcePath)) {
 		paths = paths.concat(sourcePath);
@@ -64,7 +64,7 @@ global.getFileListIgnoreSpecialsSourcePath = function(basePath, sourcePath, exte
 	return files;
 };
 
-global.copyHeaderFilesIgnoreSpecials = function(path, destinationPath) {
+global.copyHeaderFilesIgnoreSpecials = function (path, destinationPath) {
 	var fileList = getFileListIgnoreSpecials(path);
 	for (var file of fileList) {
 		var source = file;
@@ -73,28 +73,28 @@ global.copyHeaderFilesIgnoreSpecials = function(path, destinationPath) {
 	};
 };
 
-global.copyHeaderFilesIgnoreSpecialsSourcePath = function(basePath, sourcePath, extension, destinationPath) {
+global.copyHeaderFilesIgnoreSpecialsSourcePath = function (basePath, sourcePath, extension, destinationPath) {
 	var paths = [].concat(sourcePath);
 	for (var path of paths) {
 		copyHeaderFilesIgnoreSpecials(basePath + "/" + path + "/" + extension, destinationPath + "/" + path);
 	};
 };
 
-global.copyFileIfExists = function(source, destinationPath) {
+global.copyFileIfExists = function (source, destinationPath) {
 	if (Shell.fileExists(source)) {
 		var destination = destinationPath + "/" + Shell.getFileName(source);
 		exitIf(!Shell.copyFile(source, destination));
 	};
 };
 
-global.projectNameFromDependency = function(name) {
-	if (name.substring(0, 1) == ":") {
+global.projectNameFromDependency = function (name) {
+	if (name.substring(0, 1) == ":") {		
 		return name.substring(1);
 	};
 	return name;
 };
 
-global.getDependencyOfProject = function(projectName) {
+global.getDependencyOfProject = function (projectName) {
 	var json = Shell.fileGetContents(global.pathSuper + "/../lib/" + projectNameFromDependency(projectName) + ".json");
 	var retV = JSON.decode(json);
 	if (!Script.isNil(retV)) {
@@ -118,7 +118,7 @@ global.getDependencyOfProject = function(projectName) {
 	return retV;
 };
 
-global.dependencyProcess = function(projectName, projectDependency, level) {
+global.dependencyProcess = function (projectName, projectDependency, level) {
 	if (Script.isNil(projectDependency[projectName])) {
 		projectDependency[projectName] = 0;
 	};
@@ -139,7 +139,7 @@ global.dependencyProcess = function(projectName, projectDependency, level) {
 	};
 };
 
-global.getDependency = function() {
+global.getDependency = function () {
 	var projectDependency = {};
 	if (!Script.isNil(Project.dependency)) {
 		for (var dependency of Project.dependency) {
@@ -193,7 +193,7 @@ global.getDependency = function() {
 	return retV;
 };
 
-global.compileProjectDependencyToLibrary = function(compileProject) {
+global.compileProjectDependencyToLibrary = function (compileProject) {
 	var dependency = getDependency();
 	if (Script.isNil(compileProject.library)) {
 		var library = [];
@@ -208,7 +208,7 @@ global.compileProjectDependencyToLibrary = function(compileProject) {
 	};
 };
 
-global.getDependencyVersion = function() {
+global.getDependencyVersion = function () {
 	var dependencyVersion = {};
 	var projectDependency = getDependency();
 	for (project of projectDependency) {
@@ -221,20 +221,20 @@ global.getDependencyVersion = function() {
 	return dependencyVersion;
 };
 
-global.xyoCCExtra = function() {
+global.xyoCCExtra = function () {
 	arguments.push(
 
-	    "--inc=output/include",
-	    "--use-lib-path=output/lib",
-	    "--rc-inc=output/include",
+		"--inc=output/include",
+		"--use-lib-path=output/lib",
+		"--rc-inc=output/include",
 
-	    "--inc=" + pathRepository + "/include",
-	    "--use-lib-path=" + pathRepository + "/lib",
-	    "--rc-inc=" + pathRepository + "/include",
+		"--inc=" + pathRepository + "/include",
+		"--use-lib-path=" + pathRepository + "/lib",
+		"--rc-inc=" + pathRepository + "/include",
 
-	    "--inc=" + pathSuper + "/../include",
-	    "--use-lib-path=" + pathSuper + "/../lib",
-	    "--rc-inc=" + pathSuper + "/../include"
+		"--inc=" + pathSuper + "/../include",
+		"--use-lib-path=" + pathSuper + "/../lib",
+		"--rc-inc=" + pathSuper + "/../include"
 
 	);
 
@@ -245,7 +245,7 @@ global.xyoCCExtra = function() {
 	return arguments;
 };
 
-global.compileExe = function(compileProject) {
+global.compileExe = function (compileProject) {
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	var outputPath = "output/bin";
@@ -255,39 +255,19 @@ global.compileExe = function(compileProject) {
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-bin-path=" + outputPath)));
 };
 
-global.compileExeStatic = function(compileProject) {
+global.compileLib = function (compileProject) {
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
-	var outputPath = "output/bin";
-	if (!Script.isNil(Project.outputPath)) {
-		outputPath = Project.outputPath;
-	};
-	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-bin-path=" + outputPath, "--crt-static")));
+	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--lib", "--output-lib-path=output/lib")));
 };
 
-global.compileLib = function(compileProject) {
-	compileProjectDependencyToLibrary(compileProject);
-	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
-	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--lib", "--output-lib-path=output/lib", "--crt-static")));
-};
-
-global.compileDll = function(compileProject) {
+global.compileDll = function (compileProject) {
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--dll", "--output-bin-path=output/bin", "--output-lib-path=output/lib")));
 };
 
-global.compileDllStatic = function(compileProject) {
-	compileProjectDependencyToLibrary(compileProject);
-	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
-	var outputPath = "output/bin";
-	if (!Script.isNil(Project.outputPath)) {
-		outputPath = Project.outputPath;
-	};
-	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--dll-x-static", "--output-bin-path=" + outputPath, "--crt-static")));
-};
-
-global.compileAndRunTemp = function(compileProject) {
+global.compileAndRunTemp = function (compileProject) {
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=temp")));
@@ -298,14 +278,14 @@ global.compileAndRunTemp = function(compileProject) {
 	};
 };
 
-global.compileAndRunTest = function(compileProject) {
+global.compileAndRunTest = function (compileProject) {
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=output/test")));
 
 	Shell.setenv("PATH", Shell.realPath(Shell.getcwd()) + "\\output\\bin;" + Shell.getenv("PATH"));
 
-	runInPath("output/test", function() {
+	runInPath("output/test", function () {
 		exitIf(Shell.system(compileProject.project));
 	});
 };

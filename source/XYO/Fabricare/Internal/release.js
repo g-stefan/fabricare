@@ -68,7 +68,7 @@ Shell.mkdirRecursivelyIfNotExists("release");
 if (releaseBin) {
 	if (!Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 		if (Shell.directoryExists("output/bin")) {
-			runInPath("output/bin", function() {
+			runInPath("output/bin", function () {
 				exitIf(Shell.system(commandFix(p7zipCompress + " \".." + pathSeparator + ".." + pathSeparator + "release" + pathSeparator + releaseName + ".7z\" .")));
 			});
 		};
@@ -91,7 +91,7 @@ if (releaseBin) {
 if (releaseDev) {
 	if (!Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
 		if (Shell.directoryExists("output")) {
-			runInPath("output", function() {
+			runInPath("output", function () {
 				exitIf(Shell.system(commandFix(p7zipCompress + " \".." + pathSeparator + "release" + pathSeparator + releaseName + "-dev.7z\" .")));
 			});
 		};
@@ -114,7 +114,7 @@ if (releaseDev) {
 if (releaseOutput) {
 	if (!Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 		if (Shell.directoryExists("output")) {
-			runInPath("output", function() {
+			runInPath("output", function () {
 				exitIf(Shell.system(commandFix(p7zipCompress + " \".." + pathSeparator + "release" + pathSeparator + releaseName + ".7z\" .")));
 			});
 		};

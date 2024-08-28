@@ -28,15 +28,14 @@ rem ---
 
 set DEF=
 set DEF= %DEF% /D_CRT_SECURE_NO_WARNINGS
-set DEF= %DEF% /DXYO_PLATFORM_NO_VERSION
-set DEF= %DEF% /DXYO_MANAGEDMEMORY_NO_VERSION
-set DEF= %DEF% /DXYO_DATASTRUCTURES_NO_VERSION
-set DEF= %DEF% /DXYO_MULTITHREADING_NO_VERSION
-set DEF= %DEF% /DXYO_ENCODING_NO_VERSION
-set DEF= %DEF% /DXYO_SYSTEM_NO_VERSION
-set DEF= %DEF% /DXYO_FILEJSON_NO_VERSION
-set DEF= %DEF% /DXYO_CPPCOMPILERCOMMANDDRIVER_NO_VERSION
-set DEF= %DEF% /DXYO_CPPCOMPILERCOMMANDDRIVER_APPLICATION_NO_VERSION
+set DEF= %DEF% /DXYO_PLATFORM_LIBRARY
+set DEF= %DEF% /DXYO_MANAGEDMEMORY_LIBRARY
+set DEF= %DEF% /DXYO_DATASTRUCTURES_LIBRARY
+set DEF= %DEF% /DXYO_MULTITHREADING_LIBRARY
+set DEF= %DEF% /DXYO_ENCODING_LIBRARY
+set DEF= %DEF% /DXYO_SYSTEM_LIBRARY
+set DEF= %DEF% /DXYO_FILEJSON_LIBRARY
+set DEF= %DEF% /DXYO_CPPCOMPILERCOMMANDDRIVER_LIBRARY
 
 set INC=
 set INC= %INC% /Ivendor\xyo-cc\source
@@ -58,4 +57,4 @@ set SRC=%SRC% vendor\xyo-multithreading\source\XYO\Multithreading.Amalgam.cpp
 set SRC=%SRC% vendor\xyo-encoding\source\XYO\Encoding.Amalgam.cpp
 set SRC=%SRC% vendor\xyo-system\source\XYO\System.Amalgam.cpp
 
-call :cmdX %CXX% /std:c++17 /MTd /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-cc.pdb /Fetemp\xyo-cc.exe
+call :cmdX %CXX% /std:c++17 /MD /Zi /EHsc /GR /TP %DEF% %INC% %SRC% /Fotemp\ /Fdtemp\xyo-cc.pdb /Fetemp\xyo-cc.exe
