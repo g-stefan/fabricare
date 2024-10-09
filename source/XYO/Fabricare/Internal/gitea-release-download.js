@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("gitea-download");
+messageAction("gitea-release-download");
 
 Shell.mkdirRecursivelyIfNotExists("release");
 
@@ -16,8 +16,9 @@ var version = getVersion();
 
 var releaseToDownload = csvDecode(ProcessInteractive.run("tea releases list --output csv --repo " + gitRepository));
 
-if (releaseToDownload.length == 1) {
-	Console.writeLn(releaseToDownload[0]);
+if (releaseToDownload.length <= 1) {
+	Console.writeLn("No releases");
+	return;
 };
 
 var found = false;
@@ -40,6 +41,7 @@ if (!found) {
 	return;
 };
 
+
 var userAndRepo = Shell.getFilePath(Shell.getFilePath(URL.getPathAndFileName(tarFile))).substring(1);
 var curlCMD = "curl --silent --insecure -X \"GET\" \"" + URL.getSchemeName(tarFile) + "://" + URL.getHostNameAndPort(tarFile) + "/api/v1/repos/" + userAndRepo + "/releases/tags/" + tagName + "\"";
 curlCMD += " -H \"accept: application/json\"";
@@ -48,6 +50,11 @@ if (Shell.hasEnv("GITEA_TOKEN")) {
 };
 
 var jsonString = ProcessInteractive.run(curlCMD);
+var index=jsonString.indexOf("{");
+if(index>=0) {
+	jsonString=jsonString.substring(index);
+};
+
 var json = JSON.decode(jsonString);
 if (Script.isNil(json)) {
 	Console.writeLn("Release not found for version " + version);
@@ -90,3 +97,4 @@ for (var i = 0; i < json.assets.length; ++i) {
 		};
 	};
 };
+

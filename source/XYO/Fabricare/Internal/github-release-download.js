@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
-messageAction("github-download");
+messageAction("github-release-download");
 
 Shell.mkdirRecursivelyIfNotExists("release");
 
