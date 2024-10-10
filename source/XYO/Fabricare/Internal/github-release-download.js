@@ -14,7 +14,14 @@ if (!Script.isNil(Solution.githubRepository)) {
 
 var version = getVersion();
 
-var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + gitRepository + " --tag \"v" + version + "\" --json"));
+var jsonString=ProcessInteractive.run("github-release info --repo " + gitRepository + " --tag \"v" + version + "\" --json");
+// Skip console control chars
+var index=jsonString.indexOf("{");
+if(index>=0) {
+	jsonString=jsonString.substring(index);
+};
+
+var json = JSON.decode(jsonString);
 if (Script.isNil(json)) {
 	Console.writeLn("Release not found for version " + version);
 	return;

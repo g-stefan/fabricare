@@ -12,7 +12,14 @@ if (!Script.isNil(Solution.githubRepository)) {
 
 var version = getVersion();
 
-var json = JSON.decode(ProcessInteractive.run("github-release info --repo " + gitRepository + " --json"));
+var jsonString=ProcessInteractive.run("github-release info --repo " + gitRepository + " --json");
+// Skip console control chars
+var index=jsonString.indexOf("{");
+if(index>=0) {
+	jsonString=jsonString.substring(index);
+};
+
+var json = JSON.decode(jsonString);
 if (Script.isNil(json)) {
 	return;
 };

@@ -50,6 +50,7 @@ if (Shell.hasEnv("GITEA_TOKEN")) {
 };
 
 var jsonString = ProcessInteractive.run(curlCMD);
+// Skip console control chars
 var index=jsonString.indexOf("{");
 if(index>=0) {
 	jsonString=jsonString.substring(index);
