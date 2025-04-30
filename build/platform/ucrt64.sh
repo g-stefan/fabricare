@@ -4,13 +4,13 @@
 # SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 # SPDX-License-Identifier: Unlicense
 
-export platform="ubuntu-24.04"
-export pathRepository=$HOME/.xyo-sdk/$platform
-export pathRelease=$HOME/.xyo-sdk/$platform/release
+export platform=ucrt64
+export pathRepository=$HOME/.xyo-sdk/ucrt64
+export pathRelease=$HOME/.xyo-sdk/ucrt64/release
+export PATH=$PATH:/c/msys64/ucrt64/bin/../libexec;
 
-/bin/sh -- ./build/platform/ubuntu.sh $1
+. ./build/platform/ubuntu.sh $1
 RETV=$?
-
 if [ "$RETV" = "1" ]; then
 	exit 1
 fi

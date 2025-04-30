@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 global.getAllFileList = function (pathAndFilename) {
@@ -28,13 +28,13 @@ global.getFileListIgnoreSpecials = function (files) {
 	var retV = [];
 	var fileList = Shell.getFileList(files);
 	for (var file of fileList) {
-		if (file.toLowerCaseAscii().indexOf(".source.") >= 0) {
+		if (file.toLowerCaseASCII().indexOf(".source.") >= 0) {
 			continue;
 		};
-		if (file.toLowerCaseAscii().indexOf(".template.") >= 0) {
+		if (file.toLowerCaseASCII().indexOf(".template.") >= 0) {
 			continue;
 		};
-		if (file.toLowerCaseAscii().indexOf(".amalgam.") >= 0) {
+		if (file.toLowerCaseASCII().indexOf(".amalgam.") >= 0) {
 			continue;
 		};
 		retV.push(file);

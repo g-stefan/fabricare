@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 Fabricare.include("solution/generic.library");
@@ -32,7 +32,7 @@ if (!Fabricare.isPlatformSubroutine) {
 
 		function wslTranslatePath(path) {
 			var list = path.split(":");
-			var drive = (list[0]).toLowerCaseAscii();
+			var drive = (list[0]).toLowerCaseASCII();
 			return "/mnt/" + drive + (list[1]).replace("\\", "/");
 		};
 

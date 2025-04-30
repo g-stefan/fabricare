@@ -4,11 +4,7 @@ rem Public domain (Unlicense) <http://unlicense.org>
 rem SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 rem SPDX-License-Identifier: Unlicense
 
-for /F %%a in ('echo prompt $E ^| cmd') do set ESC=%%a
-echo - %ESC%[32m%project%%ESC%[0m: analyze
-
-rem ---
-
-set CXX=cl /analyze /analyze:stacksize 65536 /analyze:max_paths 1024
-
-call build\msvc.make.cmd
+set CHERE_INVOKING=enabled_from_arguments
+set SHLVL=2
+set MSYSTEM=MINGW32
+C:\msys64\usr\bin\sh --login -- ./build/platform/msys2-mingw32.sh %1

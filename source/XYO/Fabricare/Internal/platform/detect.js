@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 if (OS.isWindows()) {
@@ -53,10 +53,10 @@ if (OS.isWindows()) {
 };
 
 if (OS.isLinux()) {
-	var info = ProcessInteractive.run("uname -s").trim().toLowerCaseAscii();
+	var info = ProcessInteractive.run("uname -s").trim().toLowerCaseASCII();
 	if (info.indexOf("linux") >= 0) {
-		var id=ProcessInteractive.run("/bin/sh -c \"lsb_release --id | cut -d ':' -f 2\"").trim().toLowerCaseAscii();
-		var release=ProcessInteractive.run("/bin/sh -c \"lsb_release --release | cut -d ':' -f 2\"").trim().toLowerCaseAscii();
+		var id=ProcessInteractive.run("/bin/sh -c \"lsb_release --id | cut -d ':' -f 2\"").trim().toLowerCaseASCII();
+		var release=ProcessInteractive.run("/bin/sh -c \"lsb_release --release | cut -d ':' -f 2\"").trim().toLowerCaseASCII();
 		Platform.name = id + "-" + release;
 		return;
 	};

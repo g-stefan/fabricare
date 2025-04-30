@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2024 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 Fabricare.include("solution/generic.library");
@@ -45,7 +45,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdScript += "@echo off\r\n";
 		cmdScript += "set CHERE_INVOKING=enabled_from_arguments\r\n";
 		cmdScript += "set SHLVL=2\r\n";
-		cmdScript += "set MSYSTEM=" + Platform.next.toUpperCaseAscii() + "\r\n";
+		cmdScript += "set MSYSTEM=" + Platform.next.toUpperCaseASCII() + "\r\n";
 		cmdScript += "C:\\msys64\\usr\\bin\\sh --login -- \"" + tempFileSh + "\"\r\n";
 		cmdScript += "if errorlevel 1 exit 1\r\n";
 		cmdScript += "del \"" + tempFileArguments + "\"\r\n";
