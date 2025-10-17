@@ -148,6 +148,24 @@ namespace XYO::Fabricare {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
+
+// -- Static/Dynamic build
+#ifdef XYO_PLATFORM_COMPILE_CRT_STATIC
+		if (isDefined == "XYO_PLATFORM_COMPILE_CRT_STATIC") {
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_PLATFORM_COMPILE_STATIC_LIBRARY
+		if (isDefined == "XYO_PLATFORM_COMPILE_STATIC_LIBRARY") {
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+#ifdef XYO_PLATFORM_COMPILE_DYNAMIC_LIBRARY
+		if (isDefined == "XYO_PLATFORM_COMPILE_DYNAMIC_LIBRARY") {
+			return VariableBoolean::newVariable(true);
+		};
+#endif
+
 		return VariableBoolean::newVariable(false);
 	};
 

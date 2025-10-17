@@ -208,6 +208,31 @@ global.compileProjectDependencyToLibrary = function (compileProject) {
 	};
 };
 
+global.compileProjectDependencyToDefines = function (compileProject) {
+	var dependency = getDependency();
+	if (Script.isNil(compileProject.defines)) {
+		compileProject.defines=[];
+	};
+
+	for (var library of dependency) {
+		var project = projectNameFromDependency(library);
+		var dependency = getDependencyOfProject(library);
+		if (!Script.isNil(dependency[project]["defines"])) {
+			compileProject.defines=compileProject.defines.concat(dependency[project]["defines"]);
+		};
+	};
+	
+	var defines={};
+	for(var item of compileProject.defines) {
+		defines[item]=item;
+	};
+	
+	compileProject.defines=[];
+	for(var item of defines) {
+		compileProject.defines[compileProject.defines.length]=item;
+	};
+};
+
 global.getDependencyVersion = function () {
 	var dependencyVersion = {};
 	var projectDependency = getDependency();
@@ -246,6 +271,7 @@ global.xyoCCExtra = function () {
 };
 
 global.compileExe = function (compileProject) {
+	compileProjectDependencyToDefines(compileProject);
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	var outputPath = "output/bin";
@@ -256,18 +282,21 @@ global.compileExe = function (compileProject) {
 };
 
 global.compileLib = function (compileProject) {
+	compileProjectDependencyToDefines(compileProject);
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--lib", "--output-lib-path=output/lib")));
 };
 
 global.compileDll = function (compileProject) {
+	compileProjectDependencyToDefines(compileProject);
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--dll", "--output-bin-path=output/bin", "--output-lib-path=output/lib")));
 };
 
 global.compileAndRunTemp = function (compileProject) {
+	compileProjectDependencyToDefines(compileProject);
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=temp")));
@@ -279,6 +308,7 @@ global.compileAndRunTemp = function (compileProject) {
 };
 
 global.compileAndRunTest = function (compileProject) {
+	compileProjectDependencyToDefines(compileProject);
 	compileProjectDependencyToLibrary(compileProject);
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=output/test")));

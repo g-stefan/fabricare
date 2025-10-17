@@ -34,6 +34,10 @@ if (Script.isNil(Project.libraryPath)) {
 	Project.libraryPath = [];
 };
 
+if (!Script.isNil(Project.dependencyDefines)) {
+	Project.defines=Project.defines.concat(Project.dependencyDefines);
+};
+
 // ---
 
 compileProject = {

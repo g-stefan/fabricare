@@ -76,7 +76,7 @@ Shell.setenv("XYO_PLATFORM", Platform.next);
 
 var folderName = Solution.name;
 
-var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/source/" + folderName;
+var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/"+Platform.next+"/source/" + folderName;
 
 if (Fabricare.action == "clean") {
 	Shell.system("rm -rf \"" + buildPath + "\"");
@@ -95,7 +95,9 @@ if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
 var retV = 1;
 
 runInPath(buildPath, function() {
-	Shell.system("chmod -R -x+X source");
+	if (Shell.directoryExists("source")) {
+		Shell.system("chmod -R -x+X source");
+	};
 	if (Shell.directoryExists("vendor")) {
 		Shell.system("chmod -R -x+X vendor");
 	};

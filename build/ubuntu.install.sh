@@ -41,4 +41,14 @@ if ! grep -q "# set XYO SDK PATH if exists" "$HOME/.profile"; then
 	echo "" >> "$HOME/.profile"
 fi
 
+if ! grep -q "# set XYO SDK PATH if exists" "$HOME/.bashrc"; then
+	echo "" >> "$HOME/.bashrc"
+	echo "# set XYO SDK PATH if exists" >> "$HOME/.bashrc"
+	echo "if [ -d \"$pathRepositoryStr/bin\" ] ; then" >> "$HOME/.bashrc"
+	echo "    PATH=\"$pathRepositoryStr/bin:\$PATH\"" >> "$HOME/.bashrc"
+	echo "    LD_LIBRARY_PATH=\"$pathRepositoryStr/bin:\$LD_LIBRARY_PATH\"" >> "$HOME/.bashrc"
+	echo "fi" >> "$HOME/.bashrc"
+	echo "" >> "$HOME/.bashrc"
+fi
+
 cp output/bin/fabricare "$pathRepository/bin/fabricare"

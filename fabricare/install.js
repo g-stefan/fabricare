@@ -5,11 +5,7 @@
 
 messageAction("install");
 
-if (OS.isWindows()) {
-	Console.writeLn("run build.cmd install");
-};
-if (OS.isLinux()) {
-	Console.writeLn("run build.sh install");
-};
+runInPath("output/bin",function (){
+	Shell.system("fabricare fabricare.self-install");
+});
 
-Script.exit(0);

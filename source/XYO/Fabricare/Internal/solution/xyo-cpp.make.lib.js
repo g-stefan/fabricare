@@ -34,11 +34,15 @@ if (Script.isNil(Project.libraryPath)) {
 	Project.libraryPath = [];
 };
 
+if (!Script.isNil(Project.dependencyDefines)) {
+	Project.defines=Project.defines.concat(Project.dependencyDefines);
+};
+
 // ---
 
 compileProject = {
 	project: Project.name,
-	defines: Project.defines,
+	defines: Project.defines,	
 	includePath: Project.includePath.concat("source"),
 	hppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.hpp"),
 	cppSource: getFileListIgnoreSpecialsSourcePath("source", Project.sourcePath, Project.sourcePrefix + "*.cpp")
@@ -98,6 +102,7 @@ dependency[Project.name] = {
 	version: getProjectVersionAsInfo(),
 	"SPDX-License-Identifier": Project["SPDX-License-Identifier"],
 	library: library,
+	defines: (Script.isNil(Project["dependencyDefines"])?[]:Project["dependencyDefines"]),
 	dependency: getDependencyVersion()
 };
 
