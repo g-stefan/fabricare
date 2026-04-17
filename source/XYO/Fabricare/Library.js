@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 Script.requireExtension("Console");
@@ -8,6 +8,7 @@ Script.requireExtension("Application");
 Script.requireExtension("Buffer");
 Script.requireExtension("DateTime");
 Script.requireExtension("JSON");
+Script.requireExtension("File");
 Script.requireExtension("Shell");
 Script.requireExtension("ShellFind");
 Script.requireExtension("Math");
@@ -37,7 +38,7 @@ Config = {};
 
 Fabricare.loadConfig = function() {
 	var cwd = Shell.getcwd();
-	if (!Script.isNil(cwd)) {
+	if (cwd.length > 0) {
 		cwd += "/";
 	};
 
@@ -57,7 +58,7 @@ Fabricare.loadConfig = function() {
 
 Fabricare.saveConfig = function() {
 	var cwd = Shell.getcwd();
-	if (!Script.isNil(cwd)) {
+	if (cwd.length > 0) {
 		cwd += "/";
 	};
 
@@ -239,7 +240,7 @@ Fabricare.isDynamic = function() {
 // ---
 Fabricare.loadWorkspace = function() {
 	var cwd = Shell.getcwd();
-	if (!Script.isNil(cwd)) {
+	if (cwd.length>0) {
 		cwd += "/";
 	};
 
@@ -269,7 +270,7 @@ if (Script.isNil(Solution.type)) {
 
 // ---
 
-Fabricare.processSolution = function() {	
+Fabricare.processSolution = function() {
 	return Fabricare.include("solution/" + Solution.type + ".solution");
 };
 

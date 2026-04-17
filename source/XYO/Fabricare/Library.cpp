@@ -1,7 +1,7 @@
 // Fabricare
-// Copyright (c) 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+// Copyright (c) 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: MIT
 
 #include <XYO/Fabricare/Library.hpp>
@@ -10,6 +10,7 @@
 #include <XYO/QuantumScript.Extension/DateTime.hpp>
 #include <XYO/QuantumScript.Extension/JSON.hpp>
 #include <XYO/QuantumScript.Extension/Application.hpp>
+#include <XYO/QuantumScript.Extension/File.hpp>
 #include <XYO/QuantumScript.Extension/Shell.hpp>
 #include <XYO/QuantumScript.Extension/ShellFind.hpp>
 #include <XYO/QuantumScript.Extension/Math.hpp>
@@ -112,6 +113,11 @@ namespace XYO::Fabricare {
 			return VariableBoolean::newVariable(true);
 		};
 #endif
+#ifdef XYO_PLATFORM_OS_EMSCRIPTEN
+		if (isDefined == "XYO_PLATFORM_OS_EMSCRIPTEN") {
+			return VariableBoolean::newVariable(true);
+		};
+#endif
 
 // -- Compiler
 #ifdef XYO_PLATFORM_COMPILER_MSVC
@@ -197,6 +203,14 @@ namespace XYO::Fabricare {
 #endif
 	};
 
+	TPointer<Variable> osIsEmscripten(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#if defined(XYO_PLATFORM_OS_EMSCRIPTEN)
+		return VariableBoolean::newVariable(true);
+#else
+		return VariableBoolean::newVariable(false);
+#endif
+	};
+
 	static TPointer<Variable> getVersion(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
 		printf("- fabricare-get-version\n");
@@ -211,6 +225,7 @@ namespace XYO::Fabricare {
 		Extension::Console::registerInternalExtension(executive);
 		Extension::Buffer::registerInternalExtension(executive);
 		Extension::DateTime::registerInternalExtension(executive);
+		Extension::File::registerInternalExtension(executive);
 		Extension::JSON::registerInternalExtension(executive);
 		Extension::Application::registerInternalExtension(executive);
 		Extension::Shell::registerInternalExtension(executive);
@@ -242,6 +257,7 @@ namespace XYO::Fabricare {
 		executive->setFunction2("OS.isWindows", osIsWindows);
 		executive->setFunction2("OS.isLinux", osIsLinux);
 		executive->setFunction2("OS.isMinGW", osIsMinGW);
+		executive->setFunction2("OS.isEmscripten", osIsEmscripten);
 
 		internalInitExecutive(executive);
 

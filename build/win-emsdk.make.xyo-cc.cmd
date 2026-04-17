@@ -1,0 +1,59 @@
+@echo off
+rem Created by Grigore Stefan <g_stefan@yahoo.com>
+rem Public domain (Unlicense) <http://unlicense.org>
+rem SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
+rem SPDX-License-Identifier: Unlicense
+
+rem ---
+
+goto cmdXDefined
+:cmdX
+echo %*
+%*
+if errorlevel 1 goto cmdXError
+goto :eof
+:cmdXError
+echo %ESC%[31m* Error:%ESC%[0m make
+exit 1
+:cmdXDefined
+
+rem ---
+
+if not exist output\ mkdir output
+if not exist temp\ mkdir temp
+
+if "%CXX%" == "" set CXX=emcc
+
+rem ---
+
+set DEF=
+set DEF= %DEF% -DXYO_PLATFORM_LIBRARY
+set DEF= %DEF% -DXYO_MANAGEDMEMORY_LIBRARY
+set DEF= %DEF% -DXYO_DATASTRUCTURES_LIBRARY
+set DEF= %DEF% -DXYO_MULTITHREADING_LIBRARY
+set DEF= %DEF% -DXYO_ENCODING_LIBRARY
+set DEF= %DEF% -DXYO_SYSTEM_LIBRARY
+set DEF= %DEF% -DXYO_FILEJSON_LIBRARY
+set DEF= %DEF% -DXYO_CPPCOMPILERCOMMANDDRIVER_LIBRARY
+
+set INC=
+set INC= %INC% -Ivendor\xyo-cc\source
+set INC= %INC% -Ivendor\xyo-platform\source
+set INC= %INC% -Ivendor\xyo-managed-memory\source
+set INC= %INC% -Ivendor\xyo-data-structures\source
+set INC= %INC% -Ivendor\xyo-multithreading\source
+set INC= %INC% -Ivendor\xyo-encoding\source
+set INC= %INC% -Ivendor\xyo-system\source
+set INC= %INC% -Ivendor\file-json\source
+
+set SRC=
+set SRC=%SRC% vendor\xyo-cc\source\XYO\CPPCompilerCommandDriver.Application.Amalgam.cpp
+set SRC=%SRC% vendor\file-json\source\XYO\FileJSON.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-platform\source\XYO\Platform.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-managed-memory\source\XYO\ManagedMemory.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-data-structures\source\XYO\DataStructures.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-multithreading\source\XYO\Multithreading.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-encoding\source\XYO\Encoding.Amalgam.cpp
+set SRC=%SRC% vendor\xyo-system\source\XYO\System.Amalgam.cpp
+
+call :cmdX call %CXX% -o temp/xyo-cc -O1 -std=c++17 -std=gnu++17 %DEF% %INC% %SRC% -lstdc++ -lpthread -lm -s NODERAWFS=1 -pthread

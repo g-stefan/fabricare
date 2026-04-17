@@ -1,7 +1,7 @@
 #!/bin/sh
 # Created by Grigore Stefan <g_stefan@yahoo.com>
 # Public domain (Unlicense) <http://unlicense.org>
-# SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+# SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 # SPDX-License-Identifier: Unlicense
 
 echo "- $project: vendor"
@@ -30,6 +30,7 @@ cmdVendor quantum-script--application
 cmdVendor quantum-script--buffer
 cmdVendor quantum-script--datetime
 cmdVendor quantum-script--json
+cmdVendor quantum-script--file
 cmdVendor quantum-script--shell
 cmdVendor quantum-script--shellfind
 cmdVendor quantum-script--math

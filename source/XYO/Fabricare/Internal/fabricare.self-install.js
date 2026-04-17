@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 Fabricare.action = "fabricare.self-install";
@@ -76,7 +76,7 @@ if(OS.isLinux()||OS.isMinGW()) {
 	Shell.copyFile("fabricare",pathRepositoryBin+"/fabricare");
 
 	var guard = "# set XYO SDK PATH if exists";
-	var newLine = "\r";
+	var newLine = "\n";
 
 	var append = "";
 
@@ -90,7 +90,7 @@ if(OS.isLinux()||OS.isMinGW()) {
 
 	var profile = Shell.getenv("HOME")+"/.profile";
 	var content = Shell.fileGetContents(profile);
-	if(content.indexOf("",0)<0) {
+	if(content.indexOf(guard,0)<0) {
 		var file=new File();
 		if(file.openAppend(profile)){
 			file.write(append);
@@ -102,7 +102,7 @@ if(OS.isLinux()||OS.isMinGW()) {
 
 	var profile = Shell.getenv("HOME")+"/.bashrc";
 	var content = Shell.fileGetContents(profile);
-	if(content.indexOf("",0)<0) {
+	if(content.indexOf(guard,0)<0) {
 		var file=new File();
 		if(file.openAppend(profile)){
 			file.write(append);

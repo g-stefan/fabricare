@@ -15,6 +15,7 @@
 					"quantum-script--buffer.static",
 					"quantum-script--datetime.static",
 					"quantum-script--json.static",
+					"quantum-script--file.static",
 					"quantum-script--shell.static",
 					"quantum-script--shellfind.static",
 					"quantum-script--math.static",

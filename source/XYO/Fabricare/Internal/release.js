@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2021-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 if (!Script.isNil(Solution.hasRelease)) {
@@ -71,7 +71,7 @@ if (releaseBin) {
 			runInPath("output/bin", function () {
 				exitIf(Shell.system(commandFix(p7zipCompress + " \".." + pathSeparator + ".." + pathSeparator + "release" + pathSeparator + releaseName + ".7z\" .")));
 			});
-		};
+		};		
 		if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
 			var json = {};
 			var jsonFile = Shell.fileGetContents(jsonFilename);
