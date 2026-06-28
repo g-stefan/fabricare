@@ -30,6 +30,13 @@ if (OS.isWindows()) {
 		return;
 	};
 
+	Platform.version = "2026";
+	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build";
+	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
+		Platform.name = Platform.osType + "-msvc-" + Platform.version;
+		return;
+	};
+
 	Platform.version = "2022";
 	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
 	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
