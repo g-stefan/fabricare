@@ -71,27 +71,27 @@ Fabricare.saveConfig = function() {
 
 UserConfig = {};
 
-Fabricare.loadUserConfig = function() {
-	var pathHome = null;
-	if (OS.isWindows()) {
-		if (OS.isMinGW()) {
-			pathHome = Shell.getenv("HOME");
-			if (Script.isNil(pathHome)) {
-				pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
-			};
-		} else {
+// <home>/.fabricare.json, or --user-config=file
+Fabricare.getUserConfigFile = function() {
+	var pathHome = "";
+	if (!OS.isWindows() || OS.isMinGW()) {
+		pathHome = Shell.getenv("HOME");
+	};
+	if (Script.isNil(pathHome) || (pathHome.length == 0)) {
+		if (OS.isWindows()) {
 			pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
 		};
 	};
-	if (OS.isLinux()) {
-		pathHome = Shell.getenv("HOME");
-	};
-	if (Script.isNil(pathHome)) {
+	if (Script.isNil(pathHome) || (pathHome.length == 0)) {
 		Console.writeLn("* Error: Unable to determine user home path!");
 		Script.exit(1);
 	};
 
-	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
+	return Application.getFlagValue("user-config", pathHome + "/.fabricare.json");
+};
+
+Fabricare.loadUserConfig = function() {
+	Fabricare.userConfigFile = Fabricare.getUserConfigFile();
 
 	if (!Shell.fileExists(Fabricare.userConfigFile)) {
 		global.UserConfig = {};
@@ -111,26 +111,7 @@ Fabricare.loadUserConfig = function() {
 };
 
 Fabricare.saveUserConfig = function() {
-	var pathHome = null;
-	if (OS.isWindows()) {
-		if (OS.isMinGW()) {
-			pathHome = Shell.getenv("HOME");
-			if (Script.isNil(pathHome)) {
-				pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
-			};
-		} else {
-			pathHome = Shell.getenv("HOMEDRIVE") + Shell.getenv("HOMEPATH");
-		};
-	};
-	if (OS.isLinux()) {
-		pathHome = Shell.getenv("HOME");
-	};
-	if (Script.isNil(pathHome)) {
-		Console.writeLn("* Error: Unable to determine user home path!");
-		Script.exit(1);
-	};
-
-	Fabricare.userConfigFile = Application.getFlagValue("user-config", pathHome + ".fabricare.json");
+	Fabricare.userConfigFile = Fabricare.getUserConfigFile();
 
 	return Shell.filePutContents(Fabricare.userConfigFile, JSON.encodeWithIndentation(UserConfig));
 };
@@ -142,16 +123,16 @@ Workspace = {};
 // ---
 
 Platform = {};
-Platform.name = "unknwon";
-Platform.machine = "unknwon";
-Platform.osName = "unknwon";
-Platform.osType = "unknwon";
+Platform.name = "unknown";
+Platform.machine = "unknown";
+Platform.osName = "unknown";
+Platform.osType = "unknown";
 
 // ---
 
 Solution = {};
-Solution.name = "unknwon";
-Solution["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
+Solution.name = "unknown";
+Solution["SPDX-License-Identifier"] = "LicenseRef-Unknown";
 Solution.type = null;
 Solution.projects = [];
 
@@ -266,6 +247,10 @@ if (!Script.isNil(Workspace.solution)) {
 
 if (Script.isNil(Solution.type)) {
 	Solution.type = "generic";
+};
+
+if (Script.isNil(Solution.namespace)) {
+	Solution.namespace = "unknown";
 };
 
 // ---

@@ -1,4 +1,4 @@
-// Quantum Script Extension ApplicationVersion Test
+// Fabricare Prepare
 // Copyright (c) 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
 // SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>

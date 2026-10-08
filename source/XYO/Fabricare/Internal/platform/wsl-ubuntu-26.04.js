@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "wsl-ubuntu-26.04";
-Platform.run = "wsl -d ubuntu-26.04";
+Platform.run = "wsl -d ubuntu-26.04 --shell-type login --";
 Platform.next = "ubuntu-26.04";
 
 Fabricare.include("platform/wsl.run");

@@ -6,6 +6,10 @@
 prepareProjects();
 selectMainProject();
 
+if (Application.hasFlag("spdx")) {
+	Fabricare.action = "spdx";
+};
+
 if (Fabricare.include(Fabricare.action)) {
 	return;
 };

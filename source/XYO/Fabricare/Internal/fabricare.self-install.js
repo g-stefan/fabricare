@@ -24,7 +24,7 @@ var cwdPath = Shell.realPath(Shell.getcwd());
 var repoPath = Shell.realPath(pathRepository+"/bin");
 
 if(cwdPath == repoPath ){
-	messageAction("Allready installed");
+	messageAction("Already installed");
 	return;
 };
 
@@ -35,7 +35,7 @@ if(OS.isWindows()) {
 
 	if(Shell.fileExists(pathRepositoryBin+"/fabricare.exe")) {
 		var tempPath = Shell.getenv("TEMP");
-		if(tempPath.length>0) {
+		if(!Script.isNil(tempPath) && (tempPath.length>0)) {
 			Shell.remove(tempPath+"/fabricare.delete-me.exe");
 			Shell.rename(pathRepositoryBin+"/fabricare.exe",tempPath+"/fabricare.delete-me.exe");
 		};
@@ -55,7 +55,7 @@ if(OS.isLinux()||OS.isMinGW()) {
 	if(OS.isMinGW()) {
 		if(Shell.fileExists(pathRepositoryBin+"/fabricare.exe")) {
 			var tempPath = Shell.getenv("TEMP");
-			if(tempPath.length>0) {
+			if(!Script.isNil(tempPath) && (tempPath.length>0)) {
 				Shell.remove(tempPath+"/fabricare.delete-me.exe");
 				Shell.rename(pathRepositoryBin+"/fabricare.exe",tempPath+"/fabricare.delete-me.exe");
 			};
@@ -75,42 +75,37 @@ if(OS.isLinux()||OS.isMinGW()) {
 
 	Shell.copyFile("fabricare",pathRepositoryBin+"/fabricare");
 
-	var guard = "# set XYO SDK PATH if exists";
+	var guard = "# set FABRICARE PATH if exists";
 	var newLine = "\n";
 
 	var append = "";
 
 	append += newLine; 
 	append += guard + newLine;
-	append += "if [ -d \\\""+pathRepositoryBin+"\\\" ] ; then" + newLine;
-	append += "    PATH=\\\""+pathRepositoryBin+":\\$PATH\\\"" + newLine;
-	append += "    LD_LIBRARY_PATH=\\\""+pathRepositoryBin+":\\$LD_LIBRARY_PATH\\\"" + newLine;
+	append += "if [ -d \"" + pathRepositoryBin + "\" ] ; then" + newLine;
+	append += "    export PATH=\"" + pathRepositoryBin + ":$PATH\"" + newLine;
+	append += "    export LD_LIBRARY_PATH=\"" + pathRepositoryBin + ":$LD_LIBRARY_PATH\"" + newLine;
 	append += "fi" + newLine;
 	append += newLine;
 
-	var profile = Shell.getenv("HOME")+"/.profile";
-	var content = Shell.fileGetContents(profile);
-	if(content.indexOf(guard,0)<0) {
-		var file=new File();
-		if(file.openAppend(profile)){
+	var profileList = [
+		Shell.getenv("HOME") + "/.profile",
+		Shell.getenv("HOME") + "/.bashrc"
+	];
+	for (var profile of profileList) {
+		var content = Shell.fileGetContents(profile);
+		if (!Script.isNil(content)) {
+			if (content.indexOf(guard, 0) >= 0) {
+				continue;
+			};
+		};
+		var file = new File();
+		if (file.openAppend(profile)) {
 			file.write(append);
 			file.flush();
 			file.close();
 		};
 	};
-
-
-	var profile = Shell.getenv("HOME")+"/.bashrc";
-	var content = Shell.fileGetContents(profile);
-	if(content.indexOf(guard,0)<0) {
-		var file=new File();
-		if(file.openAppend(profile)){
-			file.write(append);
-			file.flush();
-			file.close();
-		};
-	};
-
 
 	return;
 };

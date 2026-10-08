@@ -15,8 +15,8 @@ if (hasSeparateData) {
 };
 
 var releaseInfo = {
-	"exists" : false,
-	"release" : []
+	"exists": false,
+	"release": []
 };
 
 if (!Script.isNil(Solution.hasRelease)) {
@@ -35,37 +35,32 @@ if (OS.isWindows()) {
 	};
 };
 
-var version = getVersion();
+// The release of a platform that builds on another one is named after that one
+var platformName = Application.getFlagValue("for-platform", Platform.name);
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
-
-var platformName = Application.getFlagValue("for-platform", platformName);
-
-if (platformName.indexOf("sys-") >= 0) {
+if (platformName.indexOf("msys2-") == 0) {
+	platformName = platformName.substring(6);
+} else if (platformName.indexOf("sys-") == 0) {
 	platformName = platformName.substring(4);
-} else if (platformName.indexOf("wsl-") >= 0) {
+} else if (platformName.indexOf("wsl-") == 0) {
 	platformName = platformName.substring(4);
 };
 
-var releaseName = releasePrefix + "-" + version + "-" + platformName;
-if (!Script.isNil(Solution.releaseNoPlatform)) {
-	if (Solution.releaseNoPlatform) {
-		releaseName = releasePrefix + "-" + version;
-	};
+var releaseName = getReleaseName(platformName);
+
+if (Shell.fileExists("release" + pathSeparator + releaseName + ".bin.zip")) {
+	releaseInfo.exists = true;
+	releaseInfo.release.push(releaseName + ".bin.zip");
 };
 
-
-if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
+if (Shell.fileExists("release" + pathSeparator + releaseName + ".dev.zip")) {
 	releaseInfo.exists = true;
-	releaseInfo.release.push(releaseName + ".7z");
+	releaseInfo.release.push(releaseName + ".dev.zip");
 };
 
-if (Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
+if (Shell.fileExists("release" + pathSeparator + releaseName + ".zip")) {
 	releaseInfo.exists = true;
-	releaseInfo.release.push(releaseName + "-dev.7z");
+	releaseInfo.release.push(releaseName + ".zip");
 };
 
 if (hasSeparateData) {

@@ -17,8 +17,8 @@ if [ "$platform" = "mingw64" ]; then
 	export platformPathStr=\$MINGW_PREFIX
 fi
 
-export pathRepository=$HOME/.xyo-sdk/$platformPath
-export pathRepositoryStr=\$HOME/.xyo-sdk/$platformPathStr
+export pathRepository=$HOME/.fabricare/$platformPath
+export pathRepositoryStr=\$HOME/.fabricare/$platformPathStr
 if ! [ "$XYO_PLATFORM_PATH" = "" ]; then
 	pathRepository=$XYO_PLATFORM_PATH
 	pathRepositoryStr=$XYO_PLATFORM_PATH
@@ -31,9 +31,9 @@ mkdir -p "$pathRepository/bin"
 mkdir -p "$pathRepository/include"
 mkdir -p "$pathRepository/lib"
 
-if ! grep -q "# set XYO SDK PATH if exists" "$HOME/.profile"; then
+if ! grep -q "# set FABRICARE PATH if exists" "$HOME/.profile"; then
 	echo "" >> "$HOME/.profile"
-	echo "# set XYO SDK PATH if exists" >> "$HOME/.profile"
+	echo "# set FABRICARE PATH if exists" >> "$HOME/.profile"
 	echo "if [ -d \"$pathRepositoryStr/bin\" ] ; then" >> "$HOME/.profile"
 	echo "    PATH=\"$pathRepositoryStr/bin:\$PATH\"" >> "$HOME/.profile"
 	echo "    LD_LIBRARY_PATH=\"$pathRepositoryStr/bin:\$LD_LIBRARY_PATH\"" >> "$HOME/.profile"
@@ -41,9 +41,9 @@ if ! grep -q "# set XYO SDK PATH if exists" "$HOME/.profile"; then
 	echo "" >> "$HOME/.profile"
 fi
 
-if ! grep -q "# set XYO SDK PATH if exists" "$HOME/.bashrc"; then
+if ! grep -q "# set FABRICARE PATH if exists" "$HOME/.bashrc"; then
 	echo "" >> "$HOME/.bashrc"
-	echo "# set XYO SDK PATH if exists" >> "$HOME/.bashrc"
+	echo "# set FABRICARE PATH if exists" >> "$HOME/.bashrc"
 	echo "if [ -d \"$pathRepositoryStr/bin\" ] ; then" >> "$HOME/.bashrc"
 	echo "    PATH=\"$pathRepositoryStr/bin:\$PATH\"" >> "$HOME/.bashrc"
 	echo "    LD_LIBRARY_PATH=\"$pathRepositoryStr/bin:\$LD_LIBRARY_PATH\"" >> "$HOME/.bashrc"

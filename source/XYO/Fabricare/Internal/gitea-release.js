@@ -14,10 +14,7 @@ exitIf(!Shell.directoryExists("release"), "no release");
 
 var version = getVersion();
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
+var releasePrefix = getReleasePrefix();
 var pathSeparator = "/";
 if (OS.isWindows()) {
 	if (Platform.name.indexOf("mingw") >= 0) {
@@ -26,7 +23,7 @@ if (OS.isWindows()) {
 		pathSeparator = "\\";
 	};
 };
-var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
+var jsonFilename = "release" + pathSeparator + releasePrefix + ".v" + version + ".sha512.json";
 
 Console.writeLn("Release v" + version);
 
@@ -41,7 +38,7 @@ if (Shell.system("git rev-parse --quiet \"v" + version + "\"")) {
 	var assetsList = [];
 
 	// On gitea upload source archive also
-	var fileList = Shell.getFileList("archive/*-" + version + "*.7z");
+	var fileList = Shell.getFileList("archive/*.v" + version + "*.zip");
 	for (var file of fileList) {
 		Console.writeLn("Add " + Shell.getFileName(file));
 		assetsList.push(file);
@@ -58,19 +55,19 @@ if (Shell.system("git rev-parse --quiet \"v" + version + "\"")) {
 		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
 	};
 
-	var fileList = Shell.getFileList("release/*-" + version + "*.7z");
+	var fileList = Shell.getFileList("release/*.v" + version + "*.zip");
 	for (var file of fileList) {
 		Console.writeLn("Add " + Shell.getFileName(file));
 		assetsList.push(file);
 	};
 
-	var fileList = Shell.getFileList("release/*-" + version + "*.exe");
+	var fileList = Shell.getFileList("release/*.v" + version + "*.exe");
 	for (var file of fileList) {
 		Console.writeLn("Add " + Shell.getFileName(file));
 		assetsList.push(file);
 	};
 
-	var fileList = Shell.getFileList("release/*-" + version + "*.json");
+	var fileList = Shell.getFileList("release/*.v" + version + "*.json");
 	for (var file of fileList) {
 		Console.writeLn("Add " + Shell.getFileName(file));
 		assetsList.push(file);

@@ -29,7 +29,7 @@ INC="$INC -Ivendor/xyo-managed-memory/source"
 SRC=""
 SRC="$SRC vendor/xyo-managed-memory/source/XYO/ManagedMemory.Config.cpp"
 
-cmdX $CXX -o temp/xyo-managed-memory.config -O1 -std=c++11 -std=gnu++11 $DEF $INC $SRC -lstdc++ -lpthread -lm
+cmdX $CXX -o temp/xyo-managed-memory.config -O1 -std=c++17 -std=gnu++17 $DEF $INC $SRC -lstdc++ -lpthread -lm
 
 cd "vendor/xyo-managed-memory"
 [ -d temp ] || mkdir -p temp

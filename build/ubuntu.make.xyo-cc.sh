@@ -49,4 +49,4 @@ SRC="$SRC vendor/xyo-multithreading/source/XYO/Multithreading.Amalgam.cpp"
 SRC="$SRC vendor/xyo-encoding/source/XYO/Encoding.Amalgam.cpp"
 SRC="$SRC vendor/xyo-system/source/XYO/System.Amalgam.cpp"
 
-cmdX $CXX -o temp/xyo-cc -O1 -std=c++11 -std=gnu++11 $DEF $INC $SRC -lstdc++ -lpthread -lm
+cmdX $CXX -o temp/xyo-cc -O1 -std=c++17 -std=gnu++17 $DEF $INC $SRC -lstdc++ -lpthread -lm

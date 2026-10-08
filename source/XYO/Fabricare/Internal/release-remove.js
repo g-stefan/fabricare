@@ -20,21 +20,10 @@ if (OS.isWindows()) {
 	};
 };
 
-var version = getVersion();
+var releasePrefix = getReleasePrefix();
+var releaseName = getReleaseName();
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
-
-var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
-if (!Script.isNil(Solution.releaseNoPlatform)) {
-	if (Solution.releaseNoPlatform) {
-		releaseName = releasePrefix + "-" + version;
-	};
-};
-
-var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
+var jsonFilename = "release" + pathSeparator + releasePrefix + ".v" + getVersion() + ".sha512.json";
 var releaseDev = true;
 var releaseBin = true;
 var releaseOutput = false;
@@ -54,79 +43,21 @@ if (releaseOutput) {
 	releaseBin = false;
 };
 
+function releaseRemove(releaseFile) {
+	if (Shell.fileExists("release" + pathSeparator + releaseFile)) {
+		Shell.remove("release" + pathSeparator + releaseFile);
+	};
+	removeReleaseChecksum(jsonFilename, releaseFile);
+};
 
-
-// Release bin
 if (releaseBin) {
-	if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
-		Shell.remove("release" + pathSeparator + releaseName + ".7z");
-	};
-	if (Shell.fileExists(jsonFilename)) {
-		var json = {};
-		var jsonFile = Shell.fileGetContents(jsonFilename);
-		if (jsonFile) {
-			json = JSON.decode(jsonFile);
-			if (Script.isNil(json)) {
-				json = {};
-			};
-		};
-		if (!Script.isNil(json[releaseName + ".7z"])) {
-			delete json[releaseName + ".7z"];
-			if (json.length) {
-				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
-			} else {
-				Shell.remove(jsonFilename);
-			};
-		};
-	};
+	releaseRemove(releaseName + ".bin.zip");
 };
 
-// Release dev
 if (releaseDev) {
-	if (Shell.fileExists("release" + pathSeparator + releaseName + "-dev.7z")) {
-		Shell.remove("release" + pathSeparator + releaseName + "-dev.7z");
-	};
-	if (Shell.fileExists(jsonFilename)) {
-		var json = {};
-		var jsonFile = Shell.fileGetContents(jsonFilename);
-		if (jsonFile) {
-			json = JSON.decode(jsonFile);
-			if (Script.isNil(json)) {
-				json = {};
-			};
-		};
-		if (!Script.isNil(json[releaseName + "-dev.7z"])) {
-			delete json[releaseName + "-dev.7z"];
-			if (json.length) {
-				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
-			} else {
-				Shell.remove(jsonFilename);
-			};
-		};
-	};
+	releaseRemove(releaseName + ".dev.zip");
 };
 
-// Release output
 if (releaseOutput) {
-	if (Shell.fileExists("release" + pathSeparator + releaseName + ".7z")) {
-		Shell.remove("release" + pathSeparator + releaseName + ".7z");
-	};
-	if (Shell.fileExists(jsonFilename)) {
-		var json = {};
-		var jsonFile = Shell.fileGetContents(jsonFilename);
-		if (jsonFile) {
-			json = JSON.decode(jsonFile);
-			if (Script.isNil(json)) {
-				json = {};
-			};
-		};
-		if (!Script.isNil(json[releaseName + ".7z"])) {
-			delete json[releaseName + ".7z"];
-			if (json.length) {
-				Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
-			} else {
-				Shell.remove(jsonFilename);
-			};
-		};
-	};
+	releaseRemove(releaseName + ".zip");
 };

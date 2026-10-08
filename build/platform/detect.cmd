@@ -7,13 +7,16 @@ rem SPDX-License-Identifier: Unlicense
 set platformMachine=win64
 if  "%PROCESSOR_ARCHITECTURE%" == "x86" set platformMachine=win32
 
+set platformVersion=2026
+set platformPath=C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\
+if exist "%platformPath%\vcvarsall.bat" goto :PlatformDetected
 set platformVersion=2022
 set platformPath=C:\Program Files\Microsoft Visual Studio\%platformVersion%\Community\VC\Auxiliary\Build\
 if exist "%platformPath%\vcvarsall.bat" goto :PlatformDetected
-set platformPath=2019
+set platformVersion=2019
 set platformPath=C:\Program Files (x86)\Microsoft Visual Studio\%platformVersion%\Community\VC\Auxiliary\Build\
 if exist "%platformPath%\vcvarsall.bat" goto :PlatformDetected
-set platformPath=2017
+set platformVersion=2017
 set platformPath=C:\Program Files (x86)\Microsoft Visual Studio\%platformVersion%\Community\VC\Auxiliary\Build\
 if exist "%platformPath%\vcvarsall.bat" goto :PlatformDetected
 goto :eof

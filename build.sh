@@ -10,7 +10,7 @@ for arg in "$@"
 do
 	case "$arg" in
 		--platform:*)
-			export platform=#{arg:11}
+			export platform="${arg#--platform:}"
 			shift
             	;;
 	esac

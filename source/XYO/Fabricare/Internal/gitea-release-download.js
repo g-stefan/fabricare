@@ -25,8 +25,8 @@ var found = false;
 var tarFile = null;
 var tagName = "v" + version;
 
-for (i = 1; i < releaseToDownload.length; ++i) {
-	if (releaseToDownload[i].length < 3) {
+for (var i = 1; i < releaseToDownload.length; ++i) {
+	if (releaseToDownload[i].length < 5) {
 		continue;
 	};
 	if (releaseToDownload[i][0] == tagName) {
@@ -51,9 +51,9 @@ if (Shell.hasEnv("GITEA_TOKEN")) {
 
 var jsonString = ProcessInteractive.run(curlCMD);
 // Skip console control chars
-var index=jsonString.indexOf("{");
-if(index>=0) {
-	jsonString=jsonString.substring(index);
+var index = jsonString.indexOf("{");
+if (index >= 0) {
+	jsonString = jsonString.substring(index);
 };
 
 var json = JSON.decode(jsonString);
@@ -71,15 +71,12 @@ if (json.tag_name != tagName) {
 	return;
 };
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
+var releasePrefix = getReleasePrefix();
 
 for (var i = 0; i < json.assets.length; ++i) {
-	if ((json.assets[i].name.indexOf(releasePrefix + "-" + version) == 0) || (json.assets[i].name.indexOf(releasePrefix + "-" + version + ".sha512.json") == 0)) {
+	if ((json.assets[i].name.indexOf(releasePrefix + ".v" + version) == 0) || (json.assets[i].name.indexOf(releasePrefix + ".v" + version + ".sha512.json") == 0)) {
 		var fileName = "release/" + json.assets[i].name;
-		if (json.assets[i].name.indexOf(releasePrefix + "-" + version + ".7z") == 0) {
+		if (json.assets[i].name.indexOf(releasePrefix + ".v" + version + ".zip") == 0) {
 			Shell.mkdirRecursivelyIfNotExists("archive");
 			fileName = "archive/" + json.assets[i].name;
 		};
@@ -91,7 +88,7 @@ for (var i = 0; i < json.assets.length; ++i) {
 			curlCMD += " --output \"" + fileName + "\"";
 			exitIf(Shell.system(curlCMD));
 			if (!(Shell.getFileSize(fileName) > 16)) {
-				Shell.remove(Shell.getFileSize(fileName));
+				Shell.remove(fileName);
 				messageError("download release");
 				Script.exit(1);
 			};

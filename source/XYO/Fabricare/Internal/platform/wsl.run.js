@@ -47,9 +47,9 @@ if (!Fabricare.isPlatformSubroutine) {
 
 		var cmdSh = "";
 		cmdSh += "#!/bin/sh\n";
-		cmdSh += "if [ -d \"$HOME/.xyo-sdk/"+Platform.next+"/bin\" ] ; then\n";
-		cmdSh += "	PATH=\"$HOME/.xyo-sdk/"+Platform.next+"/bin:$PATH\"\n";
-		cmdSh += "	LD_LIBRARY_PATH=\"$HOME/.xyo-sdk/"+Platform.next+"/bin:$LD_LIBRARY_PATH\"\n";
+		cmdSh += "if [ -d \"$HOME/.fabricare/"+Platform.next+"/bin\" ] ; then\n";
+		cmdSh += "	PATH=\"$HOME/.fabricare/"+Platform.next+"/bin:$PATH\"\n";
+		cmdSh += "	LD_LIBRARY_PATH=\"$HOME/.fabricare/"+Platform.next+"/bin:$LD_LIBRARY_PATH\"\n";
 		cmdSh += "fi\n";
 		cmdSh += "fabricare \"@" + wslTranslatePath(tempFileArguments) + "\"\n";
 		cmdSh += "RETV=$?\n";
@@ -59,7 +59,7 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdSh += "exit 0\n";
 		Shell.filePutContents(tempFileSh, cmdSh);
 
-		var cmd = Platform.run + " -c \"" + wslTranslatePath(tempFileSh) + "\"";
+		var cmd = Platform.run + " " + wslTranslatePath(tempFileSh);
 		var retV = Shell.system(cmd);
 
 		Shell.removeFile(tempFileArguments);
@@ -76,7 +76,7 @@ Shell.setenv("XYO_PLATFORM", Platform.next);
 
 var folderName = Solution.name;
 
-var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/"+Platform.next+"/source/" + folderName;
+var buildPath = Shell.getenv("HOME") + "/.fabricare/"+Platform.next+"/source/" + folderName;
 
 if (Fabricare.action == "clean") {
 	Shell.system("rm -rf \"" + buildPath + "\"");
@@ -101,7 +101,7 @@ runInPath(buildPath, function() {
 	if (Shell.directoryExists("vendor")) {
 		Shell.system("chmod -R -x+X vendor");
 	};
-	retV = Shell.system("fabricare " + Fabricare.action);
+	retV = Shell.system("fabricare " + cmdArgumentsExtra() + Fabricare.action);
 });
 
 if (Fabricare.action == "release") {

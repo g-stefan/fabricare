@@ -45,6 +45,7 @@ cmdVendor quantum-script--url
 cmdVendor file-json
 cmdVendor file-to-cs
 cmdVendor file-to-rc
+cmdVendor file-to-js
 cmdVendor html-to-rc
 cmdVendor xyo-cc
 cmdVendor xyo-version

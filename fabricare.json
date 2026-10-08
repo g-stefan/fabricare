@@ -1,5 +1,6 @@
 {
 	"solution": {
+		"namespace" : "xyo",
 		"name": "fabricare",
 		"type": "xyo-cpp",
 		"projects": [
@@ -30,6 +31,7 @@
 					"file-json.static",
 					"file-to-cs.application.static",
 					"file-to-rc.application.static",
+					"file-to-js.application.static",
 					"html-to-rc.application.static",
 					"xyo-cc.application.static",
 					"xyo-version.application.static"

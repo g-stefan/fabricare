@@ -13,7 +13,7 @@ goto cmdXDefined
 :cmdX
 echo %*
 %*
-if errorlevel 1 goto cmdXError
+if %ERRORLEVEL% NEQ 0 goto cmdXError
 goto :eof
 :cmdXError
 echo %ESC%[31m* Error:%ESC%[0m make
@@ -25,7 +25,8 @@ rem ---
 if not exist output\ mkdir output
 if not exist temp\ mkdir temp
 
-if "%CXX%" == "" set CXX=emcc
+rem if "%CXX%" == "" set CXX=emcc
+if "%CXX%" == "" set CXX=em++
 
 rem ---
 set PATH=%CD%\temp;%PATH%

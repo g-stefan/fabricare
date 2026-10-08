@@ -32,25 +32,18 @@ if (OS.isWindows()) {
 
 var version = getVersion();
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
-
-var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
-if (!Script.isNil(Solution.releaseNoPlatform)) {
-	if (Solution.releaseNoPlatform) {
-		releaseName = releasePrefix + "-" + version;
-	};
-};
+var releasePrefix = getReleasePrefix();
+var releaseName = getReleaseName();
 
 
 
-var filenameBin = "release" + pathSeparator + releaseName + ".7z";
-var filenameDev = "release" + pathSeparator + releaseName + "-dev.7z";
+var filenameOutput = "release" + pathSeparator + releaseName + ".zip";
+var filenameBin = "release" + pathSeparator + releaseName + ".bin.zip";
+var filenameDev = "release" + pathSeparator + releaseName + ".dev.zip";
 
 var outputPath = null;
 var outputFile = null;
+var releaseOutput = false;
 
 if (Shell.fileExists(filenameBin)) {
 	outputPath = "output/bin";
@@ -68,7 +61,7 @@ if (!Script.isNil(Solution.releaseOutput)) {
 
 if (releaseOutput) {
 	outputPath = "output";
-	outputFile = filenameBin;
+	outputFile = filenameOutput;
 };
 
 if (Script.isNil(outputFile)) {

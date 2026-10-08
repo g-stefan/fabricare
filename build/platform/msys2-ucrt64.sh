@@ -5,13 +5,13 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=ucrt64
-export pathRepository=$HOME/.xyo-sdk/ucrt64
-export pathRelease=$HOME/.xyo-sdk/ucrt64/release
+export pathRepository=$HOME/.fabricare/ucrt64
+export pathRelease=$HOME/.fabricare/release
 export PATH=$PATH:/c/msys64/ucrt64/bin/../libexec;
 
 . ./build/ubuntu.config.sh
 
-export WSL_BUILD_PROCESS_PATH=$HOME/.xyo-sdk/ucrt64/source/$project
+export WSL_BUILD_PROCESS_PATH=$HOME/.fabricare/ucrt64/source/$project
 
 /bin/sh -- ./build/platform/wsl.process.sh $1
 RETV=$?

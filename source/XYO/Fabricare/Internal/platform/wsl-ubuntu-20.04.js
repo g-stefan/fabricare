@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "wsl-ubuntu-20.04";
-Platform.run = "ubuntu2004.exe";
+Platform.run = "wsl -d ubuntu-20.04 --shell-type login --";
 Platform.next = "ubuntu-20.04";
 
 Fabricare.include("platform/wsl.run");

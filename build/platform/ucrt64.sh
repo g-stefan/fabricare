@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=ucrt64
-export pathRepository=$HOME/.xyo-sdk/ucrt64
-export pathRelease=$HOME/.xyo-sdk/ucrt64/release
+export pathRepository=$HOME/.fabricare/ucrt64
+export pathRelease=$HOME/.fabricare/release
 export PATH=$PATH:/c/msys64/ucrt64/bin/../libexec;
 
 . ./build/platform/ubuntu.sh $1

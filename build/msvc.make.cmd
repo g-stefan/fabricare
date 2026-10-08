@@ -13,7 +13,7 @@ goto cmdXDefined
 :cmdX
 echo %*
 %*
-if errorlevel 1 goto cmdXError
+if %ERRORLEVEL% NEQ 0 goto cmdXError
 goto :eof
 :cmdXError
 echo %ESC%[31m* Error:%ESC%[0m make

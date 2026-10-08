@@ -9,7 +9,7 @@ Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");
 Fabricare.platformActive = Application.getFlagValue("platform-active");
 
-global.pathRepository = Shell.getenv("USERPROFILE") + "/.xyo-sdk/"+ Platform.name;
+global.pathRepository = Shell.getenv("USERPROFILE") + "/.fabricare/"+ Platform.name;
 if (Shell.getenv("XYO_PLATFORM") == Platform.name) {
 	Fabricare.isPlatformSubroutine = true;
 	Fabricare.platformActive = Platform.name;
@@ -54,7 +54,8 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdScript += "call emsdk_env.bat\r\n";
 		cmdScript += "popd\r\n";
 		cmdScript += "fabricare \"@" + tempFileArguments + "\"\r\n";
-		cmdScript += "if errorlevel 1 exit 1\r\n";
+		// not "if errorlevel 1", a crashed test (0xC0000005) is a negative errorlevel
+		cmdScript += "if %ERRORLEVEL% NEQ 0 exit 1\r\n";
 		cmdScript += "del \"" + tempFileArguments + "\"\r\n";
 		cmdScript += "(goto) 2> NUL & del \"%~f0\"\r\n";
 		Shell.filePutContents(tempFileCmd, cmdScript);
@@ -69,7 +70,12 @@ Shell.setenv("XYO_PLATFORM", Platform.name);
 
 // ---
 
-global.pathRelease = pathRepository + "/release";
+global.pathRelease = Shell.getenv("USERPROFILE") + "/.fabricare/" + "/release";
+if (Shell.hasEnv("FABRICARE_PATH_RELEASE")) {
+	global.pathRelease = Shell.getenv("FABRICARE_PATH_RELEASE");
+}
+
+// ---
 
 global.pathSuper = Application.getPathExecutable();
 

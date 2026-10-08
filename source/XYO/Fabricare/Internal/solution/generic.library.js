@@ -6,9 +6,9 @@
 global.Project = {};
 global.projectReset = function() {
 	global.Project = {};
-	global.Project.name = "unknwon";
-	global.Project.category = "unknwon";
-	global.Project["SPDX-License-Identifier"] = "LicenseRef-Unknwon";
+	global.Project.name = "unknown";
+	global.Project.category = "unknown";
+	global.Project["SPDX-License-Identifier"] = "LicenseRef-Unknown";
 };
 global.projectReset();
 
@@ -142,27 +142,46 @@ global.runInPath = function(path, fn) {
 
 // ---
 
+// Flags set by the platform restart itself, not forwarded
+global.flagExtraExclude = [
+	"platform",
+	"platform-subroutine",
+	"platform-active",
+	"workspace"
+];
+
+// Every --flag of the command line, in order, except flagExtraExclude,
+// so project scripts can define their own flags
 global.flagExtra = function() {
 	var retV = [];
-	var flagList = [
-		"dependency-path",
-		"dependency-name",
-		"release-path",
-		"release-name",
-		"no-message",
-		"separate-data",
-		"for-platform",
-		"replace",
-		"debug"
-	];
 	var scan;
-	var flag;
-	for (flag of flagList) {
-		for (scan of Application.arguments) {
-			if (scan.indexOf("--" + flag) == 0) {
-				retV[retV.length] = scan;
+	var name;
+	var index;
+	var exclude;
+	var isExcluded;
+	for (scan of Application.arguments) {
+		if (scan.indexOf("--") != 0) {
+			continue;
+		};
+		name = scan.substring(2);
+		index = name.indexOf("=");
+		if (index >= 0) {
+			name = name.substring(0, index);
+		};
+		if (name.length == 0) {
+			continue;
+		};
+		isExcluded = false;
+		for (exclude of global.flagExtraExclude) {
+			if (name == exclude) {
+				isExcluded = true;
+				break;
 			};
 		};
+		if (isExcluded) {
+			continue;
+		};
+		retV[retV.length] = scan;
 	};
 	return retV;
 };
@@ -297,6 +316,90 @@ global.getProjectVersionAsInfo = function(file) {
 		version : Project.version
 	};
 };
+
+// ---
+
+global.copyFileIfExists = function(source, destinationPath) {
+	if (Shell.fileExists(source)) {
+		var destination = destinationPath + "/" + Shell.getFileName(source);
+		exitIf(!Shell.copyFile(source, destination));
+	};
+};
+
+// Programs and libraries just built in output/bin are used before the installed ones
+global.addOutputBinToPath = function() {
+	var pathBin = Shell.realPath(Shell.getcwd());
+	var separator = ":";
+	if (OS.isWindows()) {
+		pathBin += "\\output\\bin";
+		separator = ";";
+	} else {
+		pathBin += "/output/bin";
+	};
+	var pathList = Shell.getenv("PATH");
+	if (Script.isNil(pathList) || (pathList.length == 0)) {
+		Shell.setenv("PATH", pathBin);
+	} else {
+		Shell.setenv("PATH", pathBin + separator + pathList);
+	};
+	if (OS.isWindows()) {
+		return;
+	};
+	// An empty entry in LD_LIBRARY_PATH is the current folder, do not add one
+	pathList = Shell.getenv("LD_LIBRARY_PATH");
+	if (Script.isNil(pathList) || (pathList.length == 0)) {
+		Shell.setenv("LD_LIBRARY_PATH", pathBin);
+		return;
+	};
+	Shell.setenv("LD_LIBRARY_PATH", pathBin + ":" + pathList);
+};
+
+// ---
+
+// namespace.name, or namespace.releaseName
+global.getReleasePrefix = function() {
+	if (!Script.isNil(Solution.releaseName)) {
+		return Solution.namespace + "." + Solution.releaseName;
+	};
+	return Solution.namespace + "." + Solution.name;
+};
+
+// prefix.vVERSION.platform, or prefix.vVERSION if Solution.releaseNoPlatform
+global.getReleaseName = function(platformName) {
+	var releaseName = getReleasePrefix() + ".v" + getVersion();
+	if (!Script.isNil(Solution.releaseNoPlatform)) {
+		if (Solution.releaseNoPlatform) {
+			return releaseName;
+		};
+	};
+	if (Script.isNil(platformName)) {
+		platformName = Platform.name;
+	};
+	return releaseName + "." + platformName;
+};
+
+// Remove the checksum of releaseFile from the checksum file (prefix.vVERSION.sha512.json),
+// the checksum file is removed when it becomes empty
+global.removeReleaseChecksum = function(jsonFilename, releaseFile) {
+	if (!Shell.fileExists(jsonFilename)) {
+		return;
+	};
+	var json = JSON.decode(Shell.fileGetContents(jsonFilename));
+	if (Script.isNil(json)) {
+		return;
+	};
+	if (Script.isNil(json[releaseFile])) {
+		return;
+	};
+	delete json[releaseFile];
+	for (var key in json) {
+		Shell.filePutContents(jsonFilename, JSON.encodeWithIndentation(json));
+		return;
+	};
+	Shell.remove(jsonFilename);
+};
+
+// ---
 
 global.csvDecode = function(csv) {
 	if (Script.isNil(csv)) {

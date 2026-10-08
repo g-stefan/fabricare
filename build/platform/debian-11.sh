@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform="debian-11"
-export pathRepository=$HOME/.xyo-sdk/$platform
-export pathRelease=$HOME/.xyo-sdk/$platform/release
+export pathRepository=$HOME/.fabricare/$platform
+export pathRelease=$HOME/.fabricare/release
 
 /bin/sh -- ./build/platform/ubuntu.sh $1
 RETV=$?

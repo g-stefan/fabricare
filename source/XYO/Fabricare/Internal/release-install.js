@@ -24,24 +24,16 @@ if (OS.isWindows()) {
 
 var version = getVersion();
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
-
-var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
-if (!Script.isNil(Solution.releaseNoPlatform)) {
-	if (Solution.releaseNoPlatform) {
-		releaseName = releasePrefix + "-" + version;
-	};
-};
+var releasePrefix = getReleasePrefix();
+var releaseName = getReleaseName();
 
 
-var jsonFilename = "release" + pathSeparator + releasePrefix + "-" + version + ".sha512.json";
+var jsonFilename = "release" + pathSeparator + releasePrefix + ".v" + version + ".sha512.json";
 
 
 Shell.mkdirRecursivelyIfNotExists(global.pathRelease);
 
-copyFileIfExists("release" + pathSeparator + releaseName + ".7z", global.pathRelease);
-copyFileIfExists("release" + pathSeparator + releaseName + "-dev.7z", global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + ".zip", global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + ".bin.zip", global.pathRelease);
+copyFileIfExists("release" + pathSeparator + releaseName + ".dev.zip", global.pathRelease);
 copyFileIfExists(jsonFilename, global.pathRelease);

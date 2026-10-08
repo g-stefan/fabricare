@@ -5,7 +5,7 @@
 
 Fabricare.include("solution/generic.library");
 
-global.pathRepository = Shell.getenv("HOME") + "/.xyo-sdk/"+ Platform.name;
+global.pathRepository = Shell.getenv("HOME") + "/.fabricare/"+ Platform.name;
 if(Shell.hasEnv("XYO_PLATFORM")) {
 	if (Shell.getenv("XYO_PLATFORM") == Platform.name) {
 		if(Shell.hasEnv("XYO_PLATFORM_PATH")) {
@@ -17,7 +17,12 @@ Shell.setenv("XYO_PLATFORM", Platform.name);
 
 // ---
 
-global.pathRelease = pathRepository + "/release";
+global.pathRelease = Shell.getenv("HOME") + "/.fabricare/" + "/release";
+if (Shell.hasEnv("FABRICARE_PATH_RELEASE")) {
+	global.pathRelease = Shell.getenv("FABRICARE_PATH_RELEASE");
+}
+
+// ---
 
 global.pathSuper = Application.getPathExecutable();
 

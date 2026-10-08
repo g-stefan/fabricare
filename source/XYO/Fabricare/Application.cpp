@@ -133,29 +133,27 @@ namespace XYO::Fabricare {
 
 		// ---
 
-		int exitCode = 0;
+		int exitCode = 1;
+		bool executed = false;
 
 		if (ExecutiveX::initExecutive(appCmdN, appCmdS, initExecutive)) {
 			if (applicationFile.length()) {
 				ExecutiveX::includePath(Shell::getFilePath(applicationFile));
-				if (ExecutiveX::executeFile(applicationFile)) {
-					exitCode = ExecutiveX::getExitCode();
-					ExecutiveX::endProcessing();
-					return exitCode;
-				};
+				executed = ExecutiveX::executeFile(applicationFile);
 			} else {
-				if (ExecutiveX::executeString(processSource)) {
-					exitCode = ExecutiveX::getExitCode();
-					ExecutiveX::endProcessing();
-					return exitCode;
-				};
+				executed = ExecutiveX::executeString(processSource);
 			};
 		};
 
-		printf("%s\n", (ExecutiveX::getError()).value());
-		printf("%s", (ExecutiveX::getStackTrace()).value());
+		if (executed) {
+			exitCode = ExecutiveX::getExitCode();
+		} else {
+			printf("%s\n", (ExecutiveX::getError()).value());
+			printf("%s", (ExecutiveX::getStackTrace()).value());
+		};
 		ExecutiveX::endProcessing();
-		return 1;
+		delete[] appCmdS;
+		return exitCode;
 	};
 };
 

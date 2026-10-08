@@ -5,13 +5,13 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=mingw64
-export pathRepository=$HOME/.xyo-sdk/mingw64
-export pathRelease=$HOME/.xyo-sdk/mingw64/release
+export pathRepository=$HOME/.fabricare/mingw64
+export pathRelease=$HOME/.fabricare/release
 export PATH=$PATH:/c/msys64/mingw64/bin/../libexec;
 
 . ./build/ubuntu.config.sh
 
-export WSL_BUILD_PROCESS_PATH=$HOME/.xyo-sdk/mingw64/source/$project
+export WSL_BUILD_PROCESS_PATH=$HOME/.fabricare/mingw64/source/$project
 
 /bin/sh -- ./build/platform/wsl.process.sh $1
 RETV=$?

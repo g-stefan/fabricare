@@ -24,6 +24,7 @@
 #include <XYO/QuantumScript.Extension/URL.hpp>
 #include <XYO/FileToCS.Application.hpp>
 #include <XYO/FileToRC.Application.hpp>
+#include <XYO/FileToJS.Application.hpp>
 #include <XYO/HTMLToRC.Application.hpp>
 #include <XYO/CPPCompilerCommandDriver.Application.hpp>
 #include <XYO/Version.Application.hpp>
@@ -53,10 +54,10 @@ namespace XYO::Fabricare {
 			((VariableNumber *)retV.value())->value = (Number)(application.main(cmdN, cmdS));
 		} catch (...) {
 			((VariableNumber *)retV.value())->value = -1;
-			delete cmdS;
+			delete[] cmdS;
 			throw;
 		};
-		delete cmdS;
+		delete[] cmdS;
 		return retV;
 	};
 
@@ -72,6 +73,13 @@ namespace XYO::Fabricare {
 		printf("- internal-file-to-rc\n");
 #endif
 		return internalCall<FileToRC::Application::Application>("file-to-rc", arguments);
+	};
+
+	TPointer<Variable> internalFileToJS(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
+		printf("- internal-file-to-js\n");
+#endif
+		return internalCall<FileToJS::Application::Application>("file-to-js", arguments);
 	};
 
 	TPointer<Variable> internalHTMLToRC(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -92,7 +100,7 @@ namespace XYO::Fabricare {
 #ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
 		printf("- internal-xyo-version\n");
 #endif
-		return internalCall<::XYO::Version::Application::Application>("xyo-cc", arguments);
+		return internalCall<::XYO::Version::Application::Application>("xyo-version", arguments);
 	};
 
 	TPointer<Variable> xyoIsConfigDefined(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -245,6 +253,7 @@ namespace XYO::Fabricare {
 		executive->compileStringX("var Internal={};");
 		executive->setFunction2("Internal.fileToCS", internalFileToCS);
 		executive->setFunction2("Internal.fileToRC", internalFileToRC);
+		executive->setFunction2("Internal.fileToJS", internalFileToJS);
 		executive->setFunction2("Internal.htmlToRC", internalHTMLToRC);
 		executive->setFunction2("Internal.xyoCC", internalXYOCC);
 		executive->setFunction2("Internal.xyoVersion", internalXYOVersion);

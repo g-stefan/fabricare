@@ -6,7 +6,7 @@ rem SPDX-License-Identifier: Unlicense
 
 set platformMachine=win32
 set platformVersion=2026
-set platformPath=C:\Program Files\Microsoft Visual Studio\%platformVersion%\Community\VC\Auxiliary\Build\
+set platformPath=C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\
 
 if not "%XYO_PLATFORM%" == "" set platformActive=%XYO_PLATFORM%
 

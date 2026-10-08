@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "wsl-ubuntu-18.04";
-Platform.run = "ubuntu1804.exe";
+Platform.run = "wsl -d ubuntu-18.04 --shell-type login --";
 Platform.next = "ubuntu-18.04";
 
 Fabricare.include("platform/wsl.run");

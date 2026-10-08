@@ -30,6 +30,11 @@ if (OS.isWindows()) {
 		return;
 	};
 
+	if (Shell.getenv("MSYSTEM") == "UCRT64") {
+		Platform.name = "ucrt64";
+		return;
+	};
+
 	Platform.version = "2026";
 	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build";
 	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {

@@ -13,7 +13,6 @@ if (!Script.isNil(Solution.githubRepository)) {
 exitIf(!Shell.directoryExists("release"), "no release");
 
 var version = getVersion();
-var releaseName = gitRepository + "-" + version + "-" + Platform.name;
 
 Console.writeLn("Release v" + version);
 
@@ -39,9 +38,9 @@ var version = getVersion();
 
 var jsonString = ProcessInteractive.run("github-release info --repo " + gitRepository + " --tag \"v" + version + "\" --json");
 // Skip console control chars
-var index=jsonString.indexOf("{");
-if(index>=0) {
-	jsonString=jsonString.substring(index);
+var index = jsonString.indexOf("{");
+if (index >= 0) {
+	jsonString = jsonString.substring(index);
 };
 
 var json = JSON.decode(jsonString);
@@ -50,19 +49,19 @@ if (Script.isNil(json)) {
 	return;
 };
 
-var fileList = Shell.getFileList("release/*-" + version + "*.7z");
+var fileList = Shell.getFileList("release/*.v" + version + "*.zip");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --replace --repo " + gitRepository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
-var fileList = Shell.getFileList("release/*-" + version + "*.exe");
+var fileList = Shell.getFileList("release/*.v" + version + "*.exe");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --replace --repo " + gitRepository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");
 };
 
-var fileList = Shell.getFileList("release/*-" + version + "*.json");
+var fileList = Shell.getFileList("release/*.v" + version + "*.json");
 for (var file of fileList) {
 	Console.writeLn("Upload " + Shell.getFileName(file));
 	Shell.system("github-release upload --replace --repo " + gitRepository + " --tag \"v" + version + "\" --name \"" + Shell.getFileName(file) + "\" --file \"" + file + "\"");

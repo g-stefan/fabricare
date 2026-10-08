@@ -46,11 +46,7 @@ forEachProject("test", function() {
 	};
 });
 
-if (OS.isWindows()) {
-	Shell.setenv("PATH", Shell.realPath(Shell.getcwd()) + "\\output\\bin;" + Shell.getenv("PATH"));
-} else {
-	Shell.setenv("PATH", Shell.realPath(Shell.getcwd()) + "/output/bin:" + Shell.getenv("PATH"));
-};
+addOutputBinToPath();
 
 // Run
 forEachProject("test", function() {
@@ -59,8 +55,9 @@ forEachProject("test", function() {
 	};
 	runInPath(Project.outputPath, function() {
 		messageAction("run");
-		if(Platform.osName=="debian") {
-			exitIfTest(Shell.system("./"+Project.name));
+		// Linux shell does not search the current folder, any distribution
+		if (OS.isLinux() && !OS.isEmscripten()) {
+			exitIfTest(Shell.system("./" + Project.name));
 		} else {
 			exitIfTest(Shell.system(Project.name));
 		};

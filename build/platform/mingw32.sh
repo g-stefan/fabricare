@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Unlicense
 
 export platform=mingw32
-export pathRepository=$HOME/.xyo-sdk/mingw32
-export pathRelease=$HOME/.xyo-sdk/mingw32/release
+export pathRepository=$HOME/.fabricare/mingw32
+export pathRelease=$HOME/.fabricare/release
 export PATH=$PATH:/c/msys64/mingw32/bin/../libexec;
 
 . ./build/platform/ubuntu.sh $1

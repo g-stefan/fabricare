@@ -80,13 +80,6 @@ global.copyHeaderFilesIgnoreSpecialsSourcePath = function (basePath, sourcePath,
 	};
 };
 
-global.copyFileIfExists = function (source, destinationPath) {
-	if (Shell.fileExists(source)) {
-		var destination = destinationPath + "/" + Shell.getFileName(source);
-		exitIf(!Shell.copyFile(source, destination));
-	};
-};
-
 global.projectNameFromDependency = function (name) {
 	if (name.substring(0, 1) == ":") {		
 		return name.substring(1);
@@ -313,9 +306,13 @@ global.compileAndRunTest = function (compileProject) {
 	Shell.filePutContents("temp/" + compileProject.project + ".compile.json", JSON.encodeWithIndentation(compileProject));
 	exitIf(xyoCC.apply(null, xyoCCExtra("@temp/" + compileProject.project + ".compile.json", "--exe", "--output-path=output/test")));
 
-	Shell.setenv("PATH", Shell.realPath(Shell.getcwd()) + "\\output\\bin;" + Shell.getenv("PATH"));
+	addOutputBinToPath();
 
 	runInPath("output/test", function () {
+		if (OS.isLinux() && !OS.isEmscripten()) {
+			exitIf(Shell.system("./" + compileProject.project));
+			return;
+		};
 		exitIf(Shell.system(compileProject.project));
 	});
 };

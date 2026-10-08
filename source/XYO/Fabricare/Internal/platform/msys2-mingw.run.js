@@ -47,7 +47,8 @@ if (!Fabricare.isPlatformSubroutine) {
 		cmdScript += "set SHLVL=2\r\n";
 		cmdScript += "set MSYSTEM=" + Platform.next.toUpperCaseASCII() + "\r\n";
 		cmdScript += "C:\\msys64\\usr\\bin\\sh --login -- \"" + tempFileSh + "\"\r\n";
-		cmdScript += "if errorlevel 1 exit 1\r\n";
+		// not "if errorlevel 1", a crashed process (0xC0000005) is a negative errorlevel
+		cmdScript += "if %ERRORLEVEL% NEQ 0 exit 1\r\n";
 		cmdScript += "del \"" + tempFileArguments + "\"\r\n";
 		cmdScript += "del \"" + tempFileSh + "\"\r\n";
 		cmdScript += "(goto) 2> NUL & del \"%~f0\"\r\n";
@@ -76,7 +77,7 @@ Shell.setenv("XYO_PLATFORM", Platform.next);
 
 var folderName = Solution.name;
 
-var buildPath = Shell.getenv("HOME") + "/.xyo-sdk/" + Platform.next + "/source/" + folderName;
+var buildPath = Shell.getenv("HOME") + "/.fabricare/" + Platform.next + "/source/" + folderName;
 
 if (Fabricare.action == "clean") {
 	messageAction("clean");
@@ -89,7 +90,7 @@ Shell.mkdirRecursivelyIfNotExists(buildPath);
 if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
 	var cmd = "C:\\msys64\\usr\\bin\\sh --login -c \"";
 	cmd += "rsync --progress -avz --numeric-ids --delete-before --relative -LK ./ ";
-	cmd += "\\\"$HOME/.xyo-sdk/" + Platform.next + "/source/" + folderName + "\\\"\"";
+	cmd += "\\\"$HOME/.fabricare/" + Platform.next + "/source/" + folderName + "\\\"\"";
 	Shell.system(cmd);
 	if (Fabricare.action == "sync") {
 		return;
@@ -99,7 +100,7 @@ if ((Fabricare.action == "default") || (Fabricare.action == "sync")) {
 var retV = 1;
 
 runInPath(buildPath, function() {
-	retV = Shell.system("fabricare " + Fabricare.action);
+	retV = Shell.system("fabricare " + cmdArgumentsExtra() + Fabricare.action);
 });
 
 if (Fabricare.action == "release") {

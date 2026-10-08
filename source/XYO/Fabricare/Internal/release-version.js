@@ -20,45 +20,45 @@ var name = Application.getFlagValue("release-name");
 var version = getVersion();
 
 var releaseDev = true;
+var releaseBin = true;
 var releaseOutput = false;
 if (!Script.isNil(Solution.releaseDev)) {
 	releaseDev = Solution.releaseDev;
+};
+if (!Script.isNil(Solution.releaseBin)) {
+	releaseBin = Solution.releaseBin;
 };
 if (!Script.isNil(Solution.releaseOutput)) {
 	releaseOutput = Solution.releaseOutput;
 };
 if (releaseOutput) {
 	releaseDev = false;
+	releaseBin = false;
 };
 
-var releasePrefix = Solution.name;
-if (!Script.isNil(Solution.releaseName)) {
-	releasePrefix = Solution.releaseName;
-};
-
-var releaseName = releasePrefix + "-" + version + "-" + Platform.name;
-if (!Script.isNil(Solution.releaseNoPlatform)) {
-	if (Solution.releaseNoPlatform) {
-		releaseName = releasePrefix + "-" + version;
-	};
-};
+var releaseName = getReleaseName();
 
 var releaseList = [];
 
-releaseList.push(releaseName + ".7z");
+if (releaseBin) {
+	releaseList.push(releaseName + ".bin.zip");
+};
+if (releaseOutput) {
+	releaseList.push(releaseName + ".zip");
+};
 if (releaseDev) {
-	releaseList.push(releaseName + "-dev.7z");
+	releaseList.push(releaseName + ".dev.zip");
 };
 
 var release = {
-	name : name,
-	project : Solution.name,
-	version : version,
-	release : releaseList
+	name: name,
+	project: Solution.namespace + "." + Solution.name,
+	version: version,
+	release: releaseList
 };
 
 if (!Script.isNil(path)) {
-	exitIf(!Shell.filePutContents(path + "/" + name + "." + Solution.name + ".json", JSON.encodeWithIndentation(release)));
+	exitIf(!Shell.filePutContents(path + "/" + name + "." + Solution.namespace + "." + Solution.name + ".json", JSON.encodeWithIndentation(release)));
 	return;
 };
 

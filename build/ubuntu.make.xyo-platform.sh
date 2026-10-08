@@ -45,7 +45,7 @@ INC="$INC -Ivendor/xyo-platform/source"
 SRC=""
 SRC="$SRC vendor/xyo-platform/source/XYO/Platform.Config.cpp"
 
-cmdX $CXX -o temp/xyo-platform.config -O1 -std=c++11 -std=gnu++11 $DEF $INC $SRC -lstdc++ -lpthread -lm
+cmdX $CXX -o temp/xyo-platform.config -O1 -std=c++17 -std=gnu++17 $DEF $INC $SRC -lstdc++ -lpthread -lm
 
 cd "vendor/xyo-platform"
 [ -d temp ] || mkdir -p temp

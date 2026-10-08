@@ -13,7 +13,7 @@ goto cmdXDefined
 :cmdX
 echo %*
 %*
-if errorlevel 1 goto cmdXError
+if %ERRORLEVEL% NEQ 0 goto cmdXError
 goto :eof
 :cmdXError
 echo %ESC%[31m* Error:%ESC%[0m install
@@ -22,7 +22,7 @@ exit 1
 
 rem ---
 
-set pathRepository=%USERPROFILE%\.xyo-sdk\%platform%
+set pathRepository=%USERPROFILE%\.fabricare\%platform%
 if  not "%XYO_PLATFORM_PATH%" == "" set pathRepository=%XYO_PLATFORM_PATH%
 
 if not exist %pathRepository%\bin\ mkdir %pathRepository%\bin

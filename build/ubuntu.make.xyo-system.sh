@@ -27,7 +27,7 @@ INC="$INC -Ivendor/xyo-system/source"
 SRC=""
 SRC="$SRC vendor/xyo-system/source/XYO/System.Config.cpp"
 
-cmdX $CXX -o temp/xyo-system.config -O1 -std=c++11 -std=gnu++11 $DEF $INC $SRC -lstdc++ -lpthread -lm
+cmdX $CXX -o temp/xyo-system.config -O1 -std=c++17 -std=gnu++17 $DEF $INC $SRC -lstdc++ -lpthread -lm
 
 cd "vendor/xyo-system"
 [ -d temp ] || mkdir -p temp

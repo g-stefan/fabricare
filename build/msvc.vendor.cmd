@@ -20,7 +20,7 @@ goto cmdVendorDefined
 :cmdVendor
 echo %FABRICARE_SOURCE_GIT%/%1
 if not exist "%1" git clone --depth 1 %FABRICARE_SOURCE_GIT%/%1
-if errorlevel 1 goto cmdVendorError
+if %ERRORLEVEL% NEQ 0 goto cmdVendorError
 goto :eof
 :cmdVendorError
 echo %ESC%[31m* Error:%ESC%[0m vendor
@@ -48,6 +48,7 @@ call :cmdVendor quantum-script--url
 call :cmdVendor file-json
 call :cmdVendor file-to-cs
 call :cmdVendor file-to-rc
+call :cmdVendor file-to-js
 call :cmdVendor html-to-rc
 call :cmdVendor xyo-cc
 call :cmdVendor xyo-version
