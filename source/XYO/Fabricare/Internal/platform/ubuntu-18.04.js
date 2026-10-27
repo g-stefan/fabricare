@@ -4,9 +4,11 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "ubuntu-18.04";
+Platform.machine = "x64";
 Platform.osName = "ubuntu";
 Platform.osType = "linux";
-Platform.version = "18.04";
-Platform.machine = "x64";
+Platform.osVersion = "18.04";
+Platform.compilerType = "gcc";
+Platform.compilerVersion = "18.04";
 
 Fabricare.include("platform/ubuntu.run");

@@ -127,6 +127,9 @@ Platform.name = "unknown";
 Platform.machine = "unknown";
 Platform.osName = "unknown";
 Platform.osType = "unknown";
+Platform.osVersion = "unknown";
+Platform.compilerType = "unknown";
+Platform.compilerVersion = "unknown";
 
 // ---
 
@@ -175,6 +178,10 @@ htmlToRC = Internal.htmlToRC;
 fileToJS = Internal.fileToJS;
 
 xyoCC = function() {
+	if (Platform.compilerType == "unknown") {
+		Console.writeLn("Error: No compiler on platform " + Platform.name + " (" + Platform.osName + "), select one with --platform=<name>");
+		Script.exit(1);
+	};
 	arguments.push("--platform=" + Platform.name);
 	return Internal.xyoCC.apply(null, arguments);
 };
@@ -247,10 +254,6 @@ if (!Script.isNil(Workspace.solution)) {
 
 if (Script.isNil(Solution.type)) {
 	Solution.type = "generic";
-};
-
-if (Script.isNil(Solution.namespace)) {
-	Solution.namespace = "unknown";
 };
 
 // ---

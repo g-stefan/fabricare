@@ -4,9 +4,11 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "ubuntu-24.04";
+Platform.machine = "x64";
 Platform.osName = "ubuntu";
 Platform.osType = "linux";
-Platform.version = "24.04";
-Platform.machine = "x64";
+Platform.osVersion = "24.04";
+Platform.compilerType = "gcc";
+Platform.compilerVersion = "24.04";
 
 Fabricare.include("platform/ubuntu.run");

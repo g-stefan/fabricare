@@ -12,13 +12,24 @@ if (Application.getFlagValue("run-script")) {
 // ---
 
 Platform.name = Application.getFlagValue("platform");
-if (!Platform.name) {
-	Fabricare.include("platform/detect");
+if (Platform.name) {
+	if (!Fabricare.include("platform/" + Platform.name)) {
+		Console.writeLn("Error: Platform " + Platform.name + " not found!");
+		Script.exit(1);
+	};
+	return;
 };
-if (!Fabricare.include("platform/" + Platform.name)) {
-	Console.writeLn("Error: Platform " + Platform.name + " not found!");
-	Script.exit(1);
+
+Fabricare.include("platform/detect");
+if (Platform.name) {
+	if (Fabricare.include("platform/" + Platform.name)) {
+		return;
+	};
 };
+
+// No compiler platform found (or no descriptor for it), only the operating system is known
+Platform.name = "unknown";
+Fabricare.include("platform/unknown");
 
 // ---
 

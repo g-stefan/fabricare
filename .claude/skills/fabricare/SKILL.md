@@ -34,7 +34,9 @@ this file.
 1. Run `fabricare [options] [action]` in a project folder (the one with
    `fabricare.json`). No action → `default` → `make`.
 2. The platform is detected (newest Visual Studio on Windows, MSYS2 `MSYSTEM`,
-   `lsb_release` on Linux) or given with `--platform=name`. For MSVC fabricare
+   `lsb_release` on Linux) or given with `--platform=name`; nothing found (or
+   no descriptor for it) → the `unknown` platform: OS only, no compiler, fine
+   for `generic` solutions and release / git actions. For MSVC fabricare
    writes a temp `.cmd` that calls `vcvarsall.bat` and **runs itself again**
    inside it — no developer prompt needed. `wsl-*` / `msys2-*` platforms
    rsync the project into WSL / MSYS2 and run the Linux / MinGW fabricare there.
@@ -71,7 +73,6 @@ the tests link the *installed* library (possibly stale): always `make` before
 ```json
 {
 	"solution": {
-		"namespace": "xyo",
 		"name": "file-crypt",
 		"type": "xyo-cpp",
 		"projects": [
@@ -106,7 +107,8 @@ the tests link the *installed* library (possibly stale): always `make` before
 - `version.json` holds `{ "<name>": {version, build, date, time} }`; needed
   by libraries, `version*` and `release*`.
 - Release switches: `releaseBin`, `releaseDev`, `releaseOutput`,
-  `releaseNoPlatform`, `releaseName`, `hasRelease`, `noInstall`.
+  `releaseNoPlatform`, `releaseName`, `hasRelease`,
+  `noInstall`.
 
 ## Customizing: the fabricare/ folder
 

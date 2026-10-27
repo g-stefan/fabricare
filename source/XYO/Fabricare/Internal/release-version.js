@@ -52,13 +52,13 @@ if (releaseDev) {
 
 var release = {
 	name: name,
-	project: Solution.namespace + "." + Solution.name,
+	project: Solution.name,
 	version: version,
 	release: releaseList
 };
 
 if (!Script.isNil(path)) {
-	exitIf(!Shell.filePutContents(path + "/" + name + "." + Solution.namespace + "." + Solution.name + ".json", JSON.encodeWithIndentation(release)));
+	exitIf(!Shell.filePutContents(path + "/" + name + "." + Solution.name + ".json", JSON.encodeWithIndentation(release)));
 	return;
 };
 

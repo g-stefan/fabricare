@@ -356,12 +356,12 @@ global.addOutputBinToPath = function() {
 
 // ---
 
-// namespace.name, or namespace.releaseName
+// name, or releaseName
 global.getReleasePrefix = function() {
 	if (!Script.isNil(Solution.releaseName)) {
-		return Solution.namespace + "." + Solution.releaseName;
+		return Solution.releaseName;
 	};
-	return Solution.namespace + "." + Solution.name;
+	return Solution.name;
 };
 
 // prefix.vVERSION.platform, or prefix.vVERSION if Solution.releaseNoPlatform

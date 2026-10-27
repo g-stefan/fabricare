@@ -8,7 +8,6 @@ to the `Workspace` script object; the `solution` key is also copied to the
 ```json
 {
 	"solution": {
-		"namespace": "xyo",
 		"name": "xyo-system",
 		"type": "xyo-cpp",
 		"projects": [
@@ -48,7 +47,6 @@ Use `--workspace=file` to read another file.
 | Field | Default | Meaning |
 |-------|---------|---------|
 | `name` | | solution name; the project with this name is the *main* project |
-| `namespace` | `"unknown"` | first part of the release names (`<namespace>.<name>.v1.0.0...`) |
 | `type` | `"generic"` | `"xyo-cpp"` for C / C++ projects built with `xyo-cc`; `"generic"` for anything else (only the actions that do not compile) |
 | `projects` | `[]` | the projects, see below |
 | `version` | | the solution version; else the main project's `version`, else `version.json` |
@@ -56,7 +54,7 @@ Use `--workspace=file` to read another file.
 | `linkVersion` | | like `versionName`, checked first |
 | `noInstall` | `false` | `true`: `install` and `install-bin` do nothing |
 | `hasRelease` | `true` | `false`: the `release*` actions do nothing |
-| `releaseName` | `name` | release names use `<namespace>.<releaseName>` |
+| `releaseName` | `name` | release names use `<releaseName>` instead of `<name>` |
 | `releaseBin` | `true` | `release` packs `output/bin` into `.bin.zip` |
 | `releaseDev` | `true` | `release` packs all of `output/` into `.dev.zip` |
 | `releaseOutput` | `false` | `release` packs all of `output/` into one `.zip` (instead of `.bin.zip` and `.dev.zip`) |

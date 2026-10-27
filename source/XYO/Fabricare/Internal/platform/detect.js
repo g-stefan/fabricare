@@ -3,17 +3,9 @@
 // SPDX-FileCopyrightText: 2021-2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
+Fabricare.include("platform/detect-os");
+
 if (OS.isWindows()) {
-
-	Platform.machine = "x64";
-	Platform.osName = "windows";
-	Platform.osType = "win64";
-
-	if (Shell.getenv("PROCESSOR_ARCHITECTURE") == "x86") {
-		Platform.machine = "x86";
-		Platform.osName = "windows";
-		Platform.osType = "win32";
-	};
 
 	if (Shell.getenv("XYO_PLATFORM") != "") {
 		Platform.name = Shell.getenv("XYO_PLATFORM");
@@ -35,33 +27,25 @@ if (OS.isWindows()) {
 		return;
 	};
 
-	Platform.version = "2026";
-	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build";
-	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
-		Platform.name = Platform.osType + "-msvc-" + Platform.version;
-		return;
+	// Newest Visual Studio first
+	var msvcList = [
+		["2026", "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build"],
+		["2022", "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build"],
+		["2019", "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build"],
+		["2017", "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\Build"]
+	];
+	for (var msvc of msvcList) {
+		if (Shell.fileExists(msvc[1] + "\\vcvarsall.bat")) {
+			Platform.compilerType = "msvc";
+			Platform.compilerVersion = msvc[0];
+			Platform.path = msvc[1];
+			Platform.name = Platform.osType + "-msvc-" + Platform.compilerVersion;
+			return;
+		};
 	};
 
-	Platform.version = "2022";
-	Platform.path = "C:\\Program Files\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
-	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
-		Platform.name = Platform.osType + "-msvc-" + Platform.version;
-		return;
-	};
-
-	Platform.version = "2019";
-	Platform.path = "C:\\Program Files (x86)\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
-	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
-		Platform.name = Platform.osType + "-msvc-" + Platform.version;
-		return;
-	};
-
-	Platform.version = "2017";
-	Platform.path = "C:\\Program Files (x86)\\Microsoft Visual Studio\\" + Platform.version + "\\Community\\VC\\Auxiliary\\Build";
-	if (Shell.fileExists(Platform.path + "\\vcvarsall.bat")) {
-		Platform.name = Platform.osType + "-msvc-" + Platform.version;
-		return;
-	};
+	// No compiler found
+	return;
 };
 
 if (OS.isEmscripten()) {
@@ -70,11 +54,8 @@ if (OS.isEmscripten()) {
 };
 
 if (OS.isLinux()) {
-	var info = ProcessInteractive.run("uname -s").trim().toLowerCaseASCII();
-	if (info.indexOf("linux") >= 0) {
-		var id=ProcessInteractive.run("/bin/sh -c \"lsb_release --id | cut -d ':' -f 2\"").trim().toLowerCaseASCII();
-		var release=ProcessInteractive.run("/bin/sh -c \"lsb_release --release | cut -d ':' -f 2\"").trim().toLowerCaseASCII();
-		Platform.name = id + "-" + release;
-		return;
+	if ((Platform.osName != "linux") && (Platform.osVersion != "unknown")) {
+		Platform.name = Platform.osName + "-" + Platform.osVersion;
 	};
+	return;
 };

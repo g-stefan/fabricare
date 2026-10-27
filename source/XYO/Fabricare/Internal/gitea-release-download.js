@@ -43,7 +43,7 @@ if (!found) {
 
 
 var userAndRepo = Shell.getFilePath(Shell.getFilePath(URL.getPathAndFileName(tarFile))).substring(1);
-var curlCMD = "curl --silent --insecure -X \"GET\" \"" + URL.getSchemeName(tarFile) + "://" + URL.getHostNameAndPort(tarFile) + "/api/v1/repos/" + userAndRepo + "/releases/tags/" + tagName + "\"";
+var curlCMD = "curl --silent --ca-native -X \"GET\" \"" + URL.getSchemeName(tarFile) + "://" + URL.getHostNameAndPort(tarFile) + "/api/v1/repos/" + userAndRepo + "/releases/tags/" + tagName + "\"";
 curlCMD += " -H \"accept: application/json\"";
 if (Shell.hasEnv("GITEA_TOKEN")) {
 	curlCMD += " -H \"Authorization: token " + Shell.getenv("GITEA_TOKEN") + "\"";
@@ -81,7 +81,7 @@ for (var i = 0; i < json.assets.length; ++i) {
 			fileName = "archive/" + json.assets[i].name;
 		};
 		if (!Shell.fileExists(fileName)) {
-			var curlCMD = "curl --insecure -X \"GET\" \"" + json.assets[i].browser_download_url + "\"";
+			var curlCMD = "curl --ca-native -X \"GET\" \"" + json.assets[i].browser_download_url + "\"";
 			if (Shell.hasEnv("GITEA_TOKEN")) {
 				curlCMD += " -H \"Authorization: token " + Shell.getenv("GITEA_TOKEN") + "\"";
 			};

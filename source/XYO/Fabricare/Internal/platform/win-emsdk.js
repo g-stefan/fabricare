@@ -4,10 +4,11 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "emscripten";
+Platform.machine = "x32";
 Platform.osName = "emscripten";
 Platform.osType = "emscripten";
-Platform.version = "01.01";
-Platform.machine = "x32";
+Platform.compilerType = "emscripten";
+Platform.compilerVersion = "01.01";
 Platform.path = "C:\\emsdk";
 
 Fabricare.include("platform/win-emsdk.run");

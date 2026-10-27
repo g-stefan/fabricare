@@ -35,7 +35,7 @@ for (i = 0; i < releaseToDownload.length; ++i) {
 	for (j = 0; j < releaseToDownload[i].assets.length; ++j) {
 		Console.writeLn("\t- " + releaseToDownload[i].assets[j].name);
 		if (!Shell.fileExists("release/" + releaseToDownload[i].assets[j].name)) {
-			exitIf(Shell.system("curl --insecure --location \"" + releaseToDownload[i].html_url + "/" + releaseToDownload[i].assets[j].name + "\" --output \"release/" + releaseToDownload[i].assets[j].name + "\""));
+			exitIf(Shell.system("curl --ca-native --location \"" + releaseToDownload[i].html_url + "/" + releaseToDownload[i].assets[j].name + "\" --output \"release/" + releaseToDownload[i].assets[j].name + "\""));
 			if (!(Shell.getFileSize("release/" + releaseToDownload[i].assets[j].name) > 16)) {
 				Shell.remove("release/" + releaseToDownload[i].assets[j].name);
 				messageError("download release");

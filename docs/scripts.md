@@ -53,7 +53,7 @@ the best reference for what an action does.
 | `Fabricare` | `action` (the action name), `include(name)`, `isDebug()`, `isRelease()`, `isStatic()`, `isDynamic()`, `getVersion()`, `loadConfig()` / `saveConfig()`, `loadUserConfig()` / `saveUserConfig()`, `configFile`, `userConfigFile`, `workspaceFile` |
 | `Solution` | the `solution` object of `fabricare.json` |
 | `Project` | the current project (set by `forEachProject`, `selectMainProject`, `projectSet`) |
-| `Platform` | `name`, `machine`, `osName`, `osType`, `version`, `path` |
+| `Platform` | `name`, `machine`, `osName`, `osType`, `osVersion`, `compilerType`, `compilerVersion`, `path` ([Platforms](platforms.md#the-platform-descriptor)) |
 | `Workspace`, `Config`, `UserConfig` | the manifest and the config files |
 | `pathRepository` | the SDK repository of the platform, `~/.fabricare/<platform>` |
 | `pathRelease` | the release repository, `~/.fabricare/release` |
@@ -82,7 +82,7 @@ From `solution/generic.library.js`:
 | `selectMainProject()`, `projectSet(project)`, `projectReset()`, `prepareProjects()` | the current project; expand projects with a list of names |
 | `getVersion()`, `getVersionInfo()` | the solution version (`"1.2.3"`) / its `version.json` entry |
 | `getProjectVersion()`, `getProjectVersionInfo()`, `getProjectVersionAsInfo()` | the same for `Project` |
-| `getReleasePrefix()`, `getReleaseName(platform)` | `<namespace>.<name>`, `<prefix>.v<version>.<platform>` ([Releases](releases.md)) |
+| `getReleasePrefix()`, `getReleaseName(platform)` | `<name>` (or `<releaseName>`), `<prefix>.v<version>.<platform>` ([Releases](releases.md)) |
 | `removeReleaseChecksum(jsonFile, releaseFile)` | removes one entry from a `.sha512.json` file |
 | `copyFileIfExists(file, folder)` | copies `file` into `folder` if it exists |
 | `addOutputBinToPath()` | puts `output/bin` first in `PATH` (and `LD_LIBRARY_PATH`) |

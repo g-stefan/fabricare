@@ -9,8 +9,6 @@ Fabricare.action = Application.getArgument(0, "default");
 Fabricare.isPlatformSubroutine = Application.getFlagValue("platform-subroutine");
 Fabricare.platformActive = Application.getFlagValue("platform-active");
 
-Platform.name = Platform.osType + "-msvc-" + Platform.version;
-
 global.pathRepository = Shell.getenv("USERPROFILE") + "/.fabricare/"+ Platform.name;
 if (Shell.getenv("XYO_PLATFORM") == Platform.name) {
 	Fabricare.isPlatformSubroutine = true;

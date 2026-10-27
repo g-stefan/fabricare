@@ -5,11 +5,11 @@
 ### From a release
 
 Download the release for your platform (for example
-`xyo.fabricare.v8.0.0.win64-msvc-2026.bin.zip`), extract it, and run the
+`fabricare.v8.0.0.win64-msvc-2026.bin.zip`), extract it, and run the
 self install from the extracted folder:
 
 ```
-cd xyo.fabricare.v8.0.0.win64-msvc-2026.bin
+cd fabricare.v8.0.0.win64-msvc-2026.bin
 fabricare fabricare.self-install
 ```
 
@@ -56,7 +56,6 @@ hello/
 ```json
 {
 	"solution": {
-		"namespace": "xyo",
 		"name": "hello",
 		"type": "xyo-cpp",
 		"projects": [
@@ -136,7 +135,9 @@ fabricare --static make
 
 Without `--platform` fabricare picks the newest Visual Studio found on
 Windows, `mingw32` / `mingw64` / `ucrt64` inside MSYS2, and
-`<distribution>-<release>` (for example `ubuntu-26.04`) on Linux. See
+`<distribution>-<release>` (for example `ubuntu-26.04`) on Linux. Without a
+compiler it uses the `unknown` platform, enough for projects that do not
+compile (for example xyo.web) and for the release / git actions. See
 [Platforms](platforms.md).
 
 `--static` makes `dll-or-lib` projects static libraries; the `*.static`

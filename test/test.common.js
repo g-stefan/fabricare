@@ -45,7 +45,6 @@ Platform.name = "test-platform";
 Fabricare.action = "test";
 Solution = {
 	name : "demo",
-	namespace : "xyo",
 	type : "xyo-cpp",
 	projects : []
 };

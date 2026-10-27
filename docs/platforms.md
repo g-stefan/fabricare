@@ -16,6 +16,7 @@ of the SDK path (`~/.fabricare/<platform>`) and of the release file names.
 | `wsl-ubuntu-18.04` ... `wsl-ubuntu-26.04` | from Windows: build in that WSL distribution as `ubuntu-XX.XX` |
 | `emscripten` | Emscripten (`emcc`), running under Linux / Node |
 | `win-emsdk` | from Windows: Emscripten from `C:\emsdk`, platform name `emscripten` |
+| `unknown` | no compiler: only the operating system is known (see [The unknown platform](#the-unknown-platform)) |
 
 `fabricare --platform=<name> <action>` selects one. The Visual Studio
 platforms expect the Community edition in its default folder
@@ -30,11 +31,49 @@ Without `--platform`:
    from `MSYSTEM` (inside MSYS2); else the newest Visual Studio found (2026,
    2022, 2019, 2017), `win64-` or `win32-` by `PROCESSOR_ARCHITECTURE`.
 2. **Emscripten build of fabricare:** `emscripten`.
-3. **Linux:** `<id>-<release>` from `lsb_release`, lower case
+3. **Linux:** `<id>-<release>` from `lsb_release` (or `ID` / `VERSION_ID`
+   of `/etc/os-release` when `lsb_release` is not installed), lower case
    (`ubuntu-26.04`, `debian-12`).
 
-If no platform is found, or `platform/<name>.js` does not exist, fabricare
-stops with `Error: Platform <name> not found!`.
+If no platform is found, or there is no `platform/<name>.js` for the detected
+one (for example `fedora-40`), fabricare uses the `unknown` platform. A
+`--platform=<name>` without a `platform/<name>.js` stops with
+`Error: Platform <name> not found!`.
+
+## The platform descriptor
+
+`platform/<name>.js` fills the `Platform` object:
+
+| Field | Content |
+|-------|---------|
+| `name` | the platform name, `win64-msvc-2026`, `ubuntu-24.04`, `unknown` |
+| `machine` | `x64`, `x86`, `x32` (Emscripten), `arm64` |
+| `osName` | `windows`, `ubuntu`, `debian`, `emscripten`, the Linux distribution (`linux` if unknown) |
+| `osType` | `win64`, `win32`, `linux`, `emscripten` |
+| `osVersion` | the Linux release (`24.04`, `12`), `unknown` on Windows |
+| `compilerType` | `msvc`, `gcc` (Linux, MinGW), `emscripten`, `unknown` |
+| `compilerVersion` | the Visual Studio version (`2026`, `2022`, ...); for `gcc` on Linux the release of the distribution (`24.04`), the compiler that comes with it; `unknown` for MinGW |
+| `path` | the folder of `vcvarsall.bat` / `emsdk_env.bat` |
+
+Fields not set are `unknown`. The `*.static` platforms have the same
+`compilerVersion` as the plain ones (`2026`), the name tells them apart.
+
+## The unknown platform
+
+Without a compiler (no Visual Studio on Windows, a Linux distribution without
+a descriptor) fabricare still runs on the `unknown` platform: `name`,
+`compilerType` and `compilerVersion` are `unknown`, `machine`, `osName`,
+`osType` and `osVersion` are those of the operating system. It runs directly
+(no compiler environment), with the SDK repository `~/.fabricare/unknown`
+(`%USERPROFILE%\.fabricare\unknown`) and `XYO_PLATFORM=unknown`.
+
+Everything that does not compile works: `version`, `release`, the
+`git-*` / `gitea-*` / `github-*` actions, `fabricare.self-install`, and the
+`generic` solutions (for example xyo.web). Release names get `.unknown` unless
+`releaseNoPlatform` is set. Compiling (`xyoCC`, the `make` of `xyo-cpp`
+projects) stops with `Error: No compiler on platform unknown`; select a
+platform with `--platform=<name>`. `--platform=unknown` selects it on a
+machine that has a compiler.
 
 ## Entering the compiler environment
 
@@ -57,7 +96,7 @@ removes the copy.
 **MSYS2.** The same, with `C:\msys64\usr\bin\sh --login` and `MSYSTEM` set;
 the copy is in the MSYS2 home folder.
 
-**Linux, MinGW, Emscripten.** Fabricare runs directly.
+**Linux, MinGW, Emscripten, unknown.** Fabricare runs directly.
 
 In all cases fabricare then puts the SDK repository first in the search paths:
 `PATH` gets `<repository>/bin` and the folder of the fabricare executable;

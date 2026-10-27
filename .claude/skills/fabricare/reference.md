@@ -7,10 +7,16 @@ mental model. Source of truth: `fabricare/source/XYO/Fabricare/Internal/**`.
 
 1. **`Process.js`** runs. Detects platform: uses `--platform=<name>` or includes
    `platform/detect` (probes `PROCESSOR_ARCHITECTURE`, `MSYSTEM`, installed
-   Visual Studio `vcvarsall.bat`, `uname`/`lsb_release`, emscripten). Then
-   includes `platform/<name>`.
-2. **`platform/<name>.js`** (e.g. `win64-msvc-2026.js`) sets `Platform.machine`,
-   `.osName`, `.osType`, `.version`, `.path`, then includes `platform/<family>.run`.
+   Visual Studio `vcvarsall.bat`, `uname`/`lsb_release`/`/etc/os-release`,
+   emscripten; the OS part is `platform/detect-os`). Then includes
+   `platform/<name>`; if nothing was detected or the detected name has no
+   descriptor, includes `platform/unknown` (OS only, `compilerType` `unknown`,
+   `xyoCC` exits with "No compiler on platform unknown").
+2. **`platform/<name>.js`** (e.g. `win64-msvc-2026.js`) sets `Platform.name`,
+   `.machine`, `.osName`, `.osType`, `.osVersion` (Linux release),
+   `.compilerType` (`msvc` / `gcc` / `emscripten` / `unknown`),
+   `.compilerVersion` (VS `2026`; for Linux gcc the distribution release
+   `24.04`), `.path`, then includes `platform/<family>.run`.
 3. **`platform/<family>.run.js`** (e.g. `win-msvc.run.js`):
    - Loads `solution/generic.library` (defines the helper globals).
    - Sets `Fabricare.action = argument[0] || "default"`.
@@ -62,7 +68,6 @@ Override paths with `--workspace=`, `--config=`, `--user-config=`.
 | `projects` | array of project objects (below) |
 | `version` | override solution version (else from version.json / project) |
 | `versionName` / `linkVersion` | key to read in version.json |
-| `namespace` | first part of release names (`<namespace>.<name>.v<version>...`) |
 | `releaseName` | release name used instead of `name` |
 | `releaseDev` | package all of `output/` → `<prefix>.v<ver>.<platform>.dev.zip`; default true |
 | `releaseBin` | package `output/bin` → `<prefix>.v<ver>.<platform>.bin.zip`; default true |
@@ -192,7 +197,7 @@ plus solution libs. All are globals inside action scripts.
 ### Versions and releases
 - `getVersion()`, `getVersionInfo(file?)`, `getProjectVersion()`,
   `getProjectVersionInfo()`, `getProjectVersionAsInfo()` — read `version.json`.
-- `getReleasePrefix()` — `<namespace>.<name|releaseName>`;
+- `getReleasePrefix()` — `<name|releaseName>`;
   `getReleaseName(platform?)` — `<prefix>.v<version>[.<platform>]`.
 - `removeReleaseChecksum(jsonFile, releaseFile)` — drop one checksum entry
   (file removed when empty).

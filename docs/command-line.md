@@ -32,7 +32,7 @@ Used by the scripts:
 | `--user-config=file` | user config file, default `~/.fabricare.json` |
 | `--replace` | `github-release` / `gitea-release`: work on an existing release |
 | `--no-message` | `release-version`, `release-exists`: print only the JSON |
-| `--release-path=dir`, `--release-name=name` | `release-version`: write `dir/name.<namespace>.<name>.json` |
+| `--release-path=dir`, `--release-name=name` | `release-version`: write `dir/name.<name>.json` |
 | `--dependency-path=dir`, `--dependency-name=name` | `dependency-version`: write `dir/name.<project>.<make>.json` |
 | `--for-platform=name` | `release-exists`: check the release of another platform |
 | `--separate-data[=marker]` | `release-exists`: print `marker` (default `@DATA:`) before the JSON |

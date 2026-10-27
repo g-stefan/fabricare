@@ -4,5 +4,10 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "ucrt64";
+Platform.machine = "x64";
+Platform.osName = "windows";
+Platform.osType = "win64";
+Platform.compilerType = "gcc";
+Platform.compilerVersion = "unknown";
 
 Fabricare.include("platform/mingw.run");

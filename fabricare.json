@@ -1,6 +1,5 @@
 {
 	"solution": {
-		"namespace" : "xyo",
 		"name": "fabricare",
 		"type": "xyo-cpp",
 		"projects": [

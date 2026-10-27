@@ -4,9 +4,11 @@
 // SPDX-License-Identifier: Unlicense
 
 Platform.name = "debian-11";
+Platform.machine = "x64";
 Platform.osName = "debian";
 Platform.osType = "linux";
-Platform.version = "11";
-Platform.machine = "x64";
+Platform.osVersion = "11";
+Platform.compilerType = "gcc";
+Platform.compilerVersion = "11";
 
 Fabricare.include("platform/debian.run");

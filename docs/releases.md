@@ -11,11 +11,11 @@
 | `<prefix>.v<version>.<platform>.zip` | all of `output/` | `releaseOutput` (then no `.bin.zip` / `.dev.zip`) |
 | `<prefix>.v<version>.sha512.json` | `{ "file name": "SHA-512", ... }` for every file above, all platforms | always |
 
-- `<prefix>` is `<namespace>.<name>`, or `<namespace>.<releaseName>`.
+- `<prefix>` is `<name>`, or `<releaseName>`.
 - `<version>` is the solution version (`version.json`, or `Solution.version`).
 - `.<platform>` is left out with `"releaseNoPlatform": true`.
 
-For example `xyo.fabricare.v8.0.0.win64-msvc-2026.bin.zip`. An existing
+For example `fabricare.v8.0.0.win64-msvc-2026.bin.zip`. An existing
 release file is not replaced: bump the version, or `release-remove` first.
 `"hasRelease": false` turns all the release actions off.
 
@@ -24,7 +24,7 @@ release file is not replaced: bump the version, or `release-remove` first.
 | Action | Effect |
 |--------|--------|
 | `release` | make the release files of the current version and platform |
-| `release-version` | print `{ "version": ..., "release": [file names] }`; with `--release-path=dir --release-name=n` write it to `dir/n.<namespace>.<name>.json` |
+| `release-version` | print `{ "version": ..., "release": [file names] }`; with `--release-path=dir --release-name=n` write it to `dir/n.<name>.json` |
 | `release-exists` | print `{ "exists": true/false, "release": [files found] }`; `--for-platform=name` checks another platform (`wsl-`, `msys2-` prefixes removed, as those builds are named after the system they run in) |
 | `release-extract` | extract the current version's release into `output/` (`.dev.zip` or `.zip` into `output/`, else `.bin.zip` into `output/bin`) |
 | `install-from-release` | `release-extract`, then `install` |
